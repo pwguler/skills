@@ -17,7 +17,7 @@ Fast path. When there is no spec, the diff is small, and the user already named 
 
 Rules:
 
-- Never force-push.
+- Never force-push, never amend a published commit, and no `--no-verify` or `reset --hard` on a dirty tree without an explicit ask.
 - Never delete a spec the user did not ask to delete. Silence is not consent; unanswered means keep.
 - Never remove a worktree the harness created; only clean up ones under `.worktrees/` or `worktrees/`. Run `git worktree prune` after removal.
 - Never merge without re-running tests on the merged result.

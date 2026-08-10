@@ -20,7 +20,8 @@ Rules:
 - No production code before its failing test exists.
 - A test that passes regardless of the change protects nothing; grep-style string checks counterfeit falsifiability.
 - Keep every diff surgical: each changed line traces to the current slice.
-- Each slice's commit message names the criterion it satisfies and the why, not only the what.
+- The code that passes the test still meets the bar: walk the ladder before adding any (does it need to exist, does the stdlib or a native platform feature do it, does an already-present dependency, does one line) and never add a dependency for what a few lines cover; no premature abstraction, since three similar lines beat a wrong one; type-safe with no escape hatches; defensive at I/O boundaries, trusting inside; no silent fallback that hides failure; clear over clever, names that document themselves, comments that say what the code is now, not its history; delete what your change orphaned and flag dead code without removing it unasked.
+- Each slice's commit message names the criterion it satisfies and the why, not only the what: one line, imperative, lowercase. Stage the specific files, never `git add .`.
 - A bug or unexpected failure mid-slice routes to the `debug` skill; do not patch around symptoms.
 - Three failed attempts on the same slice stop the loop: escalate to the user with the criterion, what was tried, and the last error.
 - When the last slice lands, run the `verify` skill before claiming the work is done.
