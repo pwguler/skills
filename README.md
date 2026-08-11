@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/pwguler/skills)](https://skills.sh/pwguler/skills)
 
-Connected skills that carry work from fuzzy plan to landed branch, on any project. Not a pile of skills; one flow with a fast path and a deep dial.
+Skills that carry work from fuzzy plan to landed branch, on any project. One flow with a fast path and a deep dial.
 
 ## Install
 

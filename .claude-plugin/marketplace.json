@@ -4,12 +4,12 @@
     "name": "pwguler",
     "url": "https://github.com/pwguler"
   },
-  "description": "Connected skills that carry work from fuzzy plan to landed branch, installable as a Claude Code plugin.",
+  "description": "Skills that carry work from fuzzy plan to landed branch, installable as a Claude Code plugin.",
   "plugins": [
     {
       "name": "pwguler-skills",
       "source": "./",
-      "description": "Connected skills for Claude Code",
+      "description": "Skills for Claude Code",
       "category": "engineering",
       "keywords": [
         "skills",
