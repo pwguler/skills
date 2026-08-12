@@ -8,6 +8,12 @@ Skills that carry work from fuzzy plan to landed branch, on any project. One flo
 
 Two paths, both for Claude Code. Pick one: installing both loads every skill twice.
 
+**`npx skills`**:
+
+```bash
+npx skills add pwguler/skills
+```
+
 **Plugin** (updates via version):
 
 ```bash
@@ -22,26 +28,20 @@ Or in a Claude Code session:
 /plugin install pwguler-skills
 ```
 
-**`npx skills`**:
-
-```bash
-npx skills add pwguler/skills
-```
-
 Restart Claude Code after installing.
 
 ## Update
-
-**Plugin**:
-
-```bash
-claude plugin update pwguler-skills
-```
 
 **`npx skills`**:
 
 ```bash
 npx skills update
+```
+
+**Plugin**:
+
+```bash
+claude plugin update pwguler-skills
 ```
 
 Restart Claude Code after updating.
