@@ -25,6 +25,7 @@ Key principles (see [LANGUAGE.md](LANGUAGE.md) for the full list):
 - **Deletion test**: imagine deleting the module. If complexity vanishes, it was a pass-through. If complexity reappears across N callers, it was earning its keep.
 - **The interface is the test surface.**
 - **One adapter = hypothetical seam. Two adapters = real seam.**
+- **A shared interface is a published promise.** More than one consumer means deepening behind it additively, never reshaping what callers already depend on; a breaking change to a shared seam is a migration to plan, not a refactor to slip in.
 
 This skill is _informed_ by the project's domain model: `CONTEXT.md` and any `docs/adr/`. The domain language gives names to good seams; ADRs record decisions the skill should not re-litigate. See [CONTEXT-FORMAT.md](../drill/CONTEXT-FORMAT.md) and [ADR-FORMAT.md](../drill/ADR-FORMAT.md). When the work touches a toolchain (Python, Rust, TypeScript, Prisma), [TOOLING.md](TOOLING.md) carries the commands, configuration shape, and pitfalls for it.
 
