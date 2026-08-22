@@ -77,6 +77,7 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Moment | Skill |
 |---|---|
 | New plan, feature, or design | `drill` |
+| A design fork needs a throwaway to react to | `prototype` |
 | Implementing a settled plan | `implement` |
 | Bug or unexpected behavior | `debug` |
 | About to claim done, fixed, or passing | `verify` |
