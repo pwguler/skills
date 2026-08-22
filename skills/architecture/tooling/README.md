@@ -2,11 +2,11 @@
 
 Reference for the toolchains themselves: commands, configuration shape, and the pitfalls that bite in practice. Load only the file for the ecosystem the work touches; this is not a workflow step.
 
-- [TOOLING-PYTHON.md](TOOLING-PYTHON.md): uv and ruff, type checking, pitfalls.
-- [TOOLING-RUST.md](TOOLING-RUST.md): the cargo toolchain, pinning, error handling.
-- [TOOLING-TYPESCRIPT.md](TOOLING-TYPESCRIPT.md): package manager, compiler, lint, build, monorepo.
-- [TOOLING-PRISMA.md](TOOLING-PRISMA.md): the migration loop, querying, when not to Prisma.
-- [TOOLING-NEXTJS.md](TOOLING-NEXTJS.md): conventions for the Next.js App Router + React Query + Axios + shadcn/ui + React Hook Form + Zod stack.
+- [python.md](python.md): uv and ruff, type checking, pitfalls.
+- [rust.md](rust.md): the cargo toolchain, pinning, error handling.
+- [typescript.md](typescript.md): package manager, compiler, lint, build, monorepo.
+- [prisma.md](prisma.md): the migration loop, querying, when not to Prisma.
+- [nextjs.md](nextjs.md): conventions for the Next.js App Router + React Query + Axios + shadcn/ui + React Hook Form + Zod stack.
 
 Two rules run through all four:
 

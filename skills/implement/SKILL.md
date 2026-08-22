@@ -7,7 +7,7 @@ Work the plan one thin slice at a time. A slice is the smallest piece that chang
 
 When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the plan: work criterion by criterion, and let the spec's non-goals fence every diff. A spec that still carries an `## Open decisions` section is a draft, not a plan: stop and route back to `drill`; implementation cannot start until the draft is settled.
 
-Follow the conventions `architecture` owns when the slice touches them: [FRONTEND.md](../architecture/FRONTEND.md) for UI from a settled design, [BACKEND.md](../architecture/BACKEND.md) for an API, service, or job, and the matching file in [TOOLING.md](../architecture/TOOLING.md) for the toolchain or stack.
+Follow the conventions `architecture` owns when the slice touches them: [FRONTEND.md](../architecture/conventions/FRONTEND.md) for UI from a settled design, [BACKEND.md](../architecture/conventions/BACKEND.md) for an API, service, or job, and the matching file in [tooling/](../architecture/tooling/README.md) for the toolchain or stack.
 
 1. Pick the smallest unfinished slice of the plan.
 2. Write the test that fails for it. Test external behavior through the interface, never implementation details. If no failing test can be written, the seam is wrong: stop and fix the plan, not the test.

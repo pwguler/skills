@@ -7,7 +7,7 @@ Surface architectural friction and propose **deepening opportunities**: refactor
 
 This skill also runs at the start, before there is friction to find: setting up a new codebase or area means choosing its structure and conventions. Greenfield skips the exploration and candidate list; go straight to the interview against the conventions below, and write what settles into `ARCHITECTURE.md`.
 
-The conventions this skill owns, loaded when the work touches them: [FRONTEND.md](FRONTEND.md) for UI built from a settled design, [BACKEND.md](BACKEND.md) for APIs, services, and jobs, and [TOOLING.md](TOOLING.md) per toolchain and stack. The look itself lives in the project's `DESIGN.md`, which `prototype` grounds in and FRONTEND.md reads. `implement` follows all of them while building.
+The conventions this skill owns, loaded when the work touches them: [FRONTEND.md](conventions/FRONTEND.md) for UI built from a settled design, [BACKEND.md](conventions/BACKEND.md) for APIs, services, and jobs, and [tooling/](tooling/README.md) per toolchain and stack. The look itself lives in the project's `DESIGN.md`, which `prototype` grounds in and FRONTEND.md reads. `implement` follows all of them while building.
 
 Fast by default: scope the exploration to the area the user names or the friction they describe, present the top candidates, and hold the rival-interface sub-agent fan-out until asked. Deep mode (the `deep` skill is active): whole-codebase sweep, full candidate list, sub-agent interface exploration on the picked candidate.
 
