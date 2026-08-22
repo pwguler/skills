@@ -6,6 +6,7 @@ Reference for the toolchains themselves: commands, configuration shape, and the 
 - [TOOLING-RUST.md](TOOLING-RUST.md): the cargo toolchain, pinning, error handling.
 - [TOOLING-TYPESCRIPT.md](TOOLING-TYPESCRIPT.md): package manager, compiler, lint, build, monorepo.
 - [TOOLING-PRISMA.md](TOOLING-PRISMA.md): the migration loop, querying, when not to Prisma.
+- [TOOLING-NEXTJS.md](TOOLING-NEXTJS.md): conventions for the Next.js App Router + React Query + Axios + shadcn/ui + React Hook Form + Zod stack.
 
 Two rules run through all four:
 
