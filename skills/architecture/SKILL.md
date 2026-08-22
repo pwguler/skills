@@ -1,9 +1,13 @@
 ---
 name: architecture
-description: Find deepening opportunities in a codebase, informed by the domain language in CONTEXT.md and the decisions in docs/adr/. Use when the user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable.
+description: Shape a codebase's architecture, at the start or once it fights you. Use when setting up a new codebase or area, choosing structure and conventions, or when the user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable.
 ---
 
 Surface architectural friction and propose **deepening opportunities**: refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.
+
+This skill also runs at the start, before there is friction to find: setting up a new codebase or area means choosing its structure and conventions. Greenfield skips the exploration and candidate list; go straight to the interview against the conventions below, and write what settles into `ARCHITECTURE.md`.
+
+The conventions this skill owns, loaded when the work touches them: [FRONTEND.md](FRONTEND.md) for UI built from a settled design, [BACKEND.md](BACKEND.md) for APIs, services, and jobs, [TOOLING.md](TOOLING.md) per toolchain, and [STACK-NEXTJS.md](STACK-NEXTJS.md) when the stack matches it. `implement` follows them while building.
 
 Fast by default: scope the exploration to the area the user names or the friction they describe, present the top candidates, and hold the rival-interface sub-agent fan-out until asked. Deep mode (the `deep` skill is active): whole-codebase sweep, full candidate list, sub-agent interface exploration on the picked candidate.
 

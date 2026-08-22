@@ -7,9 +7,7 @@ Work the plan one thin slice at a time. A slice is the smallest piece that chang
 
 When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the plan: work criterion by criterion, and let the spec's non-goals fence every diff. A spec that still carries an `## Open decisions` section is a draft, not a plan: stop and route back to `drill`; implementation cannot start until the draft is settled.
 
-Frontend from a settled design uses a different acceptance shape: the design is the spec, checked visually rather than by unit tests. See [FRONTEND.md](FRONTEND.md).
-
-When the project's stack is TypeScript + Next.js App Router with React Query, Axios, Tailwind, shadcn/ui, React Hook Form, and Zod, follow the conventions in [STACK-NEXTJS.md](STACK-NEXTJS.md).
+Follow the conventions `architecture` owns when the slice touches them: [FRONTEND.md](../architecture/FRONTEND.md) for UI from a settled design, where the design is the spec and the check is visual rather than a unit test; [BACKEND.md](../architecture/BACKEND.md) for an API, service, or job; and [STACK-NEXTJS.md](../architecture/STACK-NEXTJS.md) when the stack is TypeScript + Next.js App Router with React Query, Axios, Tailwind, shadcn/ui, React Hook Form, and Zod.
 
 1. Pick the smallest unfinished slice of the plan.
 2. Write the test that fails for it. Test external behavior through the interface, never implementation details. If no failing test can be written, the seam is wrong: stop and fix the plan, not the test.
