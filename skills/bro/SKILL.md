@@ -7,9 +7,9 @@ A task just finished. Give its result, not its transcript.
 
 Write in ASD-STE100 Simplified Technical English: one meaning per word, active voice, short sentences, no idioms. The length adapts to the task: a small task gets two or three lines, a large or noisy one gets more, never longer than the result needs.
 
-- Lead with the result: what the task produced or decided, in one line.
-- Then one flat bullet per outcome that matters, one line each. Keep exact paths, commands, names, and error strings. Link commits, PRs, and files.
-- Close with one line for what needs the user now, or "nothing" when the task is done.
+- Lead with the result: what the task produced or decided.
+- Give the outcomes that matter, keeping exact paths, commands, names, and error strings, and linking commits, PRs, and files. Use flat bullets only when several distinct outcomes need listing; a small result is a sentence or two, not a list.
+- Close with what needs the user now, or "nothing" when the task is done.
 
 Drop tool-call narration; keep outcomes. No tables, no code blocks, no sub-bullets. If the task produced nothing, say so; never invent progress.
 
