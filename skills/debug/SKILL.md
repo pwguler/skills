@@ -9,13 +9,13 @@ Fast path: when the first cause is directly visible in the error output (the sta
 
 1. Reproduce first. Build the smallest deterministic reproduction. If it cannot be reproduced, gather evidence (logs, inputs, versions) until it can; do not guess.
 2. Read the actual error and trace it back to the first cause in the chain, not the nearest symptom.
-3. Form one hypothesis. State it. Verify it with evidence (a log line, a probe, an inspection) before touching any code.
-4. Fix the root cause. One fix at a time; if two hypotheses compete, test the cheaper one first.
-5. Add the regression test that would have caught this: red on the old code, green on the fix.
-6. Run the `verify` skill before claiming it is fixed.
+3. Form one hypothesis. State it with the observation that would confirm or refute it, then get that observation before touching any fix: a log line, an assertion, a probe. Add instrumentation when the evidence is not already there; keep it minimal and reversible, and remove it once it has answered.
+4. When two hypotheses compete, design the one observation that distinguishes them, rather than trying fixes in turn.
+5. Fix the root cause. One fix at a time.
+6. Add the regression test that would have caught this: red on the old code, green on the fix.
+7. Run the `verify` skill before claiming it is fixed.
 
 Rules:
 
 - No shotgun fixes, no "try this and see if it helps".
-- If the fix does not make the reproduction pass, the hypothesis was wrong: return to step 3, do not stack a second fix on top.
-- If the root cause reveals a design problem, say so and offer the `architecture` skill instead of burying a workaround.
+- If the fix does not make the reproduction pass, the hypothesis was wrong: return to step 3, do not stack a second fix on top.- If the root cause reveals a design problem, say so and offer the `architecture` skill instead of burying a workaround.
