@@ -15,6 +15,7 @@
   ],
   "skills": [
     "./skills/architecture",
+    "./skills/bro",
     "./skills/core-interview",
     "./skills/debug",
     "./skills/deep",
