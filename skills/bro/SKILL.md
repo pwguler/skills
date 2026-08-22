@@ -1,6 +1,6 @@
 ---
 name: bro
-description: Condense the output of a task that just finished into a short, scannable summary. Use right after a long or noisy task completes (a workflow, a background agent, a big command, an implement or verify run), or when the user types /bro.
+description: The default shape of every reply after work. Use whenever a task, command, edit, or run just finished and you are about to report it, however small, and when the user types /bro. Report the result, never the process.
 ---
 
 A task just finished. Give its result, not its transcript.
@@ -13,4 +13,4 @@ Write in ASD-STE100 Simplified Technical English: one meaning per word, active v
 
 Drop tool-call narration; keep outcomes. No tables, no code blocks, no sub-bullets. If the task produced nothing, say so; never invent progress.
 
-No preamble, no sign-off. The summary is the whole reply. Stop.
+Never explain what you were about to do, how you reasoned, or why the approach is sound unless asked. The user sees the diff and the output; do not restate them. No preamble, no sign-off. The summary is the whole reply. Stop.

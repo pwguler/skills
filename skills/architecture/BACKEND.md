@@ -9,4 +9,4 @@ Applies when the slice is an API, service, or job rather than UI. The contract i
 - **Migrations run locally, never beyond.** Apply them against a local development database as part of the slice. Shared, staging, and production databases stay the user's to run; name the command and stop.
 - **Logs and secrets.** Structured logs at the boundary, no secrets in them. Configuration comes from the environment, never the codebase.
 
-Acceptance for a backend slice: the contract holds (shape, status, errors), the failure paths are exercised, and nothing outside the spec's non-goals changed.
+Acceptance for a backend slice: the contract holds (shape, status, errors), the failure paths are exercised by calling the running service through `run`, and nothing outside the spec's non-goals changed.

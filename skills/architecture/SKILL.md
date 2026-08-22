@@ -7,7 +7,7 @@ Surface architectural friction and propose **deepening opportunities**: refactor
 
 This skill also runs at the start, before there is friction to find: setting up a new codebase or area means choosing its structure and conventions. Greenfield skips the exploration and candidate list; go straight to the interview against the conventions below, and write what settles into `ARCHITECTURE.md`.
 
-The conventions this skill owns, loaded when the work touches them: [FRONTEND.md](FRONTEND.md) for UI built from a settled design, [BACKEND.md](BACKEND.md) for APIs, services, and jobs, and [TOOLING.md](TOOLING.md) per toolchain and stack. `implement` follows them while building.
+The conventions this skill owns, loaded when the work touches them: [FRONTEND.md](FRONTEND.md) for UI built from a settled design, [BACKEND.md](BACKEND.md) for APIs, services, and jobs, and [TOOLING.md](TOOLING.md) per toolchain and stack. The look itself lives in the project's `DESIGN.md`, which `prototype` grounds in and FRONTEND.md reads. `implement` follows all of them while building.
 
 Fast by default: scope the exploration to the area the user names or the friction they describe, present the top candidates, and hold the rival-interface sub-agent fan-out until asked. Deep mode (the `deep` skill is active): whole-codebase sweep, full candidate list, sub-agent interface exploration on the picked candidate.
 
@@ -31,9 +31,11 @@ Key principles (see [LANGUAGE.md](LANGUAGE.md) for the full list):
 - **One adapter = hypothetical seam. Two adapters = real seam.**
 - **A shared interface is a published promise.** More than one consumer means deepening behind it additively, never reshaping what callers already depend on; a breaking change to a shared seam is a migration to plan, not a refactor to slip in.
 
-This skill is _informed_ by the project's domain model: `CONTEXT.md` and any `docs/adr/`. The domain language gives names to good seams; ADRs record decisions the skill should not re-litigate. See [CONTEXT-FORMAT.md](../drill/CONTEXT-FORMAT.md) and [ADR-FORMAT.md](../drill/ADR-FORMAT.md). When the work touches a toolchain (Python, Rust, TypeScript, Prisma), [TOOLING.md](TOOLING.md) carries the commands, configuration shape, and pitfalls for it.
+This skill is _informed_ by the project's domain model: `CONTEXT.md` and any `docs/adr/`. The domain language gives names to good seams; ADRs record decisions the skill should not re-litigate. See [CONTEXT-FORMAT.md](../drill/CONTEXT-FORMAT.md) and [ADR-FORMAT.md](../drill/ADR-FORMAT.md).
 
 ## Process
+
+Greenfield (no code to find friction in): skip to step 3 and interview against the conventions above.
 
 ### 1. Explore
 

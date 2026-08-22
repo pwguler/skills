@@ -12,6 +12,7 @@ Ground it in a design system before building; never prototype on model defaults,
 Build it with the `/design` skill, a design canvas the user can see and refine. If `/design` is not available in this environment, write a single self-contained HTML artifact instead, with the same intent.
 
 - Visual only. Mock the surface with fake data. Wire no backend, keep no state, touch no production code.
+- Say less: short labels, no helper text or explanatory copy the design does not call for. Generated UI over-explains; a prototype that does is already wrong.
 - When the direction is open, put a few genuinely different layouts on the canvas to react to, not one polished guess.
 - Reference what exists: point `/design` at the real components or pages to match, rather than describing them.
 - It is throwaway. It settles the direction; discard it once the user picks, and carry the decision into the real work.

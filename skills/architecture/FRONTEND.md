@@ -18,6 +18,16 @@ Step 2's failing test is that match. Check it by driving the app through `run` a
 
 Match the surrounding code: reuse existing components, tokens, and idioms, and add no dependency without a reason. The design is the spec; when it is silent, ask rather than guess.
 
+## Say less in the UI
+
+Generated interfaces over-explain. Every label, hint, and empty state earns its place or goes:
+
+- Labels are nouns, buttons are verbs, both short. No sentence where a word does.
+- No helper text under a field the label already explains. No tooltip restating the label.
+- Empty states are one line and one action, not a paragraph of encouragement.
+- No explanatory banners, onboarding blurbs, or "here you can" copy unless the design has them.
+- Errors say what went wrong and what to do, in one line.
+
 ## Avoid the AI tells
 
 Grounding in real tokens kills most of these, but check anyway:
