@@ -12,7 +12,25 @@ For each slice, the acceptance criterion is the design itself:
 - Responsive at the project's breakpoints.
 - Accessible: roles, labels, contrast, keyboard, reduced motion.
 - Every value drawn from `DESIGN.md` tokens, not hardcoded.
+- Performant: animate `transform` and `opacity` only, and meet Core Web Vitals (LCP < 2.5s, INP < 200ms, CLS < 0.1).
 
 Step 2's failing test is that match. Check it by driving the app through `run` and comparing the rendered result, not only by a unit test. The rest of the loop is unchanged: minimum code to pass, refactor green, `verify` gates each slice, `land` closes it out.
 
 Match the surrounding code: reuse existing components, tokens, and idioms, and add no dependency without a reason. The design is the spec; when it is silent, ask rather than guess.
+
+## Avoid the AI tells
+
+Grounding in real tokens kills most of these, but check anyway:
+
+- No AI-purple gradients, and no pure black or pure white; use the palette's real values.
+- Serif type only with a reason. Do not center everything; the design's own alignment wins.
+- No fake avatars, logos, or startup-slop brand names; use the project's real content or the design's.
+- Real images, not fake screenshots or placeholder-generator art.
+
+## On a redesign
+
+When the work replaces existing UI rather than building new:
+
+- Audit the existing tokens, components, and content first; preserve what the design keeps.
+- Preserve the information architecture and URLs unless the design changes them on purpose; churn there costs SEO.
+- Apply modernization in order: typography, spacing, color, motion.
