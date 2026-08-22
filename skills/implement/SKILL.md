@@ -9,6 +9,8 @@ When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the pl
 
 Frontend from a settled design uses a different acceptance shape: the design is the spec, checked visually rather than by unit tests. See [FRONTEND.md](FRONTEND.md).
 
+When the project's stack is TypeScript + Next.js App Router with React Query, Axios, Tailwind, shadcn/ui, React Hook Form, and Zod, follow the conventions in [STACK-NEXTJS.md](STACK-NEXTJS.md).
+
 1. Pick the smallest unfinished slice of the plan.
 2. Write the test that fails for it. Test external behavior through the interface, never implementation details. If no failing test can be written, the seam is wrong: stop and fix the plan, not the test.
 3. Write the minimum code that makes it pass.
