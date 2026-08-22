@@ -7,6 +7,8 @@ Work the plan one thin slice at a time. A slice is the smallest piece that chang
 
 When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the plan: work criterion by criterion, and let the spec's non-goals fence every diff. A spec that still carries an `## Open decisions` section is a draft, not a plan: stop and route back to `drill`; implementation cannot start until the draft is settled.
 
+Frontend from a settled design: ground in `DESIGN.md` and its tokens first; if no design is settled, route to `prototype` rather than inventing the look. Decompose the design into component or region slices. The acceptance criterion is the design itself: visual match, responsive at the project's breakpoints, accessibility (roles, labels, contrast, keyboard, reduced motion), and values drawn from `DESIGN.md` tokens. Step 2's failing test is that match, checked by driving the app through `run`, not only a unit test.
+
 1. Pick the smallest unfinished slice of the plan.
 2. Write the test that fails for it. Test external behavior through the interface, never implementation details. If no failing test can be written, the seam is wrong: stop and fix the plan, not the test.
 3. Write the minimum code that makes it pass.
