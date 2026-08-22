@@ -1,6 +1,6 @@
 {
   "name": "pwguler-skills",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Skills for Claude Code",
   "author": {
     "name": "pwguler",
@@ -24,7 +24,6 @@
     "./skills/land",
     "./skills/parallel",
     "./skills/research",
-    "./skills/spawn",
     "./skills/teach",
     "./skills/verify",
     "./skills/write-skill"
