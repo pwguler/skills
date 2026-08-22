@@ -7,6 +7,8 @@ argument-hint: "What should the prototype show?"
 
 The user wants a throwaway prototype: something to react to before any real code. It settles a look, feel, or flow question that prose cannot.
 
+Ground it in a design system before building; never prototype on model defaults, which read as slop. Use the project's `design.md` or existing design tokens when they exist. When none exists, get one from the user first: a `design.md`, a reference site to match, or a source like fontpairs.co for the type pairing. Do not start until type, color, and spacing trace to a real source.
+
 Build it with the `/design` skill, a design canvas the user can see and refine. If `/design` is not available in this environment, write a single self-contained HTML artifact instead, with the same intent.
 
 - Visual only. Mock the surface with fake data. Wire no backend, keep no state, touch no production code.
