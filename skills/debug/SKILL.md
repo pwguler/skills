@@ -1,6 +1,6 @@
 ---
 name: debug
-description: Find the root cause of a bug before fixing it. Use when a bug, test failure, or unexpected behavior appears, before proposing any fix.
+description: Find the root cause of a bug before fixing it. Use whenever the user says "fix", "broken", "not working", "error", "failing", or "bug", and whenever a bug, test failure, or unexpected behavior appears, before proposing any fix.
 ---
 
 No fix before root cause. Symptoms are where the search starts, never where it ends.
