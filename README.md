@@ -87,7 +87,7 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Independent failures or tasks, two or more | `parallel` |
 | Authoring or editing anything an agent reads | `write-skill` |
 | Learning a topic across sessions | `teach` |
-| A task finished, you want the short version | `bro` |
+| A task finished, you want the short version | `tldr` |
 | Risky or ambiguous work, full rigor wanted | `deep` |
 
 `core-interview` is internal support: `drill` and `architecture` run it, you do not invoke it directly.

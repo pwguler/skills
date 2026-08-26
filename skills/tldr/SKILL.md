@@ -1,6 +1,6 @@
 ---
-name: bro
-description: The default shape of every reply after work. Use whenever a task, command, edit, or run just finished and you are about to report it, however small, and when the user types /bro. Report the result, never the process.
+name: tldr
+description: The default shape of every reply after work. Use whenever a task, command, edit, or run just finished and you are about to report it, however small, and when the user types /tldr. Report the result, never the process.
 ---
 
 A task just finished. Give its result, not its transcript.
