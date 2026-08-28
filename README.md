@@ -70,7 +70,7 @@ flowchart TD
     land -- "residue to ADRs, CONTEXT.md, ARCHITECTURE.md; spec kept unless dropped" --> done([branch closed])
 ```
 
-The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does).
+The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does). These are shared project artifacts: committed, human-readable, reviewed in PRs. Claude's auto-memory is per-user preference and never replaces them; neither writes to the other.
 
 ## When to use what
 
@@ -81,6 +81,7 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Implementing a settled plan | `implement` |
 | Bug or unexpected behavior | `debug` |
 | About to claim done, fixed, or passing | `verify` |
+| Is it good, not just correct | `rubric` |
 | Starting a codebase or area, or existing code fights you | `architecture` |
 | Reading legwork | `research` |
 | Branch done, needs merging or a PR | `land` |

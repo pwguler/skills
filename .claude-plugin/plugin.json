@@ -24,6 +24,7 @@
     "./skills/parallel",
     "./skills/prototype",
     "./skills/research",
+    "./skills/rubric",
     "./skills/teach",
     "./skills/tldr",
     "./skills/verify",

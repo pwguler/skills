@@ -19,5 +19,6 @@ Rules:
 - A skipped check is reported as skipped, not implied as passing.
 - Review feedback is a claim: verify it before implementing. Unclear feedback is checked, not obeyed.
 - Partial verification gets a partial claim: "tests pass; behavior not exercised" is honest, "done" is not.
+- A claim no command can prove (good design, not slop, reads well) is a taste claim: route it to the `rubric` skill, which judges against written criteria by a fresh subagent.
 - Fast path (one-sentence plan, no spec file): the gate is that sentence's criterion, not the whole suite. Run only the tests that exercise the change; the changed path still runs end to end.
 - Deep mode (the `deep` skill is active): exercise the changed path end to end unconditionally and gate every criterion; a partial claim is not accepted as final.
