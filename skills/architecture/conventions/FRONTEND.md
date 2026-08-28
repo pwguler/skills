@@ -14,7 +14,7 @@ For each slice, the acceptance criterion is the design itself:
 - Every value drawn from `DESIGN.md` tokens, not hardcoded.
 - Performant: animate `transform` and `opacity` only, and meet Core Web Vitals (LCP < 2.5s, INP < 200ms, CLS < 0.1).
 
-Step 2's failing test is that match. Check it by driving the app through `run` and comparing the rendered result, not only by a unit test. The rest of the loop is unchanged: minimum code to pass, refactor green, `verify` gates each slice, `land` closes it out.
+Step 2's failing test is that match. Check it by driving the app (through `run` when the harness provides it, otherwise the way the project's README or scripts start it) and comparing the rendered result, not only by a unit test. The rest of the loop is unchanged: minimum code to pass, refactor green, `verify` gates each slice, `land` closes it out.
 
 Match the surrounding code: reuse existing components, tokens, and idioms, and add no dependency without a reason. The design is the spec; when it is silent, ask rather than guess.
 

@@ -17,7 +17,7 @@ Follow the conventions `architecture` owns, loading only the ones the slice touc
 
 Rules:
 
-- On `main` or `development`, recommend a git branch before the first test and ask; the spec slug names it. Implementing on the base branch is the user's call to make, not yours to assume. A session already on a feature branch stays there.
+- On the repo's base branch (whatever the remote HEAD points at), recommend a git branch before the first test and ask; the spec slug names it, or a short slug of the one-sentence plan when there is no spec. Implementing on the base branch is the user's call to make, not yours to assume. A session already on a feature branch stays there.
 - One implementation at a time. Unlanded work is never abandoned for a new task on your own: name the options (finish and land it, land it partial, or park it) and let the user pick. Only `land` ends the work.
 - No production code before its failing test exists.
 - A test that passes regardless of the change protects nothing; grep-style string checks counterfeit falsifiability.

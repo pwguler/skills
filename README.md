@@ -54,6 +54,7 @@ The base suite (drill → implement → verify → land) implements the run-unti
 flowchart TD
     idea([idea or codebase friction]) --> drill["1. drill: settle the plan"]
     drill -- "goal, non-goals, acceptance criteria" --> spec[("docs/specs/*.md")]
+    arch["architecture: settle a deepening"] -- "deepened interface, surviving tests" --> spec
     drill -- "tree too big for one session" --> draft[("spec as draft: open decisions")]
     draft -- "sessions resolve decisions one at a time" --> spec
     spec --> impl

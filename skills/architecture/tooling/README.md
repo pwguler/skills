@@ -8,7 +8,7 @@ Reference for the toolchains themselves: commands, configuration shape, and the 
 - [PRISMA.md](PRISMA.md): the migration loop, querying, when not to Prisma.
 - [NEXTJS.md](NEXTJS.md): conventions for the Next.js App Router + React Query + Axios + shadcn/ui + React Hook Form + Zod stack.
 
-Two rules run through all four:
+Two rules run through every file:
 
 - **Verify versions from the registry, never from memory.** These ecosystems move monthly, and a confidently wrong version number is worse than no answer. Each file names its authoritative source.
 - **Restraint over reach.** A formatter that rewrites files outside the diff, or a lint sweep nobody asked for, buries the actual change. Scope tool runs to the code being edited.

@@ -83,3 +83,5 @@ Side effects happen inline as decisions crystallize:
 - **Did the settled design change the system's shape (new module, moved seam, new invariant)?** Update `ARCHITECTURE.md` right there, per [FORMAT.md](FORMAT.md).
 - **User rejects the candidate with a load-bearing reason?** Offer an ADR, framed as: _"Want me to record this as an ADR so future architecture reviews don't re-suggest it?"_ Only offer when the reason would actually be needed by a future explorer to avoid re-suggesting the same thing. Skip ephemeral reasons ("not worth it right now") and self-evident ones. See [ADR-FORMAT.md](../drill/ADR-FORMAT.md).
 - **Want to explore alternative interfaces for the deepened module?** See [INTERFACE.md](INTERFACE.md).
+
+When the settled design is implementation work, write the spec to `docs/specs/<slug>.md` per [SPEC-FORMAT.md](../drill/SPEC-FORMAT.md), with the deepened interface and the tests that survive as its acceptance criteria, and hand it to `implement`.

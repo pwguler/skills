@@ -18,4 +18,6 @@ Fast path: when the first cause is directly visible in the error output (the sta
 Rules:
 
 - No shotgun fixes, no "try this and see if it helps".
-- If the fix does not make the reproduction pass, the hypothesis was wrong: return to step 3, do not stack a second fix on top.- If the root cause reveals a design problem, say so and offer the `architecture` skill instead of burying a workaround.
+- Three refuted hypotheses in a row, or no reproduction reachable with the evidence available, stop the loop: report what was tried and which observation is missing, and let the user decide. Do not keep cycling.
+- If the fix does not make the reproduction pass, the hypothesis was wrong: return to step 3, do not stack a second fix on top.
+- If the root cause reveals a design problem, say so and offer the `architecture` skill instead of burying a workaround.

@@ -12,7 +12,7 @@ The user has asked you to teach them something. This is a stateful request - the
 Treat the current directory as a teaching workspace. The state of their learning is captured in this directory in several files:
 
 - `MISSION.md`: A document capturing the _reason_ the user is interested in the topic. Use it to ground all teaching. Use the format in [MISSION-FORMAT.md](./MISSION-FORMAT.md).
-- `./reference/*.html`: A directory of reference materials. These are the compressed learnings from the lessons - cheat sheets, reference algorithms, syntax, yoga poses, glossaries. They are the raw units of learning. Make them beautiful documents which print out well, designed for quick reference.
+- `./reference/*.html`: A directory of reference materials. These are the compressed learnings from the lessons - cheat sheets, reference algorithms, syntax, yoga poses. They are the raw units of learning. Make them beautiful documents which print out well, designed for quick reference.
 - `GLOSSARY.md`: The workspace's term glossary, at the workspace root. Use the format in [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md).
 - `RESOURCES.md`: A list of resources which can be explored to ground your teaching in contextual knowledge, or to acquire knowledge and wisdom. Use the format in [RESOURCES-FORMAT.md](./RESOURCES-FORMAT.md).
 - `./learning-records/*.md`: A directory of learning records, which capture what the user has learned. These are loosely equivalent to architectural decision records in software development - they capture non-obvious lessons and key insights that may need to be revised later, or drive future sessions. Use them to calculate the zone of proximal development. They are titled `0001-<dash-case-name>.md`, where the number increments each time. Use the format in [LEARNING-RECORD-FORMAT.md](./LEARNING-RECORD-FORMAT.md).
@@ -26,7 +26,7 @@ The learning theory every lesson is built on lives in [PEDAGOGY.md](./PEDAGOGY.m
 
 A lesson is the main thing you produce: the unit in which knowledge and skills reach the user. Each lesson is one self-contained HTML file, saved to `./lessons/` and titled `0001-<dash-case-name>.html` where the number increments each time.
 
-Make each lesson **beautiful** (clean, readable typography and layout) since the user will return to these later to review. Think Tufte.
+Make each lesson **beautiful** (clean, readable typography and layout). Think Tufte.
 
 Keep the lesson short, and completable very quickly. Learners' working memory is very small, and we need to stay within it. But each lesson gives the user a single tangible win that they can build on. Keep it in the user's zone of proximal development.
 
@@ -76,7 +76,6 @@ Some learning topics lend themselves to reference:
 - Algorithms and flowcharts for processes
 - Yoga poses and sequences for yoga
 - Exercises and routines for fitness
-- Glossaries for any topic with its own nomenclature
 
 Glossaries, in particular, are an essential reference. Once one is created, adhere to it in every lesson.
 
