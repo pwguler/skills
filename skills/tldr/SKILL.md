@@ -5,7 +5,7 @@ description: Report a finished task as its result, not its transcript. Use when 
 
 A task just finished. Give its result, not its transcript.
 
-The length adapts to the task: a small task gets two or three lines, a large or noisy one gets more, never longer than the result needs. Choose the shape that reads fastest for this result: prose for a few outcomes, bullets or a table when several distinct items need scanning.
+Write in ASD-STE100 Simplified Technical English: one meaning per word, active voice, short sentences, no idioms. The length adapts to the task: a small task gets two or three lines, a large or noisy one gets more, never longer than the result needs. Choose the shape that reads fastest for this result: prose for a few outcomes, bullets or a table when several distinct items need scanning.
 
 - Lead with the result: what the task produced or decided.
 - Give the outcomes that matter, keeping exact paths, commands, names, and error strings, and linking commits, PRs, and files. Redact secrets: a token, key, password, or connection string that appears in a command or error is replaced with a placeholder, never reproduced.
