@@ -7,7 +7,7 @@ Work the plan one thin slice at a time. A slice is the smallest piece that chang
 
 When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the plan: work criterion by criterion, and let the spec's non-goals fence every diff. A spec that still carries an `## Open decisions` section is a draft, not a plan: stop and route back to `drill`; implementation cannot start until the draft is settled.
 
-Follow the conventions `architecture` owns. Always, for any code: the universal set in [architecture/conventions/](../architecture/conventions/), listed in `architecture`'s SKILL.md (types, failure, direction, purity, concurrency, security, observability, cohesion). When the slice touches them: [FRONTEND.md](../architecture/conventions/FRONTEND.md) for UI from a settled design, [BACKEND.md](../architecture/conventions/BACKEND.md) for an API, service, or job, and the matching file in [tooling/](../architecture/tooling/README.md) for the toolchain or stack.
+Follow the conventions `architecture` owns, loading only the ones the slice touches: the universal set indexed in [architecture/conventions/](../architecture/conventions/README.md) (types, failure, direction, purity, concurrency, security, observability, cohesion), [FRONTEND.md](../architecture/conventions/FRONTEND.md) for UI from a settled design, [BACKEND.md](../architecture/conventions/BACKEND.md) for an API, service, or job, and the matching file in [tooling/](../architecture/tooling/README.md) for the toolchain or stack.
 
 1. Pick the smallest unfinished slice of the plan.
 2. Write the test that fails for it. Test external behavior through the interface, never implementation details. If no failing test can be written, the seam is wrong: stop and fix the plan, not the test.
@@ -22,9 +22,9 @@ Rules:
 - No production code before its failing test exists.
 - A test that passes regardless of the change protects nothing; grep-style string checks counterfeit falsifiability.
 - Keep every diff surgical: each changed line traces to the current slice.
-- The code that passes the test still meets the bar. Before adding anything, walk the ladder: does it need to exist, does the stdlib or platform do it, does a present dependency, does one line. Never add a dependency for what a few lines cover.
-- No premature abstraction; three similar lines beat a wrong one. Type-safe with no escape hatches. Defensive at I/O boundaries, trusting inside. No silent fallback that hides failure.
-- Clear over clever: names that document themselves, comments that say what the code is now, not its history. Delete what your change orphaned; flag dead code without removing it unasked.
+- Before adding anything, walk the ladder: does it need to exist, does the stdlib or platform do it, does a present dependency, does one line.
+- Type-safe with no escape hatches. Defensive at I/O boundaries, trusting inside. No silent fallback that hides failure.
+- Delete what your change orphaned; flag dead code without removing it unasked.
 - Each slice's commit message names the criterion it satisfies and the why, not only the what: one line, imperative, lowercase. Stage the specific files, never `git add .`.
 - A bug or unexpected failure mid-slice routes to the `debug` skill; do not patch around symptoms.
 - Three failed attempts on the same slice stop the loop: escalate to the user with the criterion, what was tried, and the last error.
