@@ -47,7 +47,7 @@ Read existing documentation first:
 
 If any of these files don't exist, proceed silently. Don't flag their absence or suggest creating them upfront. Exception: when `ARCHITECTURE.md` is missing on a nontrivial codebase, offer once to seed it from this run's exploration, using [FORMAT.md](FORMAT.md); write only what the user confirms.
 
-Then use the Agent tool with `subagent_type=Explore` to walk the codebase. Don't follow rigid heuristics. Explore organically and note where you experience friction:
+Then walk the codebase, in a subagent when the harness dispatches one (`subagent_type=Explore`), otherwise here, scoped to the area the user named. Don't follow rigid heuristics. Explore organically and note where you experience friction:
 
 - Where does understanding one concept require bouncing between many small modules?
 - Where are modules **shallow** (interface nearly as complex as the implementation)?
