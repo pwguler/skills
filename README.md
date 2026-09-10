@@ -88,6 +88,7 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Branch done, needs merging or a PR | `land` |
 | Independent failures or tasks, two or more | `parallel` |
 | Authoring or editing anything an agent reads | `write-skill` |
+| A slice the agent wrote landed, test your understanding of it | `recall` |
 | A task finished, you want the short version | `tldr` |
 | Risky or ambiguous work, full rigor wanted | `deep` |
 

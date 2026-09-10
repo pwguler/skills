@@ -23,6 +23,7 @@
     "./skills/land",
     "./skills/parallel",
     "./skills/prototype",
+    "./skills/recall",
     "./skills/research",
     "./skills/rubric",
     "./skills/tldr",

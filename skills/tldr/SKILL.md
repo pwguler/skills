@@ -26,4 +26,4 @@ A file split into a module:
 
 Drop tool-call narration; keep outcomes. If the task produced nothing, say so; never invent progress.
 
-Never explain what you were about to do, how you reasoned, or why the approach is sound unless asked. The user sees the diff and the output; do not restate them. No preamble, no sign-off. The summary is the whole reply. Stop.
+Never explain what you were about to do, how you reasoned, or why the approach is sound unless asked. The user sees the diff and the output; do not restate them. This register applies to this reply only; it never becomes the standing register, and the reasoning it skips still lands in ADRs and specs on the land path. No preamble, no sign-off. The summary is the whole reply. Stop.
