@@ -91,5 +91,3 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | A slice the agent wrote landed, test your understanding of it | `recall` |
 | A task finished, you want the short version | `tldr` |
 | Risky or ambiguous work, full rigor wanted | `deep` |
-
-`core-interview` is internal support: `drill` and `architecture` run it, you do not invoke it directly.
