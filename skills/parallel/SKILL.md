@@ -12,6 +12,6 @@ Each agent's prompt carries:
 - Constraints: what must not change ("tests only", "do not touch production code").
 - Expected return: a summary of root cause and changes, so integration is reviewable.
 
-Integrate when they return: read each summary, check the diffs for conflicts, run the full suite, then the `verify` skill before claiming the batch done.
+Integrate when they return: read each summary, check the diffs for conflicts, run the full suite, then the `verify` skill before claiming the batch done. A batch is the biggest slice you did not write; `/recall` after integration pays the understanding back.
 
 Do not use when failures are related (fixing one may fix the rest: investigate together first), when the problem is still exploratory, or when agents would touch the same files.
