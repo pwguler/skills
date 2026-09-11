@@ -3,7 +3,7 @@ name: parallel
 description: Dispatch independent tasks to concurrent subagents. Use when two or more failures or tasks are independent, sharing no files or state, and can be worked simultaneously.
 ---
 
-One agent per independent problem domain, all dispatched in a single response so they run concurrently.
+One agent per independent problem domain, all dispatched in a single response so they run concurrently. Without subagent dispatch, run the tasks one at a time in this session; independence is the guarantee, parallelism is only the cheap way to get it.
 
 Each agent's prompt carries:
 
