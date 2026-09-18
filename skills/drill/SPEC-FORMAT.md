@@ -47,15 +47,16 @@ What this work must not touch or change. These fence the diff.
 
 ## Acceptance criteria
 - AC-1: <a checkable statement; a command or test can prove it true or false>
-- AC-2: ...
+- AC-2: <a quality statement naming `rubric` as its judge, when no command can prove it>
+- AC-3: ...
 
 ## Verification
-The exact commands that prove the criteria, one per line.
+The exact commands that prove the criteria, one per line. A quality criterion has no command: its line names `rubric` instead.
 ```
 
 ## Rules
 
-- Every criterion is checkable. If no command or test can prove it, rewrite it until one can.
+- Every criterion is checkable. A command or test proves it, or, when it is a quality (how a surface looks, reads, or feels) rather than a behavior, a named judge does: `rubric`, run at `verify` time and again in `land`'s gate. There is no third kind.
 - Non-goals are load-bearing: `verify` fails work that changes what a non-goal fences off.
 - The spec states the destination, not the route: no implementation steps, no file lists.
 - Durable residue is routed out regardless of the spec file's fate: decisions go to `docs/adr/`, settled terms to `CONTEXT.md`. A kept spec is a record of one branch's reasoning, not a substitute for that routing.

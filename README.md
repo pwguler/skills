@@ -48,7 +48,7 @@ Restart Claude Code after updating.
 
 ## The loop
 
-The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. Fast path: an obvious task skips the interview; one sentence is the spec, once it passes the fork test. If `verify` fails twice, the task was lying: route back through drill. `/deep` is user-only and turns every fast path off for the session.
+The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the spec, once it passes the fork test. If `verify` fails twice, the task was lying: route back through drill. `/deep` is user-only and turns every fast path off for the session.
 
 ```mermaid
 flowchart TD
@@ -64,8 +64,12 @@ flowchart TD
         verify -- "criterion fails" --> impl
         impl -. "bug: root cause first" .-> debug
         debug -.-> impl
+        rub["rubric (checker): fresh judge, criteria first"] -- "criterion fails" --> impl
     end
 
+    verify -- "taste claim: no command can settle it" --> rub
+    impl -- "quality surface: UI, interface, name, doc" --> rub
+    rub -- "criteria met" --> land
     verify -- "every criterion proven" --> land["3. land: fresh-eyes gate"]
     impl -- "3 failed attempts on one slice" --> you(["escalate to you"])
     land -- "residue to ADRs, CONTEXT.md, ARCHITECTURE.md; spec kept unless dropped" --> done([branch closed])
@@ -82,7 +86,7 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Implementing a settled plan | `implement` |
 | Bug or unexpected behavior | `debug` |
 | About to claim done, fixed, or passing | `verify` |
-| Is it good, not just correct | `rubric` |
+| Quality no command can settle: a design, a UI, prose | `rubric` |
 | Starting a codebase or area, or existing code fights you | `architecture` |
 | Reading legwork | `research` |
 | Branch done, needs merging or a PR | `land` |

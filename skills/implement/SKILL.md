@@ -28,5 +28,5 @@ Rules:
 - Each slice's commit message names the criterion it satisfies and the why, not only the what: one line, imperative, lowercase. Stage the specific files, never `git add .`.
 - A bug or unexpected failure mid-slice routes to the `debug` skill; do not patch around symptoms.
 - Three failed attempts on the same slice stop the loop: escalate to the user with the criterion, what was tried, and the last error.
-- When the last slice lands, run the `verify` skill before claiming the work is done.
+- When the last slice lands, run the `verify` skill before claiming the work is done. When the work is a UI, a public interface, a name, or a doc, its quality is a claim of its own: run the `rubric` skill on it too, since the maker never judges its own taste.
 - Deep mode (the `deep` skill is active): work only from the spec, criterion by criterion. No one-sentence plans.

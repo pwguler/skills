@@ -1,6 +1,6 @@
 ---
 name: rubric
-description: Gate a taste claim that no command can prove, such as "this API design is good" or "this UI is not slop", by judging the work against checkable criteria. Use when verify meets a claim its commands cannot settle, when a design or artifact needs a quality call before it ships, or when the user asks whether something is good.
+description: Judge work whose quality no command can settle, such as "this API design is good" or "this UI is not slop", against criteria written down before the work is looked at. Use when the user asks how something looks or whether it is any good, when a UI, public interface, name, or doc needs a quality call before it ships, when a spec criterion names a quality rather than a behavior, and when verify meets a claim its commands cannot settle.
 ---
 
 A taste claim is verified the way a factual one is: against criteria written down first, by someone who did not make the work.
@@ -12,7 +12,7 @@ A taste claim is verified the way a factual one is: against criteria written dow
 
 Rules:
 
-- The rubric comes first. Criteria written after seeing the work describe the work, not the bar.
+- The rubric comes first. Criteria written after seeing the work describe the work, not the bar. Criteria lifted from `DESIGN.md`, the conventions, `CONTEXT.md`, or the spec predate the work and stay valid whenever they are written down; only criteria invented after the look are tainted.
 - Evidence per criterion: what in the artifact passes or fails it. A verdict without a pointer is an opinion.
-- No judge, no verdict. When no independent judge is reachable, report the rubric and the artifact, name what blocked the judging, and stop. A self-marked rubric is not a weaker verdict, it is the failure this skill exists to prevent.
+- No judge, no verdict. The maker never marks its own work, and a self-marked rubric is not a weaker verdict, it is the failure this skill exists to prevent. When no independent judge is reachable at all (no dispatch, no user, no fresh session), report the rubric and the artifact, name what blocked the judging, and stop.
 - Deep mode (the `deep` skill is active): three judges minimum, and every failed criterion is fixed before the claim stands.
