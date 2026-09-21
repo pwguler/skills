@@ -12,7 +12,7 @@ Evidence before assertion. A claim without a fresh command run behind it is not 
 5. When a spec exists at `docs/specs/<slug>.md`, gate criterion by criterion: run each criterion's verification command and quote the output that proves it, and take a criterion whose line names `rubric` from that judge's verdict rather than a command. Then check the diff against the spec's non-goals; a change inside fenced scope fails the claim even with green tests. A spec that still carries an `## Open decisions` section is a draft, and a draft proves nothing: no claim can be made against it; route back to `drill`.
 6. Exercise the changed path end to end, not only its unit tests. If the change has a runtime surface, drive it.
 7. Read the output. Passing means the output says passing, not that the command exited. A mutation run is read from its survivors list, not its score.
-8. State what was run and what it showed. If it broke, say it broke, with the output.
+8. State what was run and what it showed. If it broke, say it broke, with the output. When the spec names an artifact, the evidence is that artifact re-run, not a description of an earlier demo.
 
 Rules:
 

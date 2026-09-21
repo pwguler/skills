@@ -51,7 +51,7 @@ What this work must not touch or change. These fence the diff.
 - AC-3: ...
 
 ## Verification
-The exact commands that prove the criteria, one per line. A quality criterion has no command: its line names `rubric` instead.
+The exact commands that prove the criteria, one per line. A quality criterion has no command: its line names `rubric` instead. When the work has a runtime surface, one line names the artifact a reviewer re-runs to see it work: a script, a fixture, a recorded transcript, or the exact command sequence. A demo nobody can repeat is a claim.
 ```
 
 ## Rules
