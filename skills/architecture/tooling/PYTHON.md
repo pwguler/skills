@@ -91,11 +91,47 @@ Two viable strategies, and they are opposite:
 
 Pick one deliberately. Do not enable rules because they exist.
 
+## ruff: conventions as rules
+
+A convention a linter can hold is held by the linter, not by prose. These go in `select` under either strategy:
+
+| Convention | Rule |
+|---|---|
+| No escape hatches ([TYPES.md](../conventions/TYPES.md)) | `ANN401` (no `Any`); `PGH003` (no blanket `type: ignore`); `PGH004` (no bare `noqa`); `RUF100` (no unused `noqa`) |
+| Exhaustive by construction | pyright `reportMatchNotExhaustive = "error"`, with `typing.assert_never` in the default branch |
+| Fail loud, no swallowed failure ([FAILURE.md](../conventions/FAILURE.md)) | `E722` (no bare `except`); `BLE001` (no blind `except Exception`); `S110`, `S112` (no `except: pass`, `except: continue`); `B904` (`raise ... from` inside `except`) |
+
+Argument mutation ([PURITY.md](../conventions/PURITY.md)) has no ruff rule; `B006` catches the mutable default, the rest stays prose. A necessary exception carries `# noqa: <code>` with the reason beside it.
+
 ## Python: type checking
 
 No settled winner. mypy and pyright are the mature options; ty (Astral) and pyrefly are newer.
 
 Check what the project already uses before introducing one. If adopting ty, note its own README declares it beta with breaking diagnostic changes possible between any two versions; run it alongside an established checker rather than gating CI on it alone. Real projects that adopt it keep mypy or pyright authoritative and let ty run with a shrinking exclusion list.
+
+## Mutation: mutmut
+
+mutmut 3 runs pytest against each mutant. POSIX only: it forks. Coverage says a line ran; a killed mutant says a test failed when that line changed. `verify` reads the survivors, not the score.
+
+```bash
+uv add --dev mutmut
+```
+
+```toml
+[tool.mutmut]
+source_paths = ["src/"]
+pytest_add_cli_args_test_selection = ["tests/"]
+do_not_mutate_patterns = ['logger\.\w+']   # log text is not behavior
+```
+
+```bash
+uv run mutmut run                     # all of source_paths; later runs re-test only functions whose source changed
+uv run mutmut run "orders.total*"     # one module or function, pattern on the mutant name
+uv run mutmut results                 # every mutant with its outcome, survivors included
+uv run mutmut show <mutant>           # the diff for one survivor
+```
+
+State lives in `mutants/`; delete it to force a full run. `# pragma: no mutate` excludes one line, with the reason beside it. `paths_to_mutate` is the deprecated name of `source_paths`.
 
 ## Python: verifying versions
 

@@ -62,8 +62,47 @@ ESLint v9 is end-of-life; if a project is still on it, upgrading to v10 is maint
 ```bash
 pnpm vitest run              # CI
 pnpm vitest                  # watch
-pnpm vitest --coverage
 ```
+
+## Mutation
+
+**StrykerJS** with the Vitest runner. Coverage says a line ran; a killed mutant says a test failed when that line changed. `verify` reads the survivors, not the score.
+
+```bash
+pnpm add -D @stryker-mutator/core @stryker-mutator/vitest-runner
+```
+
+`stryker.config.mjs`:
+
+```js
+export default {
+  testRunner: "vitest",
+  mutate: ["src/**/*.ts", "!src/**/*.test.ts"],
+  reporters: ["clear-text", "progress"],
+};
+```
+
+```bash
+pnpm stryker run --incremental                                            # changed code only, against the last report
+pnpm stryker run --incremental --force --mutate src/orders/total.ts       # one file, cache ignored
+pnpm stryker run --incremental --force --mutate src/orders/total.ts:40-58 # one range
+```
+
+Incremental mode diffs source and test files against `reports/stryker-incremental.json`; keep that file between runs (commit it or cache it in CI) or every run is a full run. Survivors print under `Survived` in the clear-text report, with the mutated line.
+
+## Conventions as lint rules
+
+A convention a linter can hold is held by the linter, not by prose. ESLint names below; Biome carries `noExplicitAny`, `noNonNullAssertion`, `noParameterAssign`, and `noEmptyBlockStatements`, verify the rest in its rule list.
+
+| Convention | Rule |
+|---|---|
+| No `any` ([TYPES.md](../conventions/TYPES.md)) | `"strict": true` in tsconfig; `@typescript-eslint/no-explicit-any` |
+| No non-null assertions, no unchecked casts | `@typescript-eslint/no-non-null-assertion`; `@typescript-eslint/consistent-type-assertions` with `assertionStyle: "never"` |
+| Exhaustive by construction | `@typescript-eslint/switch-exhaustiveness-check` |
+| Never mutate an argument ([PURITY.md](../conventions/PURITY.md)) | `no-param-reassign` with `{ props: true }` |
+| Fail loud, no swallowed failure ([FAILURE.md](../conventions/FAILURE.md)) | `no-empty` (catch blocks included); `@typescript-eslint/no-floating-promises`; `@typescript-eslint/no-unused-vars` with `caughtErrors: "all"` |
+
+All at `error`. A rule at `warn` is prose with extra steps. A necessary exception carries a one-line disable comment with the reason, per TYPES.md.
 
 ## Monorepo
 

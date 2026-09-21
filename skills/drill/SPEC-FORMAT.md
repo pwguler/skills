@@ -57,6 +57,7 @@ The exact commands that prove the criteria, one per line. A quality criterion ha
 ## Rules
 
 - Every criterion is checkable. A command or test proves it, or, when it is a quality (how a surface looks, reads, or feels) rather than a behavior, a named judge does: `rubric`, run at `verify` time and again in `land`'s gate. There is no third kind.
+- A verification command is the project's test runner, build, or linter, or a tool named in the stack's [tooling](../architecture/tooling/README.md) file. A script written on the same branch as the change is not a verification command: the maker would be grading its own exam.
 - Non-goals are load-bearing: `verify` fails work that changes what a non-goal fences off.
 - The spec states the destination, not the route: no implementation steps, no file lists.
 - Durable residue is routed out regardless of the spec file's fate: decisions go to `docs/adr/`, settled terms to `CONTEXT.md`. A kept spec is a record of one branch's reasoning, not a substitute for that routing.

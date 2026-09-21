@@ -60,7 +60,7 @@ flowchart TD
     spec --> impl
 
     subgraph cycle["2. the maker / checker cycle"]
-        impl["implement (maker): failing test, minimum code"] --> verify["verify (checker): reject by default, quotes evidence"]
+        impl["implement (maker): failing test, minimum code"] --> verify["verify (checker): reject by default, quotes evidence, mutates the change"]
         verify -- "criterion fails" --> impl
         impl -. "bug: root cause first" .-> debug
         debug -.-> impl

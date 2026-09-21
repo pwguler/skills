@@ -31,6 +31,45 @@ cargo audit
 
 `cargo-binstall` fetches prebuilt binaries instead of compiling them; on CI it turns a multi-minute `cargo install` into seconds.
 
+## Mutation: cargo-mutants
+
+cargo-mutants replaces function bodies with values of their return type and swaps operators, then reports what the suite let through. Coverage says a line ran; a missed mutant says no test failed when the function stopped working. `verify` reads `missed.txt`, not the score.
+
+```bash
+cargo install cargo-mutants             # or: cargo binstall cargo-mutants
+
+git diff $(git merge-base origin/main HEAD) > /tmp/branch.diff
+cargo mutants --in-diff /tmp/branch.diff          # only mutants overlapping the branch's changes
+cargo mutants --file src/orders/total.rs          # one file
+cargo mutants --in-diff /tmp/branch.diff --jobs 4
+```
+
+Output lands in `mutants.out/`: `missed.txt` is the survivors list; `caught.txt`, `timeout.txt`, and `unviable.txt` are the rest; `diff/` holds one patch per mutant. Add `/mutants.out*` to `.gitignore`. `--in-diff` matches the diff against source only, so a slice that changes only tests runs no mutants: check it with `--file` on the module those tests cover.
+
+## Conventions as lints
+
+A convention a linter can hold is held by the linter, not by prose. In `Cargo.toml`, so every crate member and CI agree:
+
+```toml
+[lints.rust]
+unsafe_code = "forbid"
+unused_must_use = "deny"
+
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+let_underscore_must_use = "deny"
+wildcard_enum_match_arm = "deny"
+```
+
+| Convention | Lint |
+|---|---|
+| No escape hatches ([TYPES.md](../conventions/TYPES.md)) | `unsafe_code`; `unwrap_used`, `expect_used`, with `allow-unwrap-in-tests = true` and `allow-expect-in-tests = true` in `clippy.toml` |
+| Exhaustive by construction | `wildcard_enum_match_arm` |
+| Fail loud, no swallowed failure ([FAILURE.md](../conventions/FAILURE.md)) | `unused_must_use`; `let_underscore_must_use` |
+
+Argument mutation ([PURITY.md](../conventions/PURITY.md)) needs no lint: a `&mut` parameter is the declaration, and the borrow checker holds the rest. A necessary exception carries `#[allow(...)]` on the item with the reason beside it, never at the crate root.
+
 ## Pinning the toolchain
 
 `rust-toolchain.toml` at the repo root, committed:
