@@ -77,18 +77,21 @@ pnpm add -D @stryker-mutator/core @stryker-mutator/vitest-runner
 ```js
 export default {
   testRunner: "vitest",
+  plugins: ["@stryker-mutator/vitest-runner"],
   mutate: ["src/**/*.ts", "!src/**/*.test.ts"],
   reporters: ["clear-text", "progress"],
 };
 ```
 
+Name the plugin explicitly. Under pnpm the default `@stryker-mutator/*` discovery resolves against the core package's own directory inside `.pnpm/`, finds no runner there, and fails with `Cannot find TestRunner plugin "vitest". In fact, no TestRunner plugins were loaded.`
+
 ```bash
 pnpm stryker run --incremental                                            # changed code only, against the last report
 pnpm stryker run --incremental --force --mutate src/orders/total.ts       # one file, cache ignored
-pnpm stryker run --incremental --force --mutate src/orders/total.ts:40-58 # one range
+pnpm stryker run --mutate src/orders/total.ts:40-58                       # one range, no cache: the run verify reads
 ```
 
-Incremental mode diffs source and test files against `reports/stryker-incremental.json`; keep that file between runs (commit it or cache it in CI) or every run is a full run. Survivors print under `Survived` in the clear-text report, with the mutated line.
+Incremental mode diffs source and test files against `reports/stryker-incremental.json`; keep that file between runs (commit it or cache it in CI) or every run is a full run. The report accumulates: an incremental run keeps mutants that are out of scope this time, so a scoped run still prints survivors from files the branch never touched. Read the survivors for a change from a run without `--incremental`, scoped by `--mutate`. Survivors print under `Survived` in the clear-text report, with the mutated line.
 
 ## Conventions as lint rules
 
@@ -99,7 +102,7 @@ A convention a linter can hold is held by the linter, not by prose. ESLint names
 | No `any` ([TYPES.md](../conventions/TYPES.md)) | `"strict": true` in tsconfig; `@typescript-eslint/no-explicit-any` |
 | No non-null assertions, no unchecked casts | `@typescript-eslint/no-non-null-assertion`; `@typescript-eslint/consistent-type-assertions` with `assertionStyle: "never"` |
 | Exhaustive by construction | `@typescript-eslint/switch-exhaustiveness-check` |
-| Never mutate an argument ([PURITY.md](../conventions/PURITY.md)) | `no-param-reassign` with `{ props: true }` |
+| Never mutate an argument ([PURITY.md](../conventions/PURITY.md)) | `no-param-reassign` with `{ props: true }`, which catches assignment including properties, not in-place calls like `list.push(x)` |
 | Fail loud, no swallowed failure ([FAILURE.md](../conventions/FAILURE.md)) | `no-empty` (catch blocks included); `@typescript-eslint/no-floating-promises`; `@typescript-eslint/no-unused-vars` with `caughtErrors: "all"` |
 
 All at `error`. A rule at `warn` is prose with extra steps. A necessary exception carries a one-line disable comment with the reason, per TYPES.md.

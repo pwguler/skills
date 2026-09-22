@@ -127,7 +127,7 @@ do_not_mutate_patterns = ['logger\.\w+']   # log text is not behavior
 ```bash
 uv run mutmut run                     # all of source_paths; later runs re-test only functions whose source changed
 uv run mutmut run "orders.total*"     # one module or function, pattern on the mutant name
-uv run mutmut results                 # every mutant with its outcome, survivors included
+uv run mutmut results --all true      # every mutant with its outcome; bare `results` lists survivors only
 uv run mutmut show <mutant>           # the diff for one survivor
 ```
 
