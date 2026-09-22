@@ -31,24 +31,6 @@ cargo audit
 
 `cargo-binstall` fetches prebuilt binaries instead of compiling them; on CI it turns a multi-minute `cargo install` into seconds.
 
-## Mutation: cargo-mutants
-
-cargo-mutants replaces function bodies with values of their return type and swaps operators, then reports what the suite let through. Coverage says a line ran; a missed mutant says no test failed when the function stopped working. `verify` reads `missed.txt`, not the score.
-
-```bash
-cargo install cargo-mutants             # or: cargo binstall cargo-mutants
-
-git diff $(git merge-base origin/main HEAD) > /tmp/branch.diff
-cargo mutants --in-diff /tmp/branch.diff          # only mutants overlapping the branch's changes
-cargo mutants --in-diff /tmp/branch.diff --list | wc -l   # price the run: how many mutants it would test
-cargo mutants --file src/orders/total.rs          # one file
-cargo mutants --in-diff /tmp/branch.diff --jobs 4
-```
-
-`--list` prints the mutants a run would test without testing them, which is what `verify` prices before it asks. `--list --json` gives an exact count where the text lines are awkward to count. `--check` runs `cargo check` on every mutant to separate viable from unviable without touching the suite.
-
-Output lands in `mutants.out/`: `missed.txt` is the survivors list; `caught.txt`, `timeout.txt`, and `unviable.txt` are the rest; `diff/` holds one patch per mutant. Add `/mutants.out*` to `.gitignore`. `--in-diff` matches the diff against source only, so a slice that changes only tests runs no mutants: check it with `--file` on the module those tests cover.
-
 ## Conventions as lints
 
 A convention a linter can hold is held by the linter, not by prose. In `Cargo.toml`, so every crate member and CI agree:
@@ -114,5 +96,6 @@ For the current stable release, read the dist manifest, not a blog post:
 - **`cargo test` compiles test binaries per target.** Consolidating integration tests into one `tests/it/main.rs` with `mod` declarations noticeably cuts build time on large suites.
 - **MSRV is a promise.** If `rust-version` is set in `Cargo.toml`, CI must actually build with it; a dependency bump can raise the real floor silently.
 - **`cargo update` is not `cargo upgrade`.** The former moves within your semver ranges; the latter (from `cargo-edit`) rewrites the ranges themselves.
+- **Concurrent cargo commands serialize on the build lock.** Two `cargo` invocations in one target directory print `Blocking waiting for file lock on build directory` and wait for each other, so batching them concurrently buys nothing. Run them in sequence inside one call, and leave parallelism to the tool that owns it: `cargo nextest run`.
 - **cranelift is nightly-only.** It is listed in the stable manifest with zero available targets: present in the component list, not actually installable.
 

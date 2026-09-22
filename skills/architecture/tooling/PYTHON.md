@@ -109,30 +109,6 @@ No settled winner. mypy and pyright are the mature options; ty (Astral) and pyre
 
 Check what the project already uses before introducing one. If adopting ty, note its own README declares it beta with breaking diagnostic changes possible between any two versions; run it alongside an established checker rather than gating CI on it alone. Real projects that adopt it keep mypy or pyright authoritative and let ty run with a shrinking exclusion list.
 
-## Mutation: mutmut
-
-mutmut 3 runs pytest against each mutant. POSIX only: it forks. Coverage says a line ran; a killed mutant says a test failed when that line changed. `verify` reads the survivors, not the score.
-
-```bash
-uv add --dev mutmut
-```
-
-```toml
-[tool.mutmut]
-source_paths = ["src/"]
-pytest_add_cli_args_test_selection = ["tests/"]
-do_not_mutate_patterns = ['logger\.\w+']   # log text is not behavior
-```
-
-```bash
-uv run mutmut run                     # all of source_paths; later runs re-test only functions whose source changed
-uv run mutmut run "orders.total*"     # one module or function, pattern on the mutant name
-uv run mutmut results --all true      # every mutant with its outcome; bare `results` lists survivors only
-uv run mutmut show <mutant>           # the diff for one survivor
-```
-
-State lives in `mutants/`, and a run stopped early resumes there; delete it to force a full run. mutmut 3 has no list mode: it cannot count mutants without testing them, so `verify` prices a Python run from the changed functions in the diff, and scope is the only control before the first mutant runs. `# pragma: no mutate` excludes one line, with the reason beside it. `paths_to_mutate` is the deprecated name of `source_paths`.
-
 ## Python: verifying versions
 
 Registry is authoritative, memory is not:

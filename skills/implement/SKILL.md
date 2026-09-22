@@ -18,11 +18,10 @@ Follow the conventions `architecture` owns, loading only the ones the slice touc
 Rules:
 
 - On the repo's base branch (whatever the remote HEAD points at), recommend a git branch before the first test and ask; the spec slug names it, or a short slug of the one-sentence plan when there is no spec. Implementing on the base branch is the user's call to make, not yours to assume. A session already on a feature branch stays there.
-- Ask the mutation question in the same breath, before the first slice: does this branch mutate, and at what scope. Recommend the mode's default — fast: none; deep: every source file the branch touches. The answer is the branch policy: it goes in the spec's `## Verification` section when a spec exists, and it is what `verify` applies. Mutation never runs mid-slice.
 - One implementation at a time. Unlanded work is never abandoned for a new task on your own: name the options (finish and land it, land it partial, or park it) and let the user pick. Only `land` ends the work.
 - No production code before its failing test exists.
 - Before the first test of a slice, list the ways it can fail; the slice's tests are that list.
-- A test that passes regardless of the change protects nothing; grep-style string checks counterfeit falsifiability. `verify` reads which tests fail under mutation, where the branch policy runs it; a slice whose tests survive that is not done.
+- A test that passes regardless of the change protects nothing; grep-style string checks counterfeit falsifiability. A slice whose tests never went red on the behavior under test is not done.
 - Keep every diff surgical: each changed line traces to the current slice.
 - Before adding anything, walk the ladder: does it need to exist, does the stdlib or platform do it, does a present dependency, does one line.
 - Type-safe with no escape hatches. Defensive at I/O boundaries, trusting inside. No silent fallback that hides failure.

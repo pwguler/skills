@@ -64,35 +64,6 @@ pnpm vitest run              # CI
 pnpm vitest                  # watch
 ```
 
-## Mutation
-
-**StrykerJS** with the Vitest runner. Coverage says a line ran; a killed mutant says a test failed when that line changed. `verify` reads the survivors, not the score.
-
-```bash
-pnpm add -D @stryker-mutator/core @stryker-mutator/vitest-runner
-```
-
-`stryker.config.mjs`:
-
-```js
-export default {
-  testRunner: "vitest",
-  plugins: ["@stryker-mutator/vitest-runner"],
-  mutate: ["src/**/*.ts", "!src/**/*.test.ts"],
-  reporters: ["clear-text", "progress"],
-};
-```
-
-Name the plugin explicitly. Under pnpm the default `@stryker-mutator/*` discovery resolves against the core package's own directory inside `.pnpm/`, finds no runner there, and fails with `Cannot find TestRunner plugin "vitest". In fact, no TestRunner plugins were loaded.`
-
-```bash
-pnpm stryker run --incremental                                            # changed code only, against the last report
-pnpm stryker run --incremental --force --mutate src/orders/total.ts       # one file, cache ignored
-pnpm stryker run --mutate src/orders/total.ts:40-58                       # one range, no cache: the run verify reads
-```
-
-Incremental mode diffs source and test files against `reports/stryker-incremental.json`; keep that file between runs (commit it or cache it in CI) or every run is a full run. The report accumulates: an incremental run keeps mutants that are out of scope this time, so a scoped run still prints survivors from files the branch never touched. Read the survivors for a change from a run without `--incremental`, scoped by `--mutate`. Survivors print under `Survived` in the clear-text report, with the mutated line.
-
 ## Conventions as lint rules
 
 A convention a linter can hold is held by the linter, not by prose. ESLint names below; Biome carries `noExplicitAny`, `noNonNullAssertion`, `noParameterAssign`, and `noEmptyBlockStatements`, verify the rest in its rule list.

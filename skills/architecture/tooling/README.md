@@ -2,9 +2,9 @@
 
 Reference for the toolchains themselves: commands, configuration shape, and the pitfalls that bite in practice. Load only the file for the ecosystem the work touches; this is not a workflow step.
 
-- [PYTHON.md](PYTHON.md): uv and ruff, type checking, mutation, pitfalls.
-- [RUST.md](RUST.md): the cargo toolchain, pinning, mutation, error handling.
-- [TYPESCRIPT.md](TYPESCRIPT.md): package manager, compiler, lint, build, mutation, monorepo.
+- [PYTHON.md](PYTHON.md): uv and ruff, type checking, pitfalls.
+- [RUST.md](RUST.md): the cargo toolchain, pinning, error handling.
+- [TYPESCRIPT.md](TYPESCRIPT.md): package manager, compiler, lint, build, monorepo.
 - [PRISMA.md](PRISMA.md): the migration loop, querying, when not to Prisma.
 - [NEXTJS.md](NEXTJS.md): conventions for the Next.js App Router + React Query + Axios + shadcn/ui + React Hook Form + Zod stack.
 
@@ -13,4 +13,4 @@ Two rules run through every file:
 - **Verify versions from the registry, never from memory.** These ecosystems move monthly, and a confidently wrong version number is worse than no answer. Each file names its authoritative source.
 - **Restraint over reach.** A formatter that rewrites files outside the diff, or a lint sweep nobody asked for, buries the actual change. Scope tool runs to the code being edited.
 
-Each language file carries two sections the loop depends on: **Mutation**, the tool `verify` runs over changed files and how to read its survivors, and **Conventions as lint rules**, the subset of [../conventions/](../conventions/README.md) the linter holds so prose does not have to.
+Each language file carries a **Conventions as lint rules** section: the subset of [../conventions/](../conventions/README.md) the linter holds so prose does not have to.
