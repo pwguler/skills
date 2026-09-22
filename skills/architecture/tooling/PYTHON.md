@@ -131,7 +131,7 @@ uv run mutmut results --all true      # every mutant with its outcome; bare `res
 uv run mutmut show <mutant>           # the diff for one survivor
 ```
 
-State lives in `mutants/`; delete it to force a full run. `# pragma: no mutate` excludes one line, with the reason beside it. `paths_to_mutate` is the deprecated name of `source_paths`.
+State lives in `mutants/`, and a run stopped early resumes there; delete it to force a full run. mutmut 3 has no list mode: it cannot count mutants without testing them, so `verify` prices a Python run from the changed functions in the diff, and scope is the only control before the first mutant runs. `# pragma: no mutate` excludes one line, with the reason beside it. `paths_to_mutate` is the deprecated name of `source_paths`.
 
 ## Python: verifying versions
 

@@ -40,9 +40,12 @@ cargo install cargo-mutants             # or: cargo binstall cargo-mutants
 
 git diff $(git merge-base origin/main HEAD) > /tmp/branch.diff
 cargo mutants --in-diff /tmp/branch.diff          # only mutants overlapping the branch's changes
+cargo mutants --in-diff /tmp/branch.diff --list | wc -l   # price the run: how many mutants it would test
 cargo mutants --file src/orders/total.rs          # one file
 cargo mutants --in-diff /tmp/branch.diff --jobs 4
 ```
+
+`--list` prints the mutants a run would test without testing them, which is what `verify` prices before it asks. `--list --json` gives an exact count where the text lines are awkward to count. `--check` runs `cargo check` on every mutant to separate viable from unviable without touching the suite.
 
 Output lands in `mutants.out/`: `missed.txt` is the survivors list; `caught.txt`, `timeout.txt`, and `unviable.txt` are the rest; `diff/` holds one patch per mutant. Add `/mutants.out*` to `.gitignore`. `--in-diff` matches the diff against source only, so a slice that changes only tests runs no mutants: check it with `--file` on the module those tests cover.
 
