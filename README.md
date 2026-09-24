@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/pwguler/skills)](https://skills.sh/pwguler/skills)
 
-Built against the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.org/abs/2603.22106)): the loop pays technical debt down, the documents carry intent, `recall` keeps your understanding of agent-written code.
+Built against the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.org/abs/2603.22106))
 
 ## Install
 
