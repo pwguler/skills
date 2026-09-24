@@ -2,3 +2,4 @@ find-skills/
 *.txt
 docs/research/
 docs/
+__pycache__/
