@@ -7,4 +7,4 @@ Failure is part of the interface. A caller must know how a module fails as surel
 - **Every external call is bounded.** A timeout, a bounded retry with jitter for transient faults only, and a defined outcome when the budget is spent. An unbounded call is a hang waiting for its moment.
 - **Writes a client may retry are idempotent.** An idempotency key or a natural unique key makes the retry safe; without one, a retry is a duplicate.
 - **Errors carry what the handler needs, never what the attacker wants.** Enough context to act on (which entity, which constraint), no stack traces, queries, or secrets past the boundary.
-- **The failure path is exercised.** A failure mode that no test or run has triggered is a guess. Acceptance includes the failures, not only the happy path.
+- **The costly failure paths are exercised.** A failure that loses data, money, or access, or breaks a caller's contract, is triggered by a test or a run before acceptance; one nothing has triggered is a guess. A failure the type or the parser already rules out needs no test of its own.

@@ -13,7 +13,7 @@ Fast path: when the first cause is directly visible in the error output (the sta
 4. When two hypotheses compete, design the one observation that distinguishes them, rather than trying fixes in turn.
 5. Fix the root cause. One fix at a time.
 6. Add the regression test that would have caught this: red on the old code, green on the fix.
-7. Run the `verify` skill before claiming it is fixed.
+7. Run the `verify` skill before claiming it is fixed. When the bug surfaced inside a slice, the reproduction and the regression test are this step's check; the full gate waits for the slice's commit.
 
 Rules:
 
