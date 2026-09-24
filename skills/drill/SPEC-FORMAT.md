@@ -15,7 +15,7 @@ The transition is mechanical: resolve the open decisions one session at a time, 
 # <slug>: draft
 
 ## Destination
-One or two lines: what reaching the end of this effort looks like: the spec, decision, or change this is finding its way to. Every session orients to this before picking a decision.
+One or two lines naming where this effort ends: the settled spec, the decision, or the change it is heading for. Each session reads this first, then picks a decision.
 
 ## Decisions so far
 - [<decision name>]: one-line gist of the answer
@@ -31,7 +31,7 @@ One or two lines: what reaching the end of this effort looks like: the spec, dec
 <fog: decisions you can see coming but cannot yet phrase sharply enough to ticket. Graduates into Open decisions as the frontier advances.>
 
 ## Out of scope
-<work ruled beyond the destination. Closed, never graduates.>
+<work placed past the destination. Closed for good; it never becomes an open decision.>
 ```
 
 ## Settled template
@@ -67,6 +67,6 @@ The exact commands that prove the criteria, one per line. A quality criterion ha
 - **Mode is who resolves the decision.** `AFK` (away from keyboard): the `research` skill resolves it alone, run in parallel from the session that wrote the draft when the harness dispatches subagents and one at a time otherwise, writing its findings to `docs/research/<slug>-<decision-slug>.md`. `HITL` (human in the loop): only a live exchange with the user resolves it; an agent answering its own HITL question has broken the loop.
 - **One decision per session**, except research decisions already dispatched as subagents. Claim the decision you work: mark it claimed before starting.
 - **Refer to decisions by name**, never by number or slug. Names read at a glance; ids do not.
-- **Fog or decision?** The test is whether you can state the question precisely now, not whether you can answer it now. Sharp question → `Open decisions`; too coarse to phrase → `Not yet specified`.
+- **Fog or decision?** What counts is whether the question can already be phrased exactly, not whether it can already be answered. Phrasable → `Open decisions`; still too coarse → `Not yet specified`.
 - **A decision that turns out to sit beyond the destination is ruled out of scope**, not resolved. Close it and leave one line in `Out of scope`; it does not enter `Decisions so far`.
 - `verify` and `implement` refuse a draft: a spec that still carries `## Open decisions` is routed back to `drill`.

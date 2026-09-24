@@ -4,7 +4,7 @@ description: Full ceremony mode for the whole suite. Run /deep before risky or a
 disable-model-invocation: true
 ---
 
-DEEP MODE is now active for this session, until the user says "deep off", "fast", or the session ends. Announce activation in one line. Announce deactivation too; fast-first then resumes. If the user passed arguments, treat them as the work item and start immediately: run `drill` against it under deep mode.
+DEEP MODE is now active for this session, until the user says "deep off", "fast", or the session ends. Announce activation in one line. Announce deactivation too; fast-first then resumes. Arguments after the command name the work: start on it right away by running `drill` against it under deep mode.
 
 Fast-first is the default everywhere: each skill runs the leanest version that keeps its guarantees. Deep mode removes the leanness, not the guarantees.
 

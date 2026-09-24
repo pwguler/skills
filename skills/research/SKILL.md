@@ -1,12 +1,10 @@
 ---
 name: research
-description: Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.
+description: Find out what is true about a library, service, or standard by reading whoever owns the facts, and write the answer down with a citation per claim. Use when the user asks to look something up, to check how an API or tool really behaves, or to hand off reading while other work continues.
 ---
 
-Spin up a **background agent** to do the research, so you keep working while it reads. When the harness runs no background agent, do the research in this session and say the session is blocked until it returns; the findings still land in a file.
+Reading is slow, so it runs beside the main work: a subagent reads while this session carries on. A harness that cannot run one alongside reads inline; say so, since the session waits on it.
 
-Its job:
+What counts as evidence: the party that owns a fact. That means the vendor's own documentation, the source code, the specification, or a response from the live endpoint. A blog post, a forum answer, or a summary is at most a lead toward the owner, never the citation.
 
-1. Investigate the question against **primary sources** (official docs, source code, specs, first-party APIs), not a secondary write-up of them. Follow every claim back to the source that owns it.
-2. Write the findings to a single Markdown file, citing each claim's source.
-3. Write it to the output path the caller named. Absent one, save it where the repo already keeps such notes, matching the existing convention, and if there is none, put it somewhere sensible and say where.
+What comes back: one Markdown note, each claim followed by where it came from. It goes to the path the caller asked for. No path given: follow wherever the repo keeps similar notes. No such convention: choose a location and name it in the reply.

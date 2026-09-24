@@ -3,7 +3,7 @@ name: core-interview
 description: Internal support skill, the relentless interview loop other skills delegate to. Use only when another skill or the user explicitly triggers it, never on your own.
 ---
 
-Interview the user relentlessly about every aspect of the topic at hand until you reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. Relentless means no branch left unresolved, not one round-trip per branch.
+Keep questioning the user until the two of you agree on every part of the topic. Treat it as a decision tree and settle decisions in dependency order, each before the ones that hang off it. Relentless means no branch left open, not one round-trip per branch.
 
 - Ask only questions whose answer would change what gets built. When your recommendation is strong and the cost of being wrong is low, don't ask: adopt it, record it as an assumption, move on.
 - Real forks are put one at a time, waiting for each answer, the options carrying your candidate answers with the recommended one first. Use the harness question tool when it has one; without it, number the options in the reply, recommendation first, close with "or something else", and stop there. Low-stakes clarifications batch into a single call.

@@ -1,6 +1,6 @@
 ---
 name: drill
-description: "Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, drill into their design, or says \"drill this\" or \"drill me\"."
+description: "Question a plan or design until every decision in it is settled and agreed. Use when the user wants a plan stress-tested or a design pinned down before building, or says \"drill this\" or \"drill me\"."
 ---
 
 First, size the ask. If it has no real decision tree (one obvious change, a small diff, a criterion statable in one sentence), say so and route straight to `implement` with that sentence as the plan; a spec for an obvious change is ceremony. The fast path still drills its sentence: state it, then test it. A sentence that cannot be stated, or that surfaces a fork or a second decision, was not obvious: run the interview. A genuine fork discovered mid-task is never guessed: stop, name it, let the user answer or switch to deep. If `verify` fails twice on a task judged obvious, the task was lying about its size: stop and drill it properly.
@@ -16,25 +16,22 @@ Shape of the session:
 - Before settling a direction, put 2 or 3 genuinely different approaches on the table with trade-offs, leading with a recommendation. When a fork turns on look, feel, or flow that prose can't settle, run the `prototype` skill to build a throwaway to react to, and discard it once the direction is picked.
 - Cut ruthlessly: anything the stated constraints don't demand leaves the design.
 
-## Domain awareness
+## Domain language
 
-The interview also challenges the plan against the project's existing domain model. During exploration, look for existing documentation:
+The interview also tests the plan against the project's domain model. Before the first question, look for `CONTEXT.md` at the root (or `CONTEXT-MAP.md` and the per-context `CONTEXT.md` files it lists) and for ADRs under `docs/adr/`, including any scoped to one context.
 
-- `CONTEXT.md` at the root (or `CONTEXT-MAP.md` + per-context `CONTEXT.md` files in a multi-context repo)
-- ADRs in `docs/adr/` (and any context-scoped `docs/adr/` directories)
+Files appear only when there is something to put in them: `CONTEXT.md` with the first settled term, `docs/adr/` with the first ADR.
 
-Create files lazily: only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
+**First contact.** On a nontrivial codebase with no `CONTEXT.md`, offer one seeding pass: collect candidate terms from the code and the existing docs, then put each to the user during the interview. A term enters the glossary only after the user confirms it.
 
-**First contact.** When no `CONTEXT.md` exists and the codebase is nontrivial, offer a one-time seeding pass: distill candidate terms from the code and any existing docs, then confirm each through the interview. Only confirmed terms enter the glossary; a term nobody vouched for is not written.
+While interviewing:
 
-During the session:
-
-- **Challenge against the glossary.** When the user uses a term that conflicts with the existing language in `CONTEXT.md`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y. Which is it?"
-- **Sharpen fuzzy language.** When the user uses vague or overloaded terms, propose a precise canonical term. "You're saying 'account'. Do you mean the Customer or the User? Those are different things."
-- **Discuss concrete scenarios.** When domain relationships are being discussed, stress-test them with specific scenarios that probe edge cases and force precision about the boundaries between concepts.
-- **Cross-reference with code.** When the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible. Which is right?"
-- **Update `CONTEXT.md` inline.** When a term is resolved, update `CONTEXT.md` right there; don't batch. It is a glossary and nothing else: not a spec, not a scratchpad, not a home for implementation decisions. Format: [CONTEXT-FORMAT.md](CONTEXT-FORMAT.md).
-- **Offer ADRs sparingly.** Only offer an ADR when all three are true: hard to reverse, surprising without context, the result of a real trade-off. If any is missing, skip it. Format: [ADR-FORMAT.md](ADR-FORMAT.md).
+- **Hold the user to the glossary.** A word used against its `CONTEXT.md` meaning gets named at once: "the glossary says a Refund is X; you seem to mean Y. Which?"
+- **Replace vague words.** A loose or overloaded word gets a precise candidate: "by 'user', do you mean the Account holder or the Operator? They differ."
+- **Test with cases.** Where two concepts touch, pick a concrete case at their edge and ask what happens.
+- **Check claims against the code.** When the user says how something works, look. Name any disagreement: "the code refunds whole Payments; you described partial refunds. Which is true?"
+- **Write terms as they settle.** Update `CONTEXT.md` the moment a term is settled, not at the end. It is a glossary only: no plans, notes, or implementation choices. Format: [TERMS.md](TERMS.md).
+- **Keep ADRs rare.** Offer one only for a decision that passes the three tests in [DECISION-RECORD.md](DECISION-RECORD.md): costly to undo, puzzling from the code, won against a real rival.
 
 The session ends when every branch of the decision tree is resolved: state the settled design in a short summary and get explicit agreement before any implementation starts.
 

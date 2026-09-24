@@ -1,87 +1,67 @@
 ---
 name: architecture
-description: Shape a codebase's architecture, at the start or once it fights you. Use when setting up a new codebase or area, choosing structure and conventions, or when the user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable.
+description: "Shape a codebase's architecture, at the start or once it fights you. Use when setting up a new codebase or area and choosing its structure and conventions, or when the user wants the architecture improved: refactoring targets, modules too entangled to change apart, code that is hard to test or hard for an agent to find its way around."
 ---
 
-Surface architectural friction and propose **deepening opportunities**: refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.
+Find where the structure resists change and propose **deepenings**: refactors that put more behavior behind smaller interfaces, so the code gets easier to test and easier for an agent to navigate.
 
-This skill also runs at the start, before there is friction to find: setting up a new codebase or area means choosing its structure and conventions. Greenfield skips the exploration and candidate list; go straight to the interview against the conventions below, and write what settles into `ARCHITECTURE.md`.
+A new codebase or area has no friction to find yet. There, skip the search: go straight to the interview (step 3), settle the structure and conventions, and write the result to `ARCHITECTURE.md`.
 
-The conventions this skill owns are indexed in [conventions/](conventions/README.md), loaded when the work touches them; `implement` follows them while building.
+The conventions this skill owns are indexed in [conventions/](conventions/README.md) and load only when the work touches them; `implement` follows them while building.
 
-Fast by default: scope the exploration to the area the user names or the friction they describe, present the top candidates, and hold the rival-interface sub-agent fan-out until asked. Deep mode (the `deep` skill is active): whole-codebase sweep, full candidate list, sub-agent interface exploration on the picked candidate.
+Fast by default: search only the area or friction the user named, show the strongest few candidates, and hold the parallel interface designs until asked. Deep mode (the `deep` skill is active): the whole codebase, every candidate, and parallel interface designs for the chosen one.
 
-## Glossary
+## Vocabulary
 
-Use these terms exactly in every suggestion. Consistent language is the point. Don't drift into "component," "service," "API," or "boundary." Full definitions in [LANGUAGE.md](LANGUAGE.md).
+Speak in the terms of [LANGUAGE.md](LANGUAGE.md) every time: **module**, **interface**, **implementation**, **depth**, **seam**, **adapter**, **leverage**, **locality**. Drifting into "component", "service", "API", or "boundary" blurs the distinctions this skill exists to draw. The checks it leans on most:
 
-- **Module**: anything with an interface and an implementation (function, class, package, slice).
-- **Interface**: everything a caller must know to use the module: types, invariants, error modes, ordering, config. Not just the type signature.
-- **Implementation**: the code inside.
-- **Depth**: leverage at the interface, a lot of behavior behind a small interface. **Deep** = high leverage. **Shallow** = interface nearly as complex as the implementation.
-- **Seam**: where an interface lives; a place behavior can be altered without editing in place. (Use this, not "boundary.")
-- **Adapter**: a concrete thing satisfying an interface at a seam.
-- **Leverage**: what callers get from depth.
-- **Locality**: what maintainers get from depth (change, bugs, knowledge concentrated in one place).
+- **Deletion test**: would removing the module make complexity vanish (it was a pass-through) or reappear in every caller (it was earning its place)?
+- Tests cross the interface that callers cross.
+- A seam is real once a second adapter fills it.
+- **An interface with more than one consumer is a promise.** Deepen behind it by adding, never by reshaping what callers rely on; a breaking change to it is a migration to plan, not a refactor to slip in.
 
-Key principles (see [LANGUAGE.md](LANGUAGE.md) for the full list):
-
-- **Deletion test**: imagine deleting the module. If complexity vanishes, it was a pass-through. If complexity reappears across N callers, it was earning its keep.
-- **The interface is the test surface.**
-- **One adapter = hypothetical seam. Two adapters = real seam.**
-- **A shared interface is a published promise.** More than one consumer means deepening behind it additively, never reshaping what callers already depend on; a breaking change to a shared seam is a migration to plan, not a refactor to slip in.
-
-This skill is _informed_ by the project's domain model: `CONTEXT.md` and any `docs/adr/`. The domain language gives names to good seams; ADRs record decisions the skill should not re-litigate. See [CONTEXT-FORMAT.md](../drill/CONTEXT-FORMAT.md) and [ADR-FORMAT.md](../drill/ADR-FORMAT.md).
+The domain model steers the work: names for good seams come from `CONTEXT.md`, and decisions in `docs/adr/` are settled ground, not open questions. Formats: [TERMS.md](../drill/TERMS.md), [DECISION-RECORD.md](../drill/DECISION-RECORD.md).
 
 ## Process
 
-Greenfield (no code to find friction in): skip to step 3 and interview against the conventions above.
+### 1. Look
 
-### 1. Explore
+Start from what is written down: `ARCHITECTURE.md` (the last map of modules, seams, and invariants; re-derive only what changed since), `CONTEXT.md` or `CONTEXT-MAP.md` with each context's glossary, and the ADRs near the area. A missing file is not worth mentioning, with one exception: on a nontrivial codebase with no `ARCHITECTURE.md`, offer once to seed it from this run using [FORMAT.md](FORMAT.md), and write only what the user confirms.
 
-Read existing documentation first:
+Then read the code within the area the user named, in a subagent when the harness dispatches one, otherwise here. Follow the friction rather than a checklist. Signs worth noting:
 
-- `ARCHITECTURE.md` at the root: the prior map of modules, seams, and invariants. Re-derive only what changed since it was written.
-- `CONTEXT.md` (or `CONTEXT-MAP.md` + each `CONTEXT.md` in a multi-context repo)
-- Relevant ADRs in `docs/adr/` (and any context-scoped `docs/adr/` directories)
+- One concept that takes a tour of many small modules to understand.
+- Interfaces nearly as complicated as the code behind them.
+- Pure helpers pulled out only so they can be tested, while the bugs live in how they are called.
+- Modules so entangled that a change to one leaks into its neighbors.
+- Code with no tests, or none that its current interface lets you write.
 
-If any of these files don't exist, proceed silently. Don't flag their absence or suggest creating them upfront. Exception: when `ARCHITECTURE.md` is missing on a nontrivial codebase, offer once to seed it from this run's exploration, using [FORMAT.md](FORMAT.md); write only what the user confirms.
+Run the deletion test on every module that looks shallow.
 
-Then walk the codebase, in a subagent when the harness dispatches one, otherwise here, scoped to the area the user named. Don't follow rigid heuristics. Explore organically and note where you experience friction:
+### 2. Propose
 
-- Where does understanding one concept require bouncing between many small modules?
-- Where are modules **shallow** (interface nearly as complex as the implementation)?
-- Where have pure functions been extracted just for testability, but the real bugs hide in how they're called (no **locality**)?
-- Where do tightly-coupled modules leak across their seams?
-- Which parts of the codebase are untested, or hard to test through their current interface?
+List the deepening candidates, numbered. For each one:
 
-Apply the **deletion test** to anything you suspect is shallow: would deleting it concentrate complexity, or just move it? A "yes, concentrates" is the signal you want.
+- **Files**: the modules involved.
+- **Friction**: what the current structure makes hard.
+- **Change**: in plain words, what would move.
+- **Payoff**: in leverage and locality, and what the tests would look like afterwards.
 
-### 2. Present candidates
+Name domain things with the words of `CONTEXT.md` and structural things with those of LANGUAGE.md: "the Invoice issuing module", not "the InvoiceHelper" or "the invoice service".
 
-Present a numbered list of deepening opportunities. For each candidate:
+A candidate that cuts against an ADR appears only when the friction justifies reopening it, and is marked so ("reopens ADR-0007, because ..."). Refactors an ADR already rules out stay off the list.
 
-- **Files**: which files/modules are involved
-- **Problem**: why the current architecture is causing friction
-- **Solution**: plain English description of what would change
-- **Benefits**: explained in terms of locality and leverage, and also in how tests would improve
+Propose no interfaces yet. Close by asking which candidate to explore.
 
-**Use CONTEXT.md vocabulary for the domain, and [LANGUAGE.md](LANGUAGE.md) vocabulary for the architecture.** If `CONTEXT.md` defines "Order," talk about "the Order intake module", not "the FooBarHandler," and not "the Order service."
+### 3. Interview
 
-**ADR conflicts**: if a candidate contradicts an existing ADR, only surface it when the friction is real enough to warrant revisiting the ADR. Mark it clearly (e.g. _"contradicts ADR-0007, but worth reopening because…"_). Don't list every theoretical refactor an ADR forbids.
+Run the `core-interview` skill on the chosen candidate. The tree to settle: constraints, dependencies (sorted per [DEPENDENCIES.md](DEPENDENCIES.md)), the shape of the deepened module, what hides behind its seam, and which tests survive.
 
-Do NOT propose interfaces yet. Ask the user: "Which of these would you like to explore?"
+Write down what settles, as it settles:
 
-### 3. Interview loop
+- A deepened module named after a concept `CONTEXT.md` lacks: add the term the way `drill` does, creating the file if it does not exist yet. A fuzzy term sharpened in conversation: update its entry.
+- A new module, a moved seam, or a new invariant: update `ARCHITECTURE.md` per [FORMAT.md](FORMAT.md).
+- A candidate the user turns down for a reason a future review would need: offer an ADR so it is not proposed again. A passing reason ("not now") or an obvious one gets none.
+- Alternative interfaces for the chosen module: [INTERFACE.md](INTERFACE.md).
 
-Once the user picks a candidate, run the `core-interview` skill against it. The decision tree to walk: constraints, dependencies, the shape of the deepened module, what sits behind the seam, what tests survive.
-
-Side effects happen inline as decisions crystallize:
-
-- **Naming a deepened module after a concept not in `CONTEXT.md`?** Add the term to `CONTEXT.md`, same discipline as `/drill` (see [CONTEXT-FORMAT.md](../drill/CONTEXT-FORMAT.md)). If it doesn't exist, create it lazily when the first term is resolved.
-- **Sharpening a fuzzy term during the conversation?** Update `CONTEXT.md` right there.
-- **Did the settled design change the system's shape (new module, moved seam, new invariant)?** Update `ARCHITECTURE.md` right there, per [FORMAT.md](FORMAT.md).
-- **User rejects the candidate with a load-bearing reason?** Offer an ADR, framed as: _"Want me to record this as an ADR so future architecture reviews don't re-suggest it?"_ Only offer when the reason would actually be needed by a future explorer to avoid re-suggesting the same thing. Skip ephemeral reasons ("not worth it right now") and self-evident ones. See [ADR-FORMAT.md](../drill/ADR-FORMAT.md).
-- **Want to explore alternative interfaces for the deepened module?** See [INTERFACE.md](INTERFACE.md).
-
-When the settled design is implementation work, write the spec to `docs/specs/<slug>.md` per [SPEC-FORMAT.md](../drill/SPEC-FORMAT.md), with the deepened interface and the tests that survive as its acceptance criteria, and hand it to `implement`.
+When the result is implementation work, write the spec to `docs/specs/<slug>.md` per [SPEC-FORMAT.md](../drill/SPEC-FORMAT.md), with the deepened interface and the surviving tests as its acceptance criteria, and hand it to `implement`.
