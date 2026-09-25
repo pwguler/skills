@@ -1,4 +1,4 @@
-# Boundary security
+# Security at seams
 
 Security is a property of seams. Nothing that crossed a seam from outside is trusted, and each kind of decision happens at exactly one seam.
 

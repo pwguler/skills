@@ -13,7 +13,7 @@ Fast by default: search only the area or friction the user named, show the stron
 
 ## Vocabulary
 
-Speak in the terms of [LANGUAGE.md](LANGUAGE.md) every time: **module**, **interface**, **implementation**, **depth**, **seam**, **adapter**, **leverage**, **locality**. Drifting into "component", "service", "API", or "boundary" blurs the distinctions this skill exists to draw. The checks it leans on most:
+Speak in the terms of [LANGUAGE.md](LANGUAGE.md) every time: **module**, **interface**, **implementation**, **depth**, **seam**, **port**, **adapter**, **leverage**, **locality**. Drifting into "component", "service", "API", or "boundary" blurs the distinctions this skill exists to draw. The checks it leans on most:
 
 - **Deletion test**: would removing the module make complexity vanish (it was a pass-through) or reappear in every caller (it was earning its place)?
 - Tests cross the interface that callers cross.
