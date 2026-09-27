@@ -26,6 +26,8 @@ Rules:
 - Before adding anything, walk the ladder: does it need to exist, does the stdlib or platform do it, does a present dependency, does one line. Test code walks it too: extend the fake, fixture, or helper that exists before writing a new one; extending it is part of the slice.
 - Type-safe with no escape hatches. Defensive at I/O edges, trusting inside. No silent fallback that hides failure.
 - Every call across the network is bounded by a timeout, and a write a caller may retry carries an idempotency key.
+- Every interleaving of two operations on the same record is correct: a check made before an `await` is stale after it, so re-check it there or run that record's operations one at a time.
+- Configuration is input: validate it where it is constructed and refuse a bad value there, not on first use.
 - Delete what your change orphaned; flag dead code without removing it unasked.
 - Each slice's commit message names the criterion it satisfies and the why, not only the what: one line, imperative, lowercase. Stage the specific files, never `git add .`.
 - A bug or unexpected failure mid-slice routes to the `debug` skill; do not patch around symptoms.
