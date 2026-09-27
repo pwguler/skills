@@ -81,6 +81,7 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Moment | Skill |
 |---|---|
 | New plan, feature, or design, including the structure of a new codebase or area | `drill` |
+| Any topic you want settled by being questioned one fork at a time (`drill` runs it for plans) | `core-interview` |
 | A design fork needs a throwaway to react to | `prototype` |
 | Implementing a settled plan | `implement` |
 | Bug or unexpected behavior | `debug` |
