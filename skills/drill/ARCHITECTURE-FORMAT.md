@@ -25,5 +25,5 @@ What must stay true, system-wide. One line each.
 - Only what stays true for years: modules, responsibilities, seams, invariants. Never API signatures, never file-by-file listings, never anything a grep answers better.
 - A page is the budget. If it grows past that, it is describing implementation, not architecture.
 - Update inline at the moment the shape changes (a `land` that adds a module, moves a seam, or introduces an invariant), never in batch cleanups.
-- Use `CONTEXT.md` vocabulary for domain names and [LANGUAGE.md](LANGUAGE.md) vocabulary for structural terms.
-- Created lazily: the `architecture` skill offers to seed it on first contact with a nontrivial codebase; the first shape-changing `land` creates it otherwise.
+- Use `CONTEXT.md` vocabulary for domain names.
+- Created lazily: the first `land` that changes the system's shape creates it.

@@ -1,6 +1,6 @@
 ---
 name: drill
-description: "Question a plan or design until every decision in it is settled and agreed. Use when the user wants a plan stress-tested or a design pinned down before building, or says \"drill this\" or \"drill me\"."
+description: "Question a plan or design until every decision in it is settled and agreed. Use when the user wants a plan stress-tested, a design pinned down before building, or the structure of a new codebase or area settled, or says \"drill this\" or \"drill me\"."
 ---
 
 First, size the ask. If it has no real decision tree (one obvious change, a small diff, a criterion statable in one sentence), say so and route straight to `implement` with that sentence as the plan; a spec for an obvious change is ceremony. The fast path still drills its sentence: state it, then test it. A sentence that cannot be stated, or that surfaces a fork or a second decision, was not obvious: run the interview. A genuine fork discovered mid-task is never guessed: stop, name it, let the user answer or switch to deep. If `verify` fails twice on a task judged obvious, the task was lying about its size: stop and drill it properly.

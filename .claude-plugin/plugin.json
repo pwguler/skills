@@ -14,7 +14,6 @@
     "loop"
   ],
   "skills": [
-    "./skills/architecture",
     "./skills/core-interview",
     "./skills/debug",
     "./skills/deep",

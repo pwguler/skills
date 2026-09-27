@@ -54,7 +54,6 @@ The base suite (drill → implement → verify → land) implements the run-unti
 flowchart TD
     idea([idea or codebase friction]) --> drill["1. drill: settle the plan"]
     drill -- "goal, non-goals, acceptance criteria" --> spec[("docs/specs/*.md")]
-    arch["architecture: settle a deepening"] -- "deepened interface, surviving tests" --> spec
     drill -- "tree too big for one session" --> draft[("spec as draft: open decisions")]
     draft -- "sessions resolve decisions one at a time" --> spec
     spec --> impl
@@ -81,13 +80,12 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 
 | Moment | Skill |
 |---|---|
-| New plan, feature, or design | `drill` |
+| New plan, feature, or design, including the structure of a new codebase or area | `drill` |
 | A design fork needs a throwaway to react to | `prototype` |
 | Implementing a settled plan | `implement` |
 | Bug or unexpected behavior | `debug` |
 | About to claim done, fixed, or passing | `verify` |
 | Quality no command can settle: a design, a UI, prose | `rubric` |
-| Starting a codebase or area, or existing code fights you | `architecture` |
 | Reading legwork | `research` |
 | Branch done, needs merging or a PR | `land` |
 | Independent failures or tasks, two or more | `parallel` |
