@@ -9,7 +9,7 @@ When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the pl
 
 
 1. Open a todo list before the first test: one item per acceptance criterion when a spec exists, one per slice otherwise, then `verify`, then `rubric` when the work is a UI, a public interface, a name, or a doc. A list of fewer than three items is not opened. Mark each item done as it lands. An item you skip stays in the list as `skip: <reason>`; a criterion is never skipped, only left open.
-2. Pick the smallest unfinished slice of the plan.
+2. Pick the smallest unfinished slice of the plan. When the plan has three slices or more and the harness dispatches subagents, brief one subagent with the slice and this skill to work steps 3 to 5 and stop before the gate; read its diff, have a second subagent run the slice's gate, and commit on that record. Otherwise work steps 3 to 5 in this session.
 3. Write the test that fails for it. Test external behavior through the interface, never implementation details. If no failing test can be written, the seam is wrong: stop and fix the plan, not the test.
 4. Write the minimum code that makes it pass.
 5. Refactor only with tests green. Match the existing style of the surrounding code.
