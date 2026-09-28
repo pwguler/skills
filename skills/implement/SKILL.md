@@ -30,7 +30,7 @@ Rules:
 - Configuration is input: validate it where it is constructed and refuse a bad value there, not on first use.
 - A component's state changes only through its own operations: never hand out a reference to it that a caller could mutate or that changes under them.
 - Delete what your change orphaned; flag dead code without removing it unasked.
-- Each slice's commit message names the criterion it satisfies and the why, not only the what: one line, imperative, lowercase. Stage the specific files, never `git add .`.
+- Each slice's commit message is one line in the repository's convention (read recent `git log`; imperative lowercase when there is none), names the criterion by what it says, never its spec id, and gives the why, not only the what. Stage the specific files, never `git add .`.
 - A bug or unexpected failure mid-slice routes to the `debug` skill; do not patch around symptoms.
 - A genuine fork found mid-slice is never guessed: stop, name it, and let the user answer or switch to deep.
 - Three failed attempts on the same slice stop the loop: escalate to the user with the criterion, what was tried, and the last error.
