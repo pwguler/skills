@@ -30,12 +30,12 @@ While interviewing:
 - **Replace vague words.** A loose or overloaded word gets a precise candidate: "by 'user', do you mean the Account holder or the Operator? They differ."
 - **Test with cases.** Where two concepts touch, pick a concrete case at their edge and ask what happens.
 - **Check claims against the code.** When the user says how something works, look. Name any disagreement: "the code refunds whole Payments; you described partial refunds. Which is true?"
-- **Write terms as they settle.** Update `CONTEXT.md` the moment a term is settled, not at the end. It is a glossary only: no plans, notes, or implementation choices. Format: [TERMS.md](TERMS.md).
-- **Keep ADRs rare.** Offer one only for a decision that passes the three tests in [DECISION-RECORD.md](DECISION-RECORD.md): costly to undo, puzzling from the code, won against a real rival.
+- **Write terms as they settle.** Update `CONTEXT.md` the moment a term is settled, not at the end. It is a glossary only: no plans, notes, or implementation choices. Format: [terms.md](references/terms.md).
+- **Keep ADRs rare.** Offer one only for a decision that passes the three tests in [decision-record.md](references/decision-record.md): costly to undo, puzzling from the code, won against a real rival.
 
 The session ends when every branch of the decision tree is resolved: state the settled design in a short summary and get explicit agreement before any implementation starts.
 
-When the settled design is implementation work, write the spec to `docs/specs/<slug>.md` in the target project using [SPEC-FORMAT.md](SPEC-FORMAT.md): goal, non-goals, checkable acceptance criteria, verification commands. The spec steers the loop: `implement` builds from it, `verify` gates against it, `land` closes it out and asks whether to keep or delete the file.
+When the settled design is implementation work, write the spec to `docs/specs/<slug>.md` in the target project using [spec-format.md](references/spec-format.md): goal, non-goals, checkable acceptance criteria, verification commands. The spec steers the loop: `implement` builds from it, `verify` gates against it, `land` closes it out and asks whether to keep or delete the file.
 
 ## The tree does not fit this session: write the draft
 When the decision tree cannot resolve here (decisions await research beyond this context, or the tree is simply too large for one session), do not force a settled spec out of an unsettled design. Write the spec as a **draft** instead: `Destination`, `Decisions so far` (empty), `Open decisions`, `Not yet specified` (fog), `Out of scope`. Each open decision carries a Mode:

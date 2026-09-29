@@ -8,7 +8,7 @@ The user wants a throwaway prototype: something to react to before any real code
 
 Ground it in a design system before building; never prototype on model defaults, which read as slop. Use the project's `DESIGN.md` or existing design tokens when they exist. When none exists, get one from the user first: a `DESIGN.md`, a reference site to match, or a source like fontpairs.co for the type pairing. Do not start until type, color, and spacing trace to a real source. When that source is a reference site or a type pairing rather than an existing `DESIGN.md`, write the resolved tokens (type, color, spacing) to the project's `DESIGN.md` before building; it is the one thing the prototype leaves behind, and `implement` and `rubric` read it.
 
-Tokens leave most of the look open. Build to [LOOK.md](LOOK.md): the defaults generated UI drifts to, and what replaces them.
+Tokens leave most of the look open. Build to [look.md](references/look.md): the defaults generated UI drifts to, and what replaces them.
 
 Build it with the `/design` skill, a design canvas the user can see and refine. If `/design` is not available in this environment, write a single self-contained HTML artifact instead, with the same intent.
 
