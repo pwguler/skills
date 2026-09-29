@@ -5,7 +5,7 @@ description: Finish a development branch. Use when implementation is complete an
 
 Nothing lands unverified.
 
-Fast path. When the diff is small and the user already named the path in the invocation (merge, PR, keep, discard): skip the options menu and go. On the merge path, if the merge is a fast-forward, skip the post-merge test re-run; a fast-forward produces the exact tree `verify` just passed. Any divergence from the base branch voids this: diverged merge results are new trees and get the full re-run. The spec question is not part of the fast path: when a spec exists and its fate was not named in the invocation, ask it even here: one line, default keep. Deep mode (the `deep` skill is active) voids the whole fast path: full menu, unconditional re-run, and the spec question asked explicitly rather than inferred.
+Fast path: when the diff is small and the user already named the path in the invocation (merge, PR, keep, discard): skip the options menu and go. On the merge path, if the merge is a fast-forward, skip the post-merge test re-run; a fast-forward produces the exact tree `verify` just passed. Any divergence from the base branch voids this: diverged merge results are new trees and get the full re-run. The spec question is not part of the fast path: when a spec exists and its fate was not named in the invocation, ask it even here: one line, default keep.
 
 1. Open a todo list with these steps as its items before you run anything; when a todo list is already open, add them to it. Each step is its own item; a list of fewer than three items is not opened. A step the chosen path does not take stays as `skip: <reason>`.
 2. Run the `verify` skill, or reuse its evidence record when the tree hash is unchanged. Then the `rubric` skill, when the diff carries a quality surface (a UI, a public interface, a name, prose) or the spec has a criterion that names a quality rather than a behavior: the final gate is a fresh judge, never the maker. `rubric` picks its criteria sources and writes the criteria before it reads the diff. Failing work does not reach the options menu.
@@ -23,3 +23,5 @@ Rules:
 - Never remove a worktree the harness created; only clean up ones under `.worktrees/` or `worktrees/`. Run `git worktree prune` after removal.
 - Never merge untested: the merged result runs the tests unless its tree hash matches the evidence record, which a fast-forward's does.
 - Merge conflicts are resolved by intent, hunk by hunk, each side traced to its source; `--abort` is not a resolution.
+
+Deep mode (the `deep` skill is active): voids the whole fast path: full menu, unconditional re-run, and the spec question asked explicitly rather than inferred.

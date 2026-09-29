@@ -15,4 +15,5 @@ Rules:
 - The rubric comes first. Criteria written after seeing the work describe the work, not the bar. Criteria lifted from `DESIGN.md`, `ARCHITECTURE.md`, `CONTEXT.md`, or the spec predate the work and stay valid whenever they are written down; only criteria invented after the look are tainted.
 - Evidence per criterion: what in the artifact passes or fails it. A verdict without a pointer is an opinion.
 - No judge, no verdict. The maker never marks its own work, and a self-marked rubric is not a weaker verdict, it is the failure this skill exists to prevent. When no independent judge is reachable at all (no dispatch, no fresh session, no user), report the rubric and the artifact, name what blocked the judging, and stop.
-- Deep mode (the `deep` skill is active): three judges minimum, and every failed criterion is fixed before the claim stands.
+
+Deep mode (the `deep` skill is active): three judges minimum, and every failed criterion is fixed before the claim stands.

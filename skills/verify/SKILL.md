@@ -5,6 +5,8 @@ description: Prove a claim of done, fixed, or passing by running the commands an
 
 Evidence before assertion. A claim without a fresh command run behind it is not made.
 
+Fast path: when the plan is one sentence and no spec file exists, the gate is that sentence's criterion, not the whole suite. Run only the tests that exercise the change; the changed path still runs end to end. A second failed gate on a fast-path task means the task was not obvious: stop and run `drill` on it.
+
 1. Name the claim about to be made: "done", "fixed", "passes", "works".
 2. Sort the claim. What a command can settle is verified here; a taste claim is not. When the claim is about quality (a design, a UI, a public interface, a name, prose), run the `rubric` skill for it, now, whether or not the commands come back green. Rejecting a taste claim as unprovable is a routing failure, not a verdict.
 3. Run the commands that would prove it false: the tests, the build, the linter, and the actual behavior that changed. The full gate (every test, the build, the linter) runs once per commit, on the tree about to be committed, except on the fast path, where the gate is the sentence's criterion; inside a slice, the red-green loop runs only the tests that exercise it.
@@ -23,5 +25,5 @@ Rules:
 - Review feedback is a claim: verify it before implementing. Unclear feedback is checked, not obeyed.
 - Partial verification gets a partial claim: "tests pass; behavior not exercised" is honest, "done" is not.
 - A claim no command can prove (good design, not slop, reads well) is `rubric`'s to settle: never fail it as unprovable, and never pass it because everything a command could check came back green.
-- Fast path (one-sentence plan, no spec file): the gate is that sentence's criterion, not the whole suite. Run only the tests that exercise the change; the changed path still runs end to end. A second failed gate on a fast-path task means the task was not obvious: stop and run `drill` on it.
-- Deep mode (the `deep` skill is active): exercise the changed path end to end unconditionally and gate every criterion; a partial claim is not accepted as final.
+
+Deep mode (the `deep` skill is active): exercise the changed path end to end unconditionally and gate every criterion; a partial claim is not accepted as final.
