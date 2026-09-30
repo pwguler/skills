@@ -14,7 +14,7 @@ A suite of agent skills that carries work from a fuzzy plan to a landed branch. 
 - `write-skill`: writes any document an agent reads, these skills included, and proves it changes behavior.
 
 ## Seams
-- A skill's description is its trigger, except for a user-only skill, which fires only by name. Changing when a skill fires means changing that line, and `test/descriptions.json` pins every description so no edit changes one by accident.
+- A skill's description is its trigger, except for a user-only skill, which fires only by name. Changing when a skill fires means changing that line.
 - Skills reach each other by name, never by path: `verify` runs `rubric`, `drill` runs `core-interview`.
 - `rubric` takes the criteria a calling skill hands over: when `implement` runs it on code, `implement` hands it the principle files in its own `references/`.
 - The deep line: a skill under `deep`'s dial ends its SKILL.md with the line that says what full rigor changes there, and `deep` applies that line.
@@ -25,6 +25,5 @@ A suite of agent skills that carries work from a fuzzy plan to a landed branch. 
 - A skill folder holds `SKILL.md` and at most one `references/` folder with every file the skill links. No link leaves its skill's folder; a file two skills use is copied into both, byte for byte.
 - An engineering principle lives in the `references/` of one skill, linked from the step or rule it deepens there.
 - Every SKILL.md body runs in one order: the law, `Fast path:`, numbered steps, `Rules:`, and the deep line last.
-- `npm test` checks the layout, the order, where each principle sits, and every description.
 - Skill prose is decisive present tense, with no em dashes and no upstream names.
 - A claim is made only on fresh command output, or, for a taste claim, on the verdict of a judge that did not make the work.

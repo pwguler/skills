@@ -4,3 +4,4 @@ docs/research/
 docs/
 __pycache__/
 evals/
+test/
