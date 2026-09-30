@@ -24,6 +24,30 @@ const referencePlacement = {
   'look.md': ['prototype'],
 };
 
+// The one skill that holds each principle file, per docs/specs/principles.md AC-1.
+const principlePlacement = {
+  'test-behavior-not-implementation': 'implement',
+  'model-the-domain': 'implement',
+  'type-system-discipline': 'implement',
+  'boundary-discipline': 'implement',
+  'laziness-protocol': 'implement',
+  'subtract-before-you-add': 'implement',
+  'minimize-reader-load': 'implement',
+  'migrate-callers-then-delete-legacy-apis': 'implement',
+  'make-operations-idempotent': 'implement',
+  'separate-before-serializing-shared-state': 'implement',
+  'build-the-lever': 'implement',
+  'foundational-thinking': 'implement',
+  'sequence-verifiable-units': 'implement',
+  'exhaust-the-design-space': 'drill',
+  'redesign-from-first-principles': 'drill',
+  'experience-first': 'drill',
+  'fix-root-causes': 'debug',
+  'attack-the-premise': 'debug',
+  'prove-it-works': 'verify',
+  'encode-lessons-in-structure': 'write-skill',
+};
+
 // Each description as written at the base (750ade2), quotes included; its keys pin the skill list.
 const descriptions = JSON.parse(
   readFileSync(join(dirname(fileURLToPath(import.meta.url)), 'descriptions.json'), 'utf8'),
@@ -220,6 +244,17 @@ for (const skill of skills) {
     assert.deepEqual(problems, [], problems.join('\n'));
   });
 
+  test(`${skill}: principle files sit in their skill's references/`, () => {
+    const problems = [];
+    const own = referenceFiles(skill);
+    for (const [principle, owner] of Object.entries(principlePlacement)) {
+      const name = `${principle}.md`;
+      if (owner === skill && !own.includes(name)) problems.push(`references/${name} is missing`);
+      if (owner !== skill && own.includes(name)) problems.push(`references/${name} belongs only in ${owner}`);
+    }
+    assert.deepEqual(problems, [], problems.join('\n'));
+  });
+
   test(`${skill}: AC-4 body runs law, fast path, steps, rules, deep line and nothing else`, () => {
     const parts = splitSkillFile(readFileSync(join(skillDir, 'SKILL.md'), 'utf8'));
     assert.ok(parts, 'SKILL.md has no frontmatter');
@@ -263,5 +298,11 @@ for (const skill of skills) {
 for (const skill of Object.keys(descriptions).filter((name) => !skills.includes(name))) {
   test(`${skill}: AC-6 frontmatter keys in order, name is the folder, description matches the base`, () => {
     assert.fail(`test/descriptions.json lists ${skill} but skills/${skill}/ does not exist`);
+  });
+}
+
+for (const [principle, owner] of Object.entries(principlePlacement).filter(([, owner]) => !skills.includes(owner))) {
+  test(`${principle}: principle's skill folder exists`, () => {
+    assert.fail(`${principle} is placed in ${owner} but skills/${owner}/ does not exist`);
   });
 }
