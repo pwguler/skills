@@ -12,7 +12,7 @@ Fast path: when the first cause is directly visible in the error output (the sta
 3. Read the actual error and trace it back to the first cause in the chain, not the nearest symptom.
 4. Form one hypothesis. State it with the observation that would confirm or refute it, then get that observation before touching any fix: a log line, an assertion, a probe. Add instrumentation when the evidence is not already there; keep it minimal and reversible, and remove it once it has answered.
 5. When two hypotheses compete, design the one observation that distinguishes them, rather than trying fixes in turn.
-6. Fix the root cause. One fix at a time.
+6. Fix the root cause, per [fix root causes](references/fix-root-causes.md). One fix at a time.
 7. Add the regression test that would have caught this: red on the old code, green on the fix.
 8. Run the `verify` skill before claiming it is fixed. When the bug surfaced inside a slice, the reproduction and the regression test are this step's check; the full gate waits for the slice's commit.
 
@@ -20,7 +20,7 @@ Rules:
 
 - No shotgun fixes, no "try this and see if it helps".
 - Three refuted hypotheses in a row, or no reproduction reachable with the evidence available, stop the loop: report what was tried and which observation is missing, and let the user decide. Do not keep cycling.
-- If the fix does not make the reproduction pass, the hypothesis was wrong: return to step 4, do not stack a second fix on top.
+- If the fix does not make the reproduction pass, the hypothesis was wrong: return to step 4, do not stack a second fix on top. When two failed fixes shared one assumption, open [attack the premise](references/attack-the-premise.md).
 - If the root cause reveals a design problem, say so and offer to run `drill` on the redesign instead of burying a workaround.
 
 Deep mode (the `deep` skill is active): full discipline always.

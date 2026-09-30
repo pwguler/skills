@@ -13,4 +13,4 @@ Writing for agents is test-first development applied to prose. The same loop shi
 Rules:
 - A test harness changes mechanics, not the loop: when one exists, automate the baseline re-run.
 - When the document is a skill in this repo, follow the [conventions for skills in this repo](references/conventions.md).
-- Skip it when the work is a one-off, when standard practice is already well documented, or when a linter or hook could enforce the rule mechanically.
+- Skip it when the work is a one-off, when standard practice is already well documented, or when a linter or hook could enforce the rule mechanically; then [encode lessons in structure](references/encode-lessons-in-structure.md).
