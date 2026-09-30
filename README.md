@@ -1,4 +1,4 @@
-# skills
+# Skills that leave no debt
 
 [![skills.sh](https://skills.sh/b/pwguler/skills)](https://skills.sh/pwguler/skills)
 
