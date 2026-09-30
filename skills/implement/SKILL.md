@@ -3,10 +3,7 @@ name: implement
 description: "Implement a settled plan test-first, smallest slice at a time. Use when starting implementation of a feature or fix after the plan is settled, or when user says \"implement this\" or \"build it\"."
 ---
 
-Work the plan one thin slice at a time. A slice is the smallest piece that changes observable behavior.
-
-When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the plan: work criterion by criterion, and let the spec's non-goals fence every diff. A spec that still carries an `## Open decisions` section is a draft, not a plan: stop and route back to `drill`; implementation cannot start until the draft is settled.
-
+Work the plan one thin slice at a time. A slice is the smallest piece that changes observable behavior. When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the plan: work criterion by criterion, and let the spec's non-goals fence every diff. A spec that still carries an `## Open decisions` section is a draft, not a plan: stop and route back to `drill`; implementation cannot start until the draft is settled.
 
 1. Open a todo list before the first test: one item per acceptance criterion when a spec exists, one per slice otherwise, then `verify`, then `rubric` when the work is a UI, a public interface, a name, or a doc. A list of fewer than three items is not opened. Mark each item done as it lands. An item you skip stays in the list as `skip: <reason>`; a criterion is never skipped, only left open.
 2. Pick the smallest unfinished slice of the plan. When the plan has three slices or more and the harness dispatches subagents, brief one subagent with the slice and this skill to work steps 3 to 5 and stop before the gate; read its diff, have a second subagent run the slice's gate, and commit on that record. Otherwise work steps 3 to 5 in this session.
@@ -36,4 +33,5 @@ Rules:
 - A genuine fork found mid-slice is never guessed: stop, name it, and let the user answer or switch to deep.
 - Three failed attempts on the same slice stop the loop: escalate to the user with the criterion, what was tried, and the last error.
 - When the last slice lands, run the `verify` skill before claiming the work is done. When the work is a UI, a public interface, a name, or a doc, its quality is a claim of its own: run the `rubric` skill on it too, since the maker never judges its own taste.
-- Deep mode (the `deep` skill is active): work only from the spec, criterion by criterion. No one-sentence plans.
+
+Deep mode (the `deep` skill is active): work only from the spec, criterion by criterion. No one-sentence plans.

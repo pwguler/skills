@@ -2,5 +2,8 @@
   "name": "pwguler-skills",
   "version": "1.23.0",
   "private": true,
-  "description": "Skills for Claude Code"
+  "description": "Skills for Claude Code",
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\""
+  }
 }
