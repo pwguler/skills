@@ -65,7 +65,7 @@ The exact commands that prove the criteria, one per line. A quality criterion ha
 
 ## Draft rules
 
-- **Mode is who resolves the decision.** `AFK` (away from keyboard): the `research` skill resolves it alone, run in parallel from the session that wrote the draft when the harness dispatches subagents and one at a time otherwise, writing its findings to `docs/research/<slug>-<decision-slug>.md`. `HITL` (human in the loop): only a live exchange with the user resolves it; an agent answering its own HITL question has broken the loop.
+- **Mode is who resolves the decision.** `AFK` (away from keyboard): the `research` skill resolves it alone, run in parallel from the session that wrote the draft when the harness dispatches subagents, and by later sessions one at a time otherwise, writing its findings to `docs/research/<slug>-<decision-slug>.md`. `HITL` (human in the loop): only a live exchange with the user resolves it; an agent answering its own HITL question has broken the loop.
 - **One decision per session**, except research decisions already dispatched as subagents. Claim the decision you work: mark it claimed before starting.
 - **Refer to decisions by name**, never by number or slug. Names read at a glance; ids do not.
 - **Fog or decision?** What counts is whether the question can already be phrased exactly, not whether it can already be answered. Phrasable → `Open decisions`; still too coarse → `Not yet specified`.
