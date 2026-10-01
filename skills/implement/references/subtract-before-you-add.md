@@ -2,11 +2,11 @@
 
 When a change evolves a system, take complexity out first and build on what remains. A smaller base leaves less code and shows the next design plainly.
 
-When: sequencing a feature, refactor, or rewrite, before its first addition lands.
+When: before adding a file, a layer, a dependency, or a parameter.
 
 - Order removal ahead of construction: a removal the plan holds lands before any addition built on the code it clears, and implement's step 2 orders the rest of the slices by size.
 - Cut to the minimum before spending effort on polish.
-- Treat simplification as a standing investment: leave the design a little simpler and a little more capable than it was, behind a surface the same size or smaller.
+- The design's surface grows only when no existing name, parameter, or option can carry the new capability.
 - Design for the usage that exists, not for edge cases nobody has met.
 - Add no validator, parser, or guard beyond what the spec demands and implement's "Defensive at I/O edges" requires; [boundary-discipline](boundary-discipline.md) says where those edges sit.
 - In prompts and instruction text, cut repeated instructions and oversized templates.

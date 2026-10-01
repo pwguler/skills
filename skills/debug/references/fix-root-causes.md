@@ -2,7 +2,7 @@
 
 A fix goes where the cause lives, never where the symptom shows. Each workaround left in place hides the real bug and makes the system harder to reason about.
 
-When: step 6, as the fix is about to be written; the first bullets confirm that steps 2 to 4 happened.
+When: before a fix that adds a guard, a catch, or a comment defending it, when the same cause could recur elsewhere, or when the failure shows only after a restart; the first bullets confirm that steps 2 to 4 happened.
 
 - Reproduce first and trace back to the first cause: steps 2 and 3.
 - Keep asking why until the answer is the cause itself, not another symptom.

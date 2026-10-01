@@ -9,7 +9,7 @@ When: the work applies one recipe across files, records, or runs, or produces fi
 - A codemod or script makes edits, a generator writes repetitive files, and a query over the data answers an analysis.
 - A task done once still merits a tool when the tool is what lets a reviewer see how it was done.
 - A deterministic tool beats fanning out: when it covers every unit in one pass, run it in this session rather than dispatching subagents to apply by hand what it applies.
-- When the work does fan out to subagents, write the lever as one brief every delegate reads: the recipe, the check each unit passes, and the files it must not touch. Keep that brief outside every delegate's write scope so no delegate can quietly rewrite its own contract.
+- When the work does fan out to subagents, it goes through `parallel`; write the lever as one brief every delegate reads: the recipe, the check each unit passes, and the files it must not touch. Keep that brief outside every delegate's write scope so no delegate can quietly rewrite its own contract.
 - Citing this rule produces a file. With no codemod, script, generator, or delegate brief in the diff, the rule was not applied.
 - The lever ships in the diff when the work outlives the session.
 - Build the smallest tool that does or shows the job, never a framework, per [laziness protocol](laziness-protocol.md).

@@ -24,6 +24,6 @@ A suite of agent skills that carries work from a fuzzy plan to a landed branch. 
 ## Invariants
 - A skill folder holds `SKILL.md` and at most one `references/` folder with every file the skill links. No link leaves its skill's folder; a file two skills use is copied into both, byte for byte.
 - An engineering principle lives in the `references/` of one skill, linked from the step or rule it deepens there.
-- Every SKILL.md body runs in one order: the law, `Fast path:`, numbered steps, `Rules:`, and the deep line last.
+- Every SKILL.md body runs in one order, each block present where the skill has one: the law, `Fast path:`, numbered steps, `Rules:`, and the deep line last.
 - Skill prose is decisive present tense, with no em dashes and no upstream names.
 - A claim is made only on fresh command output, or, for a taste claim, on the verdict of a judge that did not make the work.

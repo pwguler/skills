@@ -9,6 +9,6 @@ When: a sweep, a migration, or any run of similar edits, and the order of a bran
 - When a script does the edits ([build the lever](build-the-lever.md)), the check per unit costs almost nothing; run it anyway.
 - Order commits, and a stack of pull requests, so the history argues for the work: a subtraction before the reshape it clears the way for, a baseline capture before the treatment measured against it, the scaffold before the feature.
 - Each commit stands on its own: it passes the gate when checked out alone.
-- A test's red state goes in the evidence record, and the test lands in the same commit as its fix.
+- A red run's output is kept as evidence under its own tree's hash, and the test lands in the same commit as its fix.
 
 Where it stops: the unit's check is the slice's narrow test run, and the full gate runs once, at the slice's commit, through `verify`; this file never adds a full run between. The proof behind each check stays the verify skill's prove-it-works principle, and dead weight a subtraction clears follows [subtract before you add](subtract-before-you-add.md).

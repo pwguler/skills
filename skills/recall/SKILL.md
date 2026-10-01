@@ -15,5 +15,5 @@ Rules:
 - Stay silent after asking. The wait is the mechanism. An absent answer is an answer.
 - On a wrong pick, a hollow reason, or no answer, state the gap in one sentence, then explain that spot. Explaining after the attempt is repair. Explaining before it is the failure.
 - If a probe surfaces a real defect, note it and keep recalling. Repairs come after the session, through the normal loop.
-- A slice small enough to hold in one glance needs no recall; say so and stop.
+- A slice that touches one function and changes fewer than 20 lines needs no recall; say so and stop.
 - When the questions run out, report the gaps found, in a few lines, and stop. Record nothing. A generated document substitutes the appearance of understanding for the real thing. If something durable emerges, it is a `CONTEXT.md` term per [terms.md](references/terms.md) or an ADR per [decision-record.md](references/decision-record.md), and the user decides.

@@ -2,7 +2,7 @@
 
 Use the type checker as a proof tool that rules out impossible states, mixed-up primitives, and unhandled variants before the code runs. A case the types let a caller skip becomes a failure at runtime.
 
-When: designing a type, reviewing a function signature, or writing any code a static type checker reads.
+When: designing a type or a signature.
 
 - Define errors and special cases out of existence rather than adding a handler for each one. Shapes that cannot hold a bad state, functions total over their input, and a redesigned interface are the tools.
 - Make illegal states impossible to build. Model alternatives as a sum type, one tagged variant per case, never as a record of optional fields whose contradictory combinations still compile. A done flag next to an optional completion time admits "done, with no time"; derive the flag from the time alone, or give "open" and "done at a time" a variant each. A bug that raises the question "can this combination really happen?" means the type is too loose.
