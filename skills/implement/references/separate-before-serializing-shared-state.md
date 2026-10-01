@@ -10,4 +10,4 @@ When: two or more actors (processes, tasks, workers, agents) could read and writ
 - A written instruction or a team convention is never concurrency control.
 - Reaching for a lock is a design smell to examine, not the default answer.
 
-Where it stops: the implement rule on interleavings governs a record that stays shared; this file runs first and asks whether it has to be shared at all. Work split across subagents already follows the parallel skill, which never dispatches agents that would touch the same files.
+Where it stops: it governs the code a slice writes, not how sessions share a spec file. The implement rule on interleavings governs a record that stays shared; this file runs first and asks whether it has to be shared at all. Work split across subagents already follows the parallel skill, which never dispatches agents that would touch the same files.

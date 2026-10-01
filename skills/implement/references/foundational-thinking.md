@@ -2,11 +2,11 @@
 
 Structure comes before the logic that rests on it: the data shape before the code that reads it, and the scaffold every later phase needs before those phases. Decisions about structure guard the options left open later, and decisions about code guard simplicity.
 
-When: before the first line of a slice's logic, and before work starts on anything every later slice leans on.
+When: a slice's logic holds state, branches on a shape, or lays down a type later slices share.
 
 - Settle the data shape before the logic: define the core types early, follow every path that reads or writes them, and pick structures that fit the paths taken most. Which structure fits is [model the domain](model-the-domain.md).
 - Remove duplication of structure, not of every line. Types and data models converge on one shape.
-- Three similar statements still beat an abstraction made too early. Explicit beats clever.
+- Three similar statements still beat an abstraction made too early. No reflection or dynamic dispatch where a direct call works.
 - Tests cover behavior and edge cases, never a line count; [test behavior, not implementation](test-behavior-not-implementation.md) says how.
 - Before state is shared between actors, ask what happens when another actor changes it at the same moment. Any answer other than nothing means isolate it, per [separate before serializing shared state](separate-before-serializing-shared-state.md).
 - Whatever helps every later phase goes first; ask whether each later phase gains from it already existing. CI, the linter, test infrastructure, and shared types are scaffold.

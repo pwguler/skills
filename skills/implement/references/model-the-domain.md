@@ -2,7 +2,7 @@
 
 The domain lives in one data structure that matches it, not in conditionals spread through the code. A fitting structure makes invalid states impossible to write and removes branches, and it costs least when chosen while the code is first written.
 
-When: writing logic that holds state, or meeting code that branches heavily or repeats an assumption about a shape across files.
+When: a slice's logic holds state, branches on a shape, or lays down a type later slices share.
 
 - A state machine replaces loose booleans, phase flags, and lifecycle checks.
 - A named model with typed fields replaces loose parameters and a shape assumed again at each use.

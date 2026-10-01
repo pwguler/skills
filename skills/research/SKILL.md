@@ -1,6 +1,6 @@
 ---
 name: research
-description: Find out what is true about a library, service, or standard by reading whoever owns the facts, and write the answer down with a citation per claim. Use when the user asks to look something up, to check how an API or tool really behaves, or to hand off reading while other work continues.
+description: Find out what is true about a library, service, or standard by reading whoever owns the facts, and write the answer down with a citation per claim. Use when the user asks to look something up, to check how an API or tool really behaves, or to hand off reading while other work continues. Not for a bug in this codebase, which `debug` finds.
 ---
 
 Reading is slow, so it runs beside the main work: a subagent reads while this session carries on. A harness that cannot run one alongside reads inline; say so, since the session waits on it.

@@ -2,7 +2,7 @@
 
 A test drives the code the way its callers do and compares what they would observe to a value written out literally in the test. A test no defect can turn red spends run time and review attention and guards nothing.
 
-When: every time a test is written, changed, or kept, including a test an earlier slice left behind.
+When: a test's assertion does not plainly compare the subject's output with a literal value.
 
 - The seam is the one step 3 names, the interface; this file governs what the assertion reads once the test stands there.
 - Asserting which calls the code made, or repeating a constant the code holds, observes no behavior; neither counts as a test of it.

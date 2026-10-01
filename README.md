@@ -48,12 +48,12 @@ Restart Claude Code after updating.
 
 ## The loop
 
-The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/deep` is user-only and turns every fast path off for the session.
+The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/deep` is user-only and, for the session, turns off every fast path in the skills under its dial.
 
 ```mermaid
 flowchart TD
     idea([idea or codebase friction]) --> drill["1. drill: settle the plan"]
-    drill -- "goal, non-goals, acceptance criteria" --> spec[("docs/specs/*.md")]
+    drill -- "goal, non-goals, decisions, acceptance criteria" --> spec[("docs/specs/*.md")]
     drill -- "tree too big for one session" --> draft[("spec as draft: open decisions")]
     draft -- "sessions resolve decisions one at a time" --> spec
     spec --> impl
@@ -81,7 +81,7 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Moment | Skill |
 |---|---|
 | New plan, feature, or design, including the structure of a new codebase or area | `drill` |
-| Any topic you want settled by being questioned one fork at a time (`drill` runs it for plans) | `core-interview` |
+| The interview loop `drill` runs, not run on its own | `core-interview` |
 | A design fork needs a throwaway to react to | `prototype` |
 | Implementing a settled plan | `implement` |
 | Bug or unexpected behavior | `debug` |

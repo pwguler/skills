@@ -2,7 +2,7 @@
 
 A result is checked by looking at the real thing it produced, never at a proxy for it. A wrong inference acted on costs far more than the look that would have caught it.
 
-When: a task's output is about to be called done, fixed, or working.
+When: the changed path's result is read through a proxy (a timestamp, a status file, a cached value, a screenshot, or a report from another agent), a check fails, or the work is a port or a migration whose trail is audited later.
 
 - A self-report, a subagent's summary, and "it compiles" are not evidence, per the default stance.
 - Look at the thing itself: a running process is checked directly, not through state derived from it, such as a file timestamp, an output that looks fresh, or an old screenshot.
