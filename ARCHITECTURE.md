@@ -16,7 +16,7 @@ A suite of agent skills that carries work from a fuzzy plan to a landed branch. 
 ## Seams
 - A skill's description is its trigger, except for a user-only skill, which fires only by name. Changing when a skill fires means changing that line.
 - Skills reach each other by name, never by path: `verify` runs `rubric`, `drill` runs `core-interview`.
-- `rubric` takes the criteria a calling skill hands over: when `implement` runs it on code, `implement` hands it the principle files in its own `references/`.
+- `rubric` takes the criteria a calling skill hands over: on code, `implement` hands its principle files to `verify`, which passes them to `rubric`.
 - The deep line: a skill under `deep`'s dial ends its SKILL.md with the line that says what full rigor changes there, and `deep` applies that line.
 - The spec at `docs/specs/<slug>.md` in the target project: `drill` writes it, `implement` builds from it, `verify` gates against it, and `land` closes it.
 - Harness capabilities (subagents, a question tool, a design canvas) are preferences with a fallback, never requirements.

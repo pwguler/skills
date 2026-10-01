@@ -19,3 +19,5 @@ Rules:
 - When the direction is open, put a few genuinely different layouts on the canvas to react to, not one polished guess.
 - Reference what exists: point `/design` at the real components or pages to match, rather than describing them; in the HTML fallback, read their source and reuse its markup and styles.
 - It is throwaway. It settles the direction; discard it once the user picks, and carry the decision into the real work.
+
+Deep mode (the `deep` skill is active): no fast path; a fork about flow is built on the design source like any other.
