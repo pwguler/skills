@@ -9,7 +9,7 @@ Rules:
 - Ask only questions whose answer would change what gets built. When your recommendation is strong and reversing it later changes no acceptance criterion, non-goal, or public interface, and only then, don't ask: adopt it, record it as an assumption, move on.
 - Real forks are put one at a time, waiting for each answer, the options carrying your candidate answers with the recommended one first. Use the harness question tool when it has one; without it, number the options in the reply, recommendation first, close with "or something else", and stop there.
 - Every option list leaves the user free to type an answer the options missed.
-- If a question can be answered by exploring the codebase, explore the codebase instead of asking. Facts are yours to find, never the user's. A lookup runs in a subagent and does not stall the interview: only the questions downstream of that fact wait for it. Without subagents, look it up inline before the question that depends on it.
+- If a question can be answered by exploring the codebase, explore the codebase instead of asking. Facts are yours to find, never the user's. Look the fact up in this session before the question that depends on it.
 - When the user can't put the target behavior into words, ask for a reference implementation: source code, even in another language or library, whose semantics to reimplement. Source beats prose or a screenshot.
 - The closing summary lists every adopted assumption for a one-pass veto. A vetoed assumption reopens only that branch.
 
