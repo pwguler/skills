@@ -5,3 +5,4 @@ docs/
 __pycache__/
 evals/
 test/
+ARCHITECTURE.md
