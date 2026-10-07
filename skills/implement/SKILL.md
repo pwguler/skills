@@ -10,14 +10,14 @@ Work the plan one thin slice at a time. A slice is the smallest piece that chang
 3. Write the test that fails for it. Test external behavior through the interface, never implementation details. If no failing test can be written, the seam is wrong: stop and fix the plan, not the test; a change that preserves behavior is the exception.
 4. Write the minimum code that makes it pass.
 5. Refactor only with tests green. Match the surrounding style, including naming and layout.
-6. Gate the slice through `verify` and commit on its record, per the gate rule.
+6. Gate the slice through `verify` and commit on its record.
 7. Repeat from step 2 until the plan has no unfinished slices.
 8. When no slice is left, run `verify` on the whole work, then the `rubric` skill when the work touches a quality surface, as `rubric` defines it, even when every claim is a behavior. Then offer the user `land`, which ends the work, and `/recall` on the code the agent wrote.
 
 Rules:
 
 - With no spec and no one-sentence plan from drill's fast path, run `drill` first.
-- On the repo's base branch (where the remote HEAD points), recommend a branch named for the spec slug, or a short slug of the plan, before the first test, and ask: working on the base branch is the user's call, never yours to assume. The answer holds for the session. A project instruction (AGENTS.md or CLAUDE.md) that settles where work goes answers it for every session. A session already on a feature branch stays there.
+- On the repo's base branch (where the remote HEAD points), recommend a branch before the first test and ask: working on the base branch is the user's call, never yours to assume. The answer holds for the session. A project instruction (AGENTS.md or CLAUDE.md) that settles where work goes answers it for every session.
 - One implementation at a time. Never drop unlanded work for a new task on your own: offer to finish and land it, land it partial, or park it, and let the user pick.
 - No production code before its failing test exists, except wiring whose only effect lives inside a host the tests cannot drive (a plugin entry point, a registration with a framework): its proof is an end-to-end run through `verify`, never a string match over source.
 - A change that preserves behavior (a refactor, a rename, a deletion) is the other exception: the tests that cover it, green before and after, are its test; when none covers it, first add one that passes on the current code and pins what it does. A change with no runtime behavior (docs, comments, assets) needs no test, and its quality surface waits for step 8.
