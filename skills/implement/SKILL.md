@@ -38,7 +38,7 @@ Rules:
 - Delete what your change orphaned ([migrate callers, then delete legacy APIs](references/migrate-callers-then-delete-legacy-apis.md), opened before writing a new API that replaces one that still has callers); flag dead code without removing it unasked.
 - Each slice's commit subject is one line in the repository's convention (read recent `git log`; imperative lowercase when there is none), names the criterion by what it says, never its spec id, and gives the why, not only the what. Stage the specific files, never `git add .`.
 - A bug or unexpected failure mid-slice routes to the `debug` skill; do not patch around symptoms.
-- A genuine fork found mid-slice is never guessed: stop, name it, and let the user answer or switch to deep.
+- A genuine fork found mid-slice is never guessed: stop, name it, and let the user answer or switch to deep. A fork is genuine when it changes an acceptance criterion, a non-goal, or a public interface, needs the user's authority, or cannot be undone; any other fork that running something can settle is settled by running it, per [never block on the human](references/never-block-on-the-human.md).
 - Three failed attempts on the same slice stop the loop: escalate to the user with the criterion, what was tried, and the last error.
 
 Deep mode (the `deep` skill is active): work only from the spec, criterion by criterion. No one-sentence plans.
