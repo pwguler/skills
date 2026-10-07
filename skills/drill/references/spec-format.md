@@ -46,6 +46,9 @@ What this work must not touch or change. These fence the diff.
 ## Decisions
 One line per settled fork: the option taken and its reason. `land` carries this section into the merge message.
 
+## Phases
+Only for a rewrite or migration planned in phases: one line per phase, naming the criterion it ends at and the checks that may be red inside it, those of the code being replaced or of callers not yet moved. Every phase ends green; implement's outcome-oriented-execution principle works the phases.
+
 ## Acceptance criteria
 - AC-1: <a checkable statement; a command or test can prove it true or false>
 - AC-2: <a quality statement naming `rubric` as its judge, when no command can prove it>
@@ -60,7 +63,7 @@ The exact commands that prove the criteria, one per line. A quality criterion ha
 - Every criterion is checkable. A command or test proves it, or, when it is a quality (how a surface looks, reads, or feels) rather than a behavior, a named judge does: `rubric`, run once at `verify` time; `land`'s gate reuses its verdict under rubric's rule on saved verdicts. There is no third kind.
 - A verification command is the project's test runner, build, or linter. A script written on the same branch as the change is not a verification command: the maker would be grading its own exam.
 - Non-goals are load-bearing: `verify` fails work that changes what a non-goal fences off.
-- The spec states the destination, not the route: no implementation steps, no file lists.
+- The spec states the destination, not the route: no implementation steps, no file lists; a Phases section names only where each phase ends and which checks may be red inside it.
 - Durable residue is routed out regardless of the spec file's fate: decisions go to `docs/adr/`, settled terms to `CONTEXT.md`. A kept spec is a record of one branch's reasoning, not a substitute for that routing.
 
 ## Draft rules
