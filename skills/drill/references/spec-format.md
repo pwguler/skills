@@ -5,7 +5,7 @@ One spec per work item, at `docs/specs/<slug>.md` in the target project. `drill`
 A spec has two states, derived from its content, not a status field:
 
 - **Draft**: the plan is not settled yet. The spec carries the open decisions that must be resolved before implementation can start. `drill` writes it this way when the decision tree cannot resolve within one session (decisions await research, or the tree is too large for one context).
-- **Settled**: every open decision is resolved, the `## Open decisions` section is gone, and the spec carries goal, non-goals, decisions, acceptance criteria, and verification commands. A draft settles in place: when its last open decision closes, the session writes those sections, gets the user's explicit agreement, then deletes `## Open decisions`. Only a settled spec steers `implement` and `verify`; both route a draft back to `drill`.
+- **Settled**: every open decision is resolved, the `## Open decisions` section is gone, and the spec carries goal, non-goals, decisions, acceptance criteria, and verification commands, and, for a phased migration, its phases. A draft settles in place: when its last open decision closes, the session writes those sections, gets the user's explicit agreement, then deletes `## Open decisions`. Only a settled spec steers `implement` and `verify`; both route a draft back to `drill`.
 
 ## Draft template
 
