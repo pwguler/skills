@@ -56,8 +56,7 @@ A feature, both ways. The yellow steps are the commands you type.
 
 ```mermaid
 flowchart LR
-    task([task]) --> y1["/drill"]
-    y1 --> drill["drill<br/>asks its questions"]
+    y1["/drill #lt;task#gt;"] --> drill["drill<br/>asks its questions"]
     drill --> y2["/implement"]
     y2 --> impl["implement + verify<br/>test first, prove it"]
     impl --> y3["/land"]
@@ -72,8 +71,7 @@ Either way, `land` opens a pull request; it merges locally into the base branch 
 
 ```mermaid
 flowchart LR
-    task([task]) --> y1["/auto"]
-    y1 --> pb["picks the playbook"]
+    y1["/auto #lt;task#gt;"] --> pb["picks the playbook"]
     pb --> drill["drill<br/>asks its questions"]
     drill --> impl["implement + verify<br/>test first, prove it"]
     impl --> land["land<br/>opens a PR"]
