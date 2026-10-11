@@ -1,7 +1,7 @@
 # Worktree cleanup
 
 When: disk is short, and old git worktrees or their build outputs take the space.
-Not when: a branch still has to be merged or discarded (`land`).
+Not when: a branch still has to be merged or discarded (shipping).
 
 1. List the worktrees with `git worktree list`, with the disk each one uses, largest first.
 2. For each, record its branch, whether that branch is merged or pushed, and what `git status --ignored` shows in it: changes, untracked files, and ignored files.

@@ -1,7 +1,7 @@
 # Babysit PR
 
 When: one open pull request has to reach merge-ready: checks green, review threads answered, no conflicts.
-Not when: no pull request exists yet (opening-a-pr), or several dependent ones must land in order (`drill`).
+Not when: no pull request exists yet (shipping), or several dependent ones must land in order (figure-it-out).
 
 1. Read the pull request's state: `gh pr checks` for failing checks, `gh pr view --json mergeable,reviewDecision` for conflicts and the review decision, and `gh api graphql` on its review threads for those not yet resolved.
 2. Run `debug` on each failing check whose cause its log does not state, and `implement` on the fix for each whose log states it.

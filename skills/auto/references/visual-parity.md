@@ -1,7 +1,7 @@
 # Visual parity
 
 When: a surface must match a reference: a screenshot, a design file, or a live page.
-Not when: no reference exists and the look is still open (`prototype`).
+Not when: no reference exists and the look is still open (prototype).
 
 1. Treat the reference as the spec: list what it fixes (layout, type, color, spacing, and each state shown) before any change.
 2. Capture the current surface the way the reference was captured: the same viewport, data, and state.

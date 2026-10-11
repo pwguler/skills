@@ -9,4 +9,4 @@ Not when: any caller-visible behavior changes (feature), or a bug is the reason 
 4. Run `implement` on the plan drill settled.
 5. Run `land`.
 
-Done when: every part of the contract from step 1 has a test covering it, every test from step 2 passes unchanged on the current tree, and no public name moved that the plan did not name.
+Done when: every part of the contract from step 1 has a test covering it, every test from step 2 passes on the current tree, changed only where the plan moved a public name, and no public name moved that the plan did not name.

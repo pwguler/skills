@@ -1,7 +1,7 @@
 # Eval
 
 When: the question is whether a change to a skill, a prompt, or an instruction file changes how agents behave.
-Not when: the work is writing that change (`write-skill`).
+Not when: the work is writing that change (authoring-a-skill).
 
 1. Before any run, write down the scenario, the behavior that counts as a pass, the arms (without and with the change), the runs per arm, and the bar the arm with the change must clear.
 2. Build the arms so they differ only in the change, under the rules `verify` applies to a measured number, each run on a fresh agent set up the way `write-skill` sets up its baseline.

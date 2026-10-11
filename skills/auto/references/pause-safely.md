@@ -1,7 +1,7 @@
 # Pause safely
 
 When: work stops now, and another session resumes it later.
-Not when: the work is done (`land`).
+Not when: the work is done (shipping).
 
 1. Leave no file half-edited: finish the edit in progress, or reverse that one edit by hand; never restore a whole file from git to undo it.
 2. Stop anything still running that writes files, except a process writing to a database: that one goes into the note for the user to decide.
