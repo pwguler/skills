@@ -50,18 +50,20 @@ Restart Claude Code after updating.
 
 The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/deep` is user-only and, for the session, turns off every fast path in the skills under its dial. `/auto` is the other door, also user-only: it routes a task to its playbook or to the one skill that owns it, and every playbook runs its steps through the same skills.
 
-A feature, both ways. Hexagons are the steps you take.
+A feature, both ways. The yellow steps are the commands you type.
 
 **Manual**: you start each skill.
 
 ```mermaid
 flowchart LR
-    task([task]) --> y1{{"you: /drill"}}
-    y1 --> drill["drill<br/>you answer its questions"]
-    drill --> y2{{"you: /implement"}}
+    task([task]) --> y1["/drill"]
+    y1 --> drill["drill<br/>asks its questions"]
+    drill --> y2["/implement"]
     y2 --> impl["implement + verify<br/>test first, prove it"]
-    impl --> y3{{"you: /land"}}
+    impl --> y3["/land"]
     y3 --> land["land<br/>opens a PR"]
+    classDef you fill:#fde68a,stroke:#b45309,color:#1f2937
+    class y1,y2,y3 you
 ```
 
 **Auto**: `/auto` starts each skill in the playbook's order; you still answer drill's questions.
@@ -70,11 +72,13 @@ Either way, `land` opens a pull request; it merges locally into the base branch 
 
 ```mermaid
 flowchart LR
-    task([task]) --> y1{{"you: /auto"}}
+    task([task]) --> y1["/auto"]
     y1 --> pb["picks the playbook"]
-    pb --> drill["drill<br/>you answer its questions"]
+    pb --> drill["drill<br/>asks its questions"]
     drill --> impl["implement + verify<br/>test first, prove it"]
     impl --> land["land<br/>opens a PR"]
+    classDef you fill:#fde68a,stroke:#b45309,color:#1f2937
+    class y1 you
 ```
 
 The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does). These are shared project artifacts: committed, human-readable, reviewed in PRs. Claude's auto-memory is per-user preference and never replaces them; neither writes to the other.
