@@ -53,11 +53,15 @@ The base suite (drill → implement → verify → land) implements the run-unti
 ```mermaid
 flowchart TD
     task([a task, an idea, or codebase friction])
-    task -- "plain request: the skill whose description fits fires" --> drill
-    task -- "/auto: one route per task" --> router{"auto"}
+    task -- "plain request" --> fit["the skill whose description fits"]
+    task -- "/auto task" --> router{"auto: one route"}
     router -- "one of 14 playbooks" --> playbook[["playbook: When, steps, Done when"]]
-    router -- "the one skill that owns the flow" --> owner["land, write-skill, prototype, or drill"]
-    playbook -- "each step runs the skill it names" --> cycle
+    router -- "the one skill that owns the flow" --> fit
+    playbook -- "a step that names a skill" --> fit
+    playbook -- "a step no skill owns: measure, answer read-only, write a pause note" --> session(["done in the session as written"])
+    fit -- "plan or feature" --> drill
+    fit -- "bug" --> debug
+    fit -- "branch done" --> land
 
     drill["1. drill: settle the plan"]
     drill -- "goal, non-goals, decisions, acceptance criteria" --> spec[("docs/specs/*.md")]
