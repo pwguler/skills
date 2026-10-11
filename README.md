@@ -51,38 +51,18 @@ Restart Claude Code after updating.
 The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/deep` is user-only and, for the session, turns off every fast path in the skills under its dial. `/auto` is the other door, also user-only: it routes a task to its playbook or to the one skill that owns it, and every playbook runs its steps through the same skills.
 
 ```mermaid
-flowchart TD
-    task([a task, an idea, or codebase friction])
-    task -- "plain request" --> fit["the skill whose description fits"]
-    task -- "/auto task" --> router{"auto: one route"}
-    router -- "one of 14 playbooks" --> playbook[["playbook: When, steps, Done when"]]
-    router -- "the one skill that owns the flow" --> fit
-    playbook -- "a step that names a skill" --> fit
-    playbook -- "a step no skill owns: measure, answer read-only, write a pause note" --> session(["done in the session as written"])
-    fit -- "plan or feature" --> drill
-    fit -- "bug" --> debug
-    fit -- "branch done" --> land
-
-    drill["1. drill: settle the plan"]
-    drill -- "goal, non-goals, decisions, acceptance criteria" --> spec[("docs/specs/*.md")]
-    drill -- "tree too big for one session" --> draft[("spec as draft: open decisions")]
-    draft -- "sessions resolve decisions one at a time" --> spec
-    spec --> impl
-
-    subgraph cycle["2. the maker / checker cycle"]
-        impl["implement (maker): failing test, minimum code"] --> verify["verify (checker): reject by default, quotes evidence, exercises the changed path"]
-        verify -- "criterion fails" --> impl
-        impl -. "bug: root cause first" .-> debug
-        debug -.-> impl
-        rub["rubric (checker): fresh judge, criteria first"] -- "criterion fails" --> impl
-    end
-
-    verify -- "taste claim: no command can settle it" --> rub
-    impl -- "quality surface: UI, interface, name, doc" --> rub
-    rub -- "criteria met" --> land
-    verify -- "every criterion proven" --> land["3. land: fresh-eyes gate"]
-    impl -- "3 failed attempts on one slice" --> you(["escalate to you"])
-    land -- "residue to ADRs, CONTEXT.md, ARCHITECTURE.md; spec kept unless dropped" --> done([branch closed])
+flowchart LR
+    task([task]) --> door{"plain request<br/>or /auto"}
+    door -- "plan, feature" --> drill["drill<br/>settle the plan"]
+    door -- "bug" --> debug["debug<br/>root cause"]
+    door -- "branch done" --> land
+    drill --> implement["implement<br/>test first"]
+    implement --> verify["verify<br/>prove it"]
+    verify -- "fails" --> implement
+    verify -- "taste claim" --> rubric["rubric<br/>fresh judge"]
+    rubric --> land["land<br/>merge or PR"]
+    verify -- "proven" --> land
+    debug --> verify
 ```
 
 The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does). These are shared project artifacts: committed, human-readable, reviewed in PRs. Claude's auto-memory is per-user preference and never replaces them; neither writes to the other.
@@ -106,19 +86,3 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | A task finished, you want the short version | `tldr` |
 | Risky or ambiguous work, full rigor wanted | `deep` |
 | Any task, routed to its playbook or to the one skill that owns it | `auto` |
-
-## Routing with `auto`
-
-`auto` drives a task on its own and hands you the wheel at forks and decisions only you can make. It matches a task to one route: the playbook for its type (bug fix, feature, refactoring, investigation, perf, and nine more), or the one skill that owns the whole flow (`land`, `write-skill`, `prototype`, or `drill`, which also takes any task nothing else fits). On a playbook route it copies the playbook's steps into the todo list and runs the skills it names; on a skill route it runs that skill. It runs only when you invoke it by name (`/skill:auto <task>` in pi); every other skill except `deep` and `recall` fires on its own description.
-
-In pi, a prompt template turns it into `/auto <task>`. Save it as `~/.pi/agent/prompts/auto.md`:
-
-```markdown
----
-description: Route a task to its playbook or skill and run it
-argument-hint: "<task>"
----
-Read ~/.agents/skills/auto/SKILL.md and follow it for this task, resolving its references relative to that folder: $ARGUMENTS
-```
-
-The template reads the skill file instead of calling `/skill:auto`, because pi expands skill commands before prompt templates. Its path fits a global `npx skills` install; point it at wherever `auto` is installed.
