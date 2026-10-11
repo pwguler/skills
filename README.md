@@ -48,7 +48,7 @@ Restart Claude Code after updating.
 
 ## The loop
 
-The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was not obvious: `verify` stops, and under `/auto` the task goes back through drill's interview. `/auto` is the other door, and it is user-only: it routes a task to the playbook for its type, and the playbook starts each skill in turn, since no skill starts another.
+The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was not obvious: `verify` stops, and under `/pecut` the task goes back through drill's interview. `/pecut` is the other door, and it is user-only: it routes a task to the playbook for its type, and the playbook starts each skill in turn, since no skill starts another.
 
 A feature, both ways. The yellow steps are the commands you type.
 
@@ -65,11 +65,11 @@ flowchart LR
     class y1,y2,y3 you
 ```
 
-**Auto**: `/auto` starts each skill in the playbook's order; you still answer drill's questions.
+**Pecut**: `/pecut` starts each skill in the playbook's order; you still answer drill's questions.
 
 ```mermaid
 flowchart LR
-    y1["/auto #lt;task#gt;"] --> pb["picks the playbook"]
+    y1["/pecut #lt;task#gt;"] --> pb["picks the playbook"]
     pb --> drill["drill<br/>asks its questions"]
     drill --> impl["implement + verify<br/>test first, prove it"]
     impl --> land["land<br/>opens a PR"]
@@ -98,4 +98,4 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Authoring or editing anything an agent reads | `write-skill` |
 | A slice the agent wrote landed, test your understanding of it | `recall` |
 | A task finished, you want the short version | `tldr` |
-| Any task, run through the playbook for its type | `auto` |
+| Any task, run through the playbook for its type | `pecut` |

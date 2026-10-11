@@ -1,7 +1,6 @@
 # Session pickup
 
 When: the user asks to resume work an earlier session started and left.
-Not when: nothing was started before (route the task itself).
 
 1. Read the state before touching anything: `git status`, the branch and its recent log, open worktrees, any pause note (`docs/specs/<slug>.pause.md` or `PAUSE.md`), and the spec under `docs/specs/`.
 2. List what is done, what is in progress, and what was never verified, each with the evidence for it.

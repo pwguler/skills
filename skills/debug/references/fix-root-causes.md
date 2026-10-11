@@ -12,4 +12,4 @@ When: before a fix that adds a guard, a catch, or a comment defending it, when t
 - Stuck means instrument, not guess: step 4.
 - A failure that shows only after a restart points first at stale persistent state: config files, caches, lock files, serialized state. When clearing a state file brings the behavior back, the fix validates that state where it is loaded.
 
-Where it stops: other instances of the same cause belong to the fix and its slice; unrelated problems found on the way get flagged, not fixed, which keeps implement's diffs surgical. A cause that is a design problem is offered to drill, per the rule on design problems. When two fixes built on one assumption have failed, open [attack the premise](attack-the-premise.md).
+Where it stops: other instances of the same cause belong to the fix and its slice; unrelated problems found on the way get flagged, not fixed, which keeps implement's diffs surgical. A cause that is a design problem ends the fix: say so and stop, per the rule on design problems. When two fixes built on one assumption have failed, open [attack the premise](attack-the-premise.md).

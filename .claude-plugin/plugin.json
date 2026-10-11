@@ -14,13 +14,13 @@
     "loop"
   ],
   "skills": [
-    "./skills/auto",
     "./skills/core-interview",
     "./skills/debug",
     "./skills/drill",
     "./skills/implement",
     "./skills/land",
     "./skills/parallel",
+    "./skills/pecut",
     "./skills/prototype",
     "./skills/recall",
     "./skills/research",

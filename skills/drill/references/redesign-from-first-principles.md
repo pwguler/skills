@@ -9,4 +9,4 @@ When: a settled design meets a requirement it was not built for, whether in the 
 - List every reference the change reaches: types, docs, examples, rationale sections. The settled design names them all.
 - Design the whole change first, then deliver it in pieces: the spec's criteria become implement's slices, and each slice carries the references it touches.
 
-Where it stops: a redesign found mid-slice is a fork, routed through drill: implement stops and names it rather than growing the slice, and debug's design-problem rule routes the same way. This file rebuilds a design around a new requirement; questioning a fact the current design assumes, after fixes built on it fail, is debug's attack-the-premise principle.
+Where it stops: a redesign found mid-slice is a fork: implement stops and names it rather than growing the slice, and debug says so and stops. This file rebuilds a design around a new requirement; questioning a fact the current design assumes, after fixes built on it fail, is debug's attack-the-premise principle.

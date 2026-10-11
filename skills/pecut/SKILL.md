@@ -1,14 +1,14 @@
 ---
-name: auto
-description: Route a task to the playbook for its type and run the suite's skills in the playbook's order. Run /auto <task> at the start of a task, before any other work.
+name: pecut
+description: Run the suite on every task of this session. Routes each task to the playbook for its type, and the playbook runs the suite's skills in its order. Use for /pecut, with or without a task.
 disable-model-invocation: true
 ---
 
-One task, one playbook. A playbook is the only place the order of the suite's skills is written: each skill checks its own work and stops, and the playbook starts the next one. Pick the playbook before any other work, then follow it to its end.
+Pecut is on for this session: every task the user gives from now on, the one given with /pecut included, starts at the route table under Rules, until the user says "pecut off" or the session ends. A turn that asks for no work gets a plain reply. A playbook is the only place the order of the suite's skills is written: each skill checks its own work and stops, and the playbook starts the next one.
 
-1. Name the task's type and match it to one route under Rules. A narrower route wins over bug-fix, feature, or perf-issue; when two routes still fit, ask the user one question naming both; when none fits, the route is figure-it-out.
+1. Name the task's type and match it to one route under Rules. When two routes fit, the narrower one wins: autonomous-run over the route of the work it runs, multi-phase-plan over refactoring, and any other narrower route over bug-fix, feature, or perf-issue. When two routes still fit, ask the user one question naming both; when none fits, the route is figure-it-out.
 2. Open the playbook and check its `When:` and `Not when:` against the task; when `Not when:` matches, take the playbook it names instead. Otherwise copy its steps into a todo list (a checklist in the reply when the harness has no todo tool); when a todo list is already open, add them to it.
-3. Run the steps in order. A step that names a skill runs that skill on the task; any other step is done in this session as the playbook words it. When a skill stops on a condition a rule below names, that rule decides the next move.
+3. Run the steps in order. A step that names a skill or a principle runs it on the task; any other step is done in this session as the playbook words it. When a skill stops on a condition a rule below names, that rule decides the next move.
 4. Stop when the playbook's `Done when:` holds, or when a step stops the work for the user; either way, report the result against `Done when:`.
 
 Rules:

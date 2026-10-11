@@ -1,7 +1,7 @@
 # Autonomous run
 
 When: work on one branch runs unattended until a written exit condition.
-Not when: the user stays to answer forks (route the work itself), or several dependent pull requests are involved (figure-it-out).
+Not when: several dependent pull requests are involved (figure-it-out).
 
 1. Before starting, write down the exit condition, a time limit, and a round limit, in a file each round reads.
 2. Work from a settled spec; when none exists, run `drill` while the user is still there.
