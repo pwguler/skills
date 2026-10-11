@@ -1,6 +1,6 @@
 ---
 name: do
-description: Route a task to its playbook and run the suite's skills in the playbook's order. Run /do <task> at the start of a task, before any other work.
+description: Route a task to its playbook, or to the one skill that owns it, and run the suite's skills in order. Run /do <task> at the start of a task, before any other work.
 disable-model-invocation: true
 ---
 
