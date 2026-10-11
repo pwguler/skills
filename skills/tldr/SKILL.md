@@ -1,6 +1,6 @@
 ---
 name: tldr
-description: Report a finished task as its result, not its transcript. Use when a task that produced an artifact or a run (a build, a workflow, a background agent, a release) has just finished and you are about to report it, and when the user types /tldr.
+description: "Report a finished task as its result, not its transcript. Run by pecut when a pecut playbook ends, or on /tldr."
 ---
 
 A task just finished. Give its result, not its transcript.

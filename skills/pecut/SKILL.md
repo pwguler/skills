@@ -9,7 +9,7 @@ Pecut is on for this session: every task the user gives from now on, the one giv
 1. Name the task's type and match it to one route under Rules. When two routes fit, the narrower one wins: autonomous-run over the route of the work it runs, multi-phase-plan over refactoring, and any other narrower route over bug-fix, feature, or perf-issue. When two routes still fit, ask the user one question naming both; when none fits, the route is figure-it-out.
 2. Open the playbook and check its `When:` and `Not when:` against the task; when `Not when:` matches, take the playbook it names instead. Otherwise copy its steps into a todo list (a checklist in the reply when the harness has no todo tool); when a todo list is already open, add them to it.
 3. Run the steps in order. A step that names a skill or a principle runs it on the task; any other step is done in this session as the playbook words it. When a skill stops on a condition a rule below names, that rule decides the next move.
-4. Stop when the playbook's `Done when:` holds, or when a step stops the work for the user; either way, report the result against `Done when:`.
+4. Stop when the playbook's `Done when:` holds, or when a step stops the work for the user; either way, report the result against `Done when:` the way `tldr` reports a finished task.
 
 Rules:
 

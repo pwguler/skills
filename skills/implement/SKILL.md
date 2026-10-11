@@ -1,6 +1,6 @@
 ---
 name: implement
-description: "Implement a settled plan test-first, smallest slice at a time. Use when starting implementation of a feature or fix after the plan is settled, or when user says \"implement this\" or \"build it\"."
+description: "Build a settled spec or a one-sentence plan test-first, one thin slice at a time. Run by a pecut playbook step that names it."
 ---
 
 Work the plan one thin slice at a time. A slice is the smallest piece that changes observable behavior. When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the plan: work criterion by criterion, and let the spec's non-goals fence every diff. A spec that still carries an `## Open decisions` section is a draft: stop and name its open decisions.

@@ -1,6 +1,6 @@
 ---
 name: prototype
-description: Build a throwaway UI prototype to react to before committing. Use when a design fork turns on look, feel, or flow that prose cannot settle, or when the user asks to prototype or mock something up.
+description: "Build a throwaway UI prototype to react to before anything is built. Run by a pecut playbook step that names it, or by drill when a fork turns on look, feel, or flow."
 argument-hint: "What should the prototype show?"
 ---
 

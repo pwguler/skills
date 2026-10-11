@@ -1,6 +1,6 @@
 ---
 name: drill
-description: "Question a plan or design until every decision in it is settled and agreed. Use when the user wants a plan stress-tested, a design pinned down before building, or the structure of a new codebase or area settled, asks to be questioned on a plan or decision, or says \"drill this\" or \"drill me\"."
+description: "Question a plan or design until every decision in it is settled and agreed, then write its spec. Run by a pecut playbook step that names it."
 ---
 
 Run the `core-interview` skill against the plan or design under discussion. The interview also tests the plan against the project's domain model, as [domain checks](references/domain-checks.md) lays out.

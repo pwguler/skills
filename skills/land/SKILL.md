@@ -1,6 +1,6 @@
 ---
 name: land
-description: Finish a development branch. Use when implementation is complete and the work needs to be merged, pushed as a PR, kept, or discarded.
+description: "Finish a branch: gate it, then open its pull request, or merge, keep, or discard it when the user asks. Run by a pecut playbook step that names it."
 ---
 
 Nothing lands unverified.

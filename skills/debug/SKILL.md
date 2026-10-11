@@ -1,6 +1,6 @@
 ---
 name: debug
-description: Find the root cause of a bug before fixing it. Use when behavior differs from what was expected and its cause is not yet known, such as a failing test, an error, a crash, a regression, or something the user calls "broken" or "not working". Not for a change whose cause is already stated, such as a typo fix or a named edit.
+description: "Find the root cause of a bug before fixing it, and fix it with a regression test. Run by a pecut playbook step that names it, or by implement when a slice fails unexpectedly."
 ---
 
 No fix before root cause. Symptoms are where the search starts, never where it ends.

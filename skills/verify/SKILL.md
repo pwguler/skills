@@ -1,6 +1,6 @@
 ---
 name: verify
-description: Prove a claim of done, fixed, or passing by running the commands and reading the output before making it. Use before claiming work is complete, fixed, or tested, and before committing.
+description: "Prove a claim of done, fixed, or passing by running the commands and reading the output before making it. Run by implement, debug, land, and parallel as their gate, or by a pecut playbook step that names it."
 ---
 
 Evidence before assertion. A claim without a fresh command run behind it is not made.

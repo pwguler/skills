@@ -1,6 +1,6 @@
 ---
 name: rubric
-description: Judge work whose quality no command can settle, such as "this API design is good" or "this UI is not slop", against criteria written down before the work is looked at. Use when the user asks how something looks or whether it is any good, when a UI, public interface, name, or doc needs a quality call before it ships, when a spec criterion names a quality rather than a behavior, and when verify meets a claim its commands cannot settle. Not for a design not yet built, which `drill` settles.
+description: "Judge work whose quality no command can settle against criteria written before the work is looked at, by a judge that did not make it. Run by verify, implement, or land when the work touches a quality surface, or by a pecut playbook step that names it."
 ---
 
 A taste claim is verified the way a factual one is: against criteria written down first, by someone who did not make the work.

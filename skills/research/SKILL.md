@@ -1,6 +1,6 @@
 ---
 name: research
-description: Find out what is true about a library, service, or standard by reading whoever owns the facts, and write the answer down with a citation per claim. Use when the user asks to look something up, to check how an API or tool really behaves, or to hand off reading while other work continues. Not for a bug in this codebase, which `debug` finds.
+description: "Find out what is true about a library, service, or standard by reading whoever owns the facts, with a citation per claim. Run by a pecut playbook step that names it, or by drill for a decision that waits on research."
 ---
 
 Read in this session. A subagent reads only when the user asks to hand the reading off, a draft spec fires its AFK decisions, or a payload is too large for the session (over about 2,000 lines, or images), as the `principle-guard-the-context-window` skill lays out. On a hand-off this session carries on and reads the note when it lands; a draft spec's notes wait for the session that works each decision. A harness that cannot run one reads inline, a bulk payload by search and section; say so, since the session waits on it.

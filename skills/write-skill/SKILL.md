@@ -1,6 +1,6 @@
 ---
 name: write-skill
-description: Create or edit a document an agent reads and prove it changes behavior. Use when writing or editing a skill, AGENTS.md, CLAUDE.md, a system prompt, or other agent-facing prose, or proving that one changes agent behavior.
+description: "Create or edit a document an agent reads and prove it changes behavior. Run by a pecut playbook step that names it."
 ---
 
 Writing for agents is test-first development applied to prose. The same loop ships every document an agent reads: skills, AGENTS.md, CLAUDE.md, system prompts.
