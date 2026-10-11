@@ -48,7 +48,7 @@ Restart Claude Code after updating.
 
 ## The loop
 
-The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/auto` is the other door, and it is user-only: it routes a task to its playbook or to the one skill that owns it, and every playbook runs its steps through the same skills.
+The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was not obvious: `verify` stops, and under `/auto` the task goes back through drill's interview. `/auto` is the other door, and it is user-only: it routes a task to the playbook for its type, and the playbook starts each skill in turn, since no skill starts another.
 
 A feature, both ways. The yellow steps are the commands you type.
 
@@ -67,8 +67,6 @@ flowchart LR
 
 **Auto**: `/auto` starts each skill in the playbook's order; you still answer drill's questions.
 
-Either way, `land` opens a pull request; it merges locally into the base branch only when you ask.
-
 ```mermaid
 flowchart LR
     y1["/auto #lt;task#gt;"] --> pb["picks the playbook"]
@@ -78,6 +76,8 @@ flowchart LR
     classDef you fill:#fde68a,stroke:#b45309,color:#1f2937
     class y1 you
 ```
+
+Either way, `land` opens a pull request; it merges locally into the base branch only when you ask.
 
 The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does). These are shared project artifacts: committed, human-readable, reviewed in PRs. Claude's auto-memory is per-user preference and never replaces them; neither writes to the other.
 
@@ -98,4 +98,4 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Authoring or editing anything an agent reads | `write-skill` |
 | A slice the agent wrote landed, test your understanding of it | `recall` |
 | A task finished, you want the short version | `tldr` |
-| Any task, routed to its playbook or to the one skill that owns it | `auto` |
+| Any task, run through the playbook for its type | `auto` |
