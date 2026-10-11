@@ -1,7 +1,7 @@
 # Hillclimb
 
-When: one metric should go as far as it can, in small measured steps, with no fixed target.
-Not when: a target or a regression defines done (perf-issue).
+When: the user asks to push one metric as far as it goes, round after round.
+Not when: something is slow and should simply get faster (perf-issue).
 
 1. Write down the metric, the command that measures it, and a stop condition: a number of rounds, a time limit, or a run of rounds with no gain.
 2. Measure a baseline with that command, repeated enough times to show the spread.
