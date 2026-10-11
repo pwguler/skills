@@ -51,7 +51,7 @@ Restart Claude Code after updating.
 The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/deep` is user-only and, for the session, turns off every fast path in the skills under its dial. `/auto` is the other door, also user-only: it routes a task to its playbook or to the one skill that owns it, and every playbook runs its steps through the same skills.
 
 ```mermaid
-flowchart LR
+flowchart TD
     task([task]) --> manual["manual<br/>you call each skill,<br/>or it fires on its own"]
     task --> auto["auto<br/>/auto picks the playbook<br/>and runs its steps"]
     manual --> enter(("enters at"))
