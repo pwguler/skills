@@ -8,9 +8,9 @@ One task, one route: a playbook that orders the suite's skills, or the one skill
 
 1. Name the task's type and match it to one route under Rules. A narrower route wins over bug-fix, feature, or perf-issue; when two routes still fit, ask the user one question naming both; when none fits, the route is `drill`.
 2. A route to a skill hands the task to that skill: run it, and stop routing.
-3. A route to a playbook: open it, check its `When:` and `Not when:` against the task, and copy its steps into a todo list (a checklist in the reply when the harness has no todo tool); when a todo list is already open, add them to it.
+3. A route to a playbook: open it, and check its `When:` and `Not when:` against the task; when `Not when:` matches, take the route it names instead. Otherwise copy its steps into a todo list (a checklist in the reply when the harness has no todo tool); when a todo list is already open, add them to it.
 4. Run the steps in order. A step that names a skill runs that skill on the task; any other step is done in this session as the playbook words it.
-5. Stop when the playbook's `Done when:` holds, and report the result against it.
+5. Stop when the playbook's `Done when:` holds, or when a step stops the work for the user; either way, report the result against `Done when:`.
 
 Rules:
 

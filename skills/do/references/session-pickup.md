@@ -8,4 +8,4 @@ Not when: nothing was started before (route the task itself).
 3. Run `verify` on whatever the last session claimed without a fresh record behind it.
 4. Tell the user where the work stands and the next step, then continue through the route the work belongs to.
 
-Done when: the list from step 2 is written down, every claim the last session left is verified or marked unverified, and the next step is running.
+Done when: the list from step 2 is written down, every claim the last session left is verified or marked unverified, and the next step's route is open in the todo list.
