@@ -19,6 +19,12 @@ Rules:
 - A change to structure that keeps every caller-visible behavior: [refactoring](references/refactoring.md).
 - A question about how or why the code behaves as it does, answered without changing it: [investigation](references/investigation.md).
 - Opening a pull request for finished work: [opening-a-pr](references/opening-a-pr.md).
+- Something too slow or too costly, with a target to meet or a regression to undo: [perf-issue](references/perf-issue.md).
+- One metric pushed as far as it goes in small measured steps, with no fixed target: [hillclimb](references/hillclimb.md).
+- A surface made to match a reference image, design file, or page: [visual-parity](references/visual-parity.md).
+- Proving whether a change to a skill, a prompt, or an instruction file changes how agents behave: [eval](references/eval.md).
+- One open pull request taken to merge-ready: [babysit-pr](references/babysit-pr.md).
+- Work on one branch run unattended until a written exit: [autonomous-run](references/autonomous-run.md).
 - Writing or editing a skill or other agent-facing prose: `write-skill`.
 - A plan for work across several phases: `drill`.
 - Merging a finished branch, keeping it, or discarding it: `land`.

@@ -81,3 +81,7 @@ test('suite: every relative link resolves to a file inside its own skill folder'
   assert.deepEqual(broken, []);
 });
 
+
+test('verify: opens references/explain-the-number.md', () => {
+  assert.ok(links(read(join(root, 'verify', 'SKILL.md'))).includes('references/explain-the-number.md'), 'verify/SKILL.md does not link references/explain-the-number.md');
+});
