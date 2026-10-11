@@ -1,6 +1,6 @@
 ---
-name: pecut
-description: Route a task to its playbook, or to the one skill that owns it, and run the suite's skills in order. Run /pecut <task> at the start of a task, before any other work.
+name: auto
+description: Route a task to its playbook, or to the one skill that owns it, and run the suite's skills in order. Run /auto <task> at the start of a task, before any other work.
 disable-model-invocation: true
 ---
 
