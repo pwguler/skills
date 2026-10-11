@@ -1,12 +1,12 @@
 ---
 name: do
-description: Route a task to its playbook and run the suite's skills in the playbook's order. Run /do <task>.
+description: Route a task to its playbook and run the suite's skills in the playbook's order. Run /do <task> at the start of a task, before any other work.
 disable-model-invocation: true
 ---
 
 One task, one route: a playbook that orders the suite's skills, or the one skill that owns the whole flow. Pick the route before any other work, then follow it to its end.
 
-1. Name the task's type and match it to one route under Rules. When two routes fit, ask the user one question naming both; when none fits, the route is `drill`.
+1. Name the task's type and match it to one route under Rules. A narrower route wins over bug-fix, feature, or perf-issue; when two routes still fit, ask the user one question naming both; when none fits, the route is `drill`.
 2. A route to a skill hands the task to that skill: run it, and stop routing.
 3. A route to a playbook: open it, check its `When:` and `Not when:` against the task, and copy its steps into a todo list (a checklist in the reply when the harness has no todo tool); when a todo list is already open, add them to it.
 4. Run the steps in order. A step that names a skill runs that skill on the task; any other step is done in this session as the playbook words it.
