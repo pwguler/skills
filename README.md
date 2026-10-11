@@ -50,22 +50,29 @@ Restart Claude Code after updating.
 
 The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/deep` is user-only and, for the session, turns off every fast path in the skills under its dial. `/auto` is the other door, also user-only: it routes a task to its playbook or to the one skill that owns it, and every playbook runs its steps through the same skills.
 
+A feature, both ways. Hexagons are the steps you take.
+
+**Manual**: you start each skill.
+
 ```mermaid
-flowchart TD
-    task([task]) --> manual["manual<br/>you call each skill,<br/>or it fires on its own"]
-    task --> auto["auto<br/>/auto picks the playbook<br/>and runs its steps"]
-    manual --> enter(("enters at"))
-    auto --> enter
-    enter -- "plan, feature" --> drill["drill<br/>settle the plan"]
-    enter -- "bug" --> debug["debug<br/>root cause"]
-    enter -- "branch done" --> land
-    drill --> implement["implement<br/>test first"]
-    implement --> verify["verify<br/>prove it"]
-    verify -- "fails" --> implement
-    verify -- "taste claim" --> rubric["rubric<br/>fresh judge"]
-    rubric --> land["land<br/>merge or PR"]
-    verify -- "proven" --> land
-    debug --> verify
+flowchart LR
+    task([task]) --> y1{{"you: /drill"}}
+    y1 --> drill["drill<br/>you answer its questions"]
+    drill --> y2{{"you: /implement"}}
+    y2 --> impl["implement + verify<br/>test first, prove it"]
+    impl --> y3{{"you: /land"}}
+    y3 --> land["land<br/>you pick merge or PR"]
+```
+
+**Auto**: `/auto` starts each skill in the playbook's order; you still answer drill's questions and pick merge or PR.
+
+```mermaid
+flowchart LR
+    task([task]) --> y1{{"you: /auto"}}
+    y1 --> pb["picks the playbook"]
+    pb --> drill["drill<br/>you answer its questions"]
+    drill --> impl["implement + verify<br/>test first, prove it"]
+    impl --> land["land<br/>you pick merge or PR"]
 ```
 
 The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does). These are shared project artifacts: committed, human-readable, reviewed in PRs. Claude's auto-memory is per-user preference and never replaces them; neither writes to the other.
