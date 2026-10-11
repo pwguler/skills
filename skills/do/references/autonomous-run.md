@@ -1,6 +1,6 @@
 # Autonomous run
 
-When: work on one branch should run unattended until a written exit condition.
+When: work on one branch runs unattended until a written exit condition.
 Not when: the user stays to answer forks (route the work itself), or several dependent pull requests are involved (`drill`).
 
 1. Before starting, write down the exit condition, a time limit, and a round limit, in a file each round reads.
