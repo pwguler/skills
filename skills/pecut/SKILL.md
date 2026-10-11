@@ -32,7 +32,7 @@ Rules:
 - A mock-up to react to before building: [prototype](references/prototype.md).
 - Several dependent pull requests driven to merge, live-process or trace forensics, and anything no other route fits: [figure-it-out](references/figure-it-out.md).
 - When `verify` stops a one-sentence plan because the task was not obvious, run `drill` on the task through its interview, then go on with the settled plan.
-- When `implement` or `verify` stops on a draft spec, run `drill` on its open decisions, then go on from the step that stopped.
+- When `implement` or `verify` stops on a draft spec, run `drill` on its open decisions; go on from the step that stopped once the spec is settled, and stop for the user while a decision stays open.
 - When `debug` reports a design problem behind a failure, offer the feature playbook on the redesign and stop for the user.
 - A step that runs `implement` without a spec gives it the change in one sentence; that sentence is its plan.
 - When a playbook that ran `implement` or `parallel` reaches `Done when:`, offer `/recall` on the code the agent wrote.

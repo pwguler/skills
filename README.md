@@ -74,4 +74,4 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Playbooks | The order of the work for one type of task, in `skills/pecut/references/`: bug fix, feature, refactoring, investigation, shipping, and the rest. |
 | Skills | One job each, from `drill` to `land`: each checks its own work and stops. |
 | Principles | The `principle-*` skills: one rule each, applied by a skill or a playbook at a named moment. |
-| `/recall` | Yours to run after a slice the agent wrote: it tests your understanding of the code. |
+| `/recall` | Yours to run when pecut offers it, after a playbook that wrote code: it tests your understanding of that code. |
