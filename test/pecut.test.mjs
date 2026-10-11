@@ -1,4 +1,4 @@
-// Checks the do router and the links of the whole suite. SKILLS_ROOT points the check at another copy of skills/.
+// Checks the pecut router and the links of the whole suite. SKILLS_ROOT points the check at another copy of skills/.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
@@ -6,10 +6,10 @@ import { dirname, join, relative, resolve, isAbsolute } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(process.env.SKILLS_ROOT ?? join(dirname(fileURLToPath(import.meta.url)), '..', 'skills'));
-const doDir = join(root, 'do');
+const pecutDir = join(root, 'pecut');
 const read = (path) => readFileSync(path, 'utf8');
 const skillNames = readdirSync(root).filter((name) => existsSync(join(root, name, 'SKILL.md')));
-const playbookFiles = existsSync(join(doDir, 'references')) ? readdirSync(join(doDir, 'references')).filter((n) => n.endsWith('.md')) : [];
+const playbookFiles = existsSync(join(pecutDir, 'references')) ? readdirSync(join(pecutDir, 'references')).filter((n) => n.endsWith('.md')) : [];
 
 function markdownFiles(dir) {
   return readdirSync(dir).flatMap((name) => {
@@ -38,27 +38,27 @@ function links(text) {
 // Backticked single lowercase words: in this router's files, each one names a skill.
 const namedSkills = (text) => [...text.matchAll(/`([a-z][a-z0-9-]*)`/g)].map((m) => m[1]);
 
-test('do: runs only when the user invokes it', () => {
-  const front = read(join(doDir, 'SKILL.md')).split('\n---')[0];
-  assert.match(front, /^disable-model-invocation: true$/m, 'do/SKILL.md lacks disable-model-invocation: true');
+test('pecut: runs only when the user invokes it', () => {
+  const front = read(join(pecutDir, 'SKILL.md')).split('\n---')[0];
+  assert.match(front, /^disable-model-invocation: true$/m, 'pecut/SKILL.md lacks disable-model-invocation: true');
 });
 
-test('do: the routes in SKILL.md and the playbooks in references/ match, both ways', () => {
-  const routed = links(read(join(doDir, 'SKILL.md'))).filter((t) => t.startsWith('references/')).map((t) => t.slice('references/'.length));
+test('pecut: the routes in SKILL.md and the playbooks in references/ match, both ways', () => {
+  const routed = links(read(join(pecutDir, 'SKILL.md'))).filter((t) => t.startsWith('references/')).map((t) => t.slice('references/'.length));
   const missingFile = routed.filter((name) => !playbookFiles.includes(name));
   const unrouted = playbookFiles.filter((name) => !routed.includes(name));
   assert.deepEqual({ missingFile, unrouted }, { missingFile: [], unrouted: [] });
 });
 
-test('do: every skill the router or a playbook names exists in this repository', () => {
-  const files = [join(doDir, 'SKILL.md'), ...playbookFiles.map((n) => join(doDir, 'references', n))];
+test('pecut: every skill the router or a playbook names exists in this repository', () => {
+  const files = [join(pecutDir, 'SKILL.md'), ...playbookFiles.map((n) => join(pecutDir, 'references', n))];
   const unknown = files.flatMap((f) => namedSkills(read(f)).filter((s) => !skillNames.includes(s)).map((s) => `${relative(root, f)}: ${s}`));
   assert.deepEqual(unknown, []);
 });
 
-test('do: each playbook has When:, numbered steps, and Done when:, in 10 to 30 lines', () => {
+test('pecut: each playbook has When:, numbered steps, and Done when:, in 10 to 30 lines', () => {
   const bad = playbookFiles.flatMap((name) => {
-    const text = read(join(doDir, 'references', name)).trimEnd();
+    const text = read(join(pecutDir, 'references', name)).trimEnd();
     const lines = text.split('\n');
     const problems = [];
     if (!lines.some((l) => l.startsWith('When: '))) problems.push('no When:');

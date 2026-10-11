@@ -94,20 +94,20 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | A slice the agent wrote landed, test your understanding of it | `recall` |
 | A task finished, you want the short version | `tldr` |
 | Risky or ambiguous work, full rigor wanted | `deep` |
-| Any task, routed to its playbook or to the one skill that owns it | `do` |
+| Any task, routed to its playbook or to the one skill that owns it | `pecut` |
 
-## Routing with `do`
+## Routing with `pecut`
 
-`do` matches a task to one route: the playbook for its type (bug fix, feature, refactoring, investigation, perf, and nine more), or the one skill that owns the whole flow (`land`, `write-skill`, `prototype`, or `drill`, which also takes any task nothing else fits). On a playbook route it copies the playbook's steps into the todo list and runs the skills it names; on a skill route it runs that skill. It runs only when you invoke it by name (`/skill:do <task>` in pi); every other skill except `deep` and `recall` fires on its own description.
+`pecut` (Indonesian for whip: it drives a task to done) matches a task to one route: the playbook for its type (bug fix, feature, refactoring, investigation, perf, and nine more), or the one skill that owns the whole flow (`land`, `write-skill`, `prototype`, or `drill`, which also takes any task nothing else fits). On a playbook route it copies the playbook's steps into the todo list and runs the skills it names; on a skill route it runs that skill. It runs only when you invoke it by name (`/skill:pecut <task>` in pi); every other skill except `deep` and `recall` fires on its own description.
 
-In pi, a prompt template turns it into `/do <task>`. Save it as `~/.pi/agent/prompts/do.md`:
+In pi, a prompt template turns it into `/pecut <task>`. Save it as `~/.pi/agent/prompts/pecut.md`:
 
 ```markdown
 ---
 description: Route a task to its playbook or skill and run it
 argument-hint: "<task>"
 ---
-Read ~/.agents/skills/do/SKILL.md and follow it for this task, resolving its references relative to that folder: $ARGUMENTS
+Read ~/.agents/skills/pecut/SKILL.md and follow it for this task, resolving its references relative to that folder: $ARGUMENTS
 ```
 
-The template reads the skill file instead of calling `/skill:do`, because pi expands skill commands before prompt templates. Its path fits a global `npx skills` install; point it at wherever `do` is installed.
+The template reads the skill file instead of calling `/skill:pecut`, because pi expands skill commands before prompt templates. Its path fits a global `npx skills` install; point it at wherever `pecut` is installed.
