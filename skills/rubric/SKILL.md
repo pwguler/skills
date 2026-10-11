@@ -1,6 +1,6 @@
 ---
 name: rubric
-description: "Judge work whose quality no command can settle against criteria written before the work is looked at, by a judge that did not make it. Run by verify, implement, or land when the work touches a quality surface, or by a pecut playbook step that names it."
+description: "Judge work whose quality no command can settle against criteria written before the work is looked at, by a judge that did not make it. Run by verify, implement, or land when the work touches a quality surface, by write-skill to judge a re-run, or by a pecut playbook step that names it."
 ---
 
 A taste claim is verified the way a factual one is: against criteria written down first, by someone who did not make the work.

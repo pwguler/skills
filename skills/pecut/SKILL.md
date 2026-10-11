@@ -35,5 +35,5 @@ Rules:
 - When `implement` or `verify` stops on a draft spec, run `drill` on its open decisions; go on from the step that stopped once the spec is settled, and stop for the user while a decision stays open.
 - When `debug` reports a design problem behind a failure, offer the feature playbook on the redesign and stop for the user.
 - A step that runs `implement` without a spec gives it the change in one sentence; that sentence is its plan.
-- When a playbook that ran `implement` or `parallel` reaches `Done when:`, offer `/recall` on the code the agent wrote.
+- When a playbook that ran `implement` or `parallel` reaches `Done when:`, end the report with one line, a statement and not a question, naming `/recall` and the code the agent wrote.
 - A step that belongs to a skill runs that skill; a playbook never stands in for the skill's own rules.
