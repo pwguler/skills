@@ -61,10 +61,12 @@ flowchart LR
     drill --> y2{{"you: /implement"}}
     y2 --> impl["implement + verify<br/>test first, prove it"]
     impl --> y3{{"you: /land"}}
-    y3 --> land["land<br/>you pick merge or PR"]
+    y3 --> land["land<br/>opens a PR"]
 ```
 
-**Auto**: `/auto` starts each skill in the playbook's order; you still answer drill's questions and pick merge or PR.
+**Auto**: `/auto` starts each skill in the playbook's order; you still answer drill's questions.
+
+Either way, `land` opens a pull request; it merges locally into the base branch only when you ask.
 
 ```mermaid
 flowchart LR
@@ -72,7 +74,7 @@ flowchart LR
     y1 --> pb["picks the playbook"]
     pb --> drill["drill<br/>you answer its questions"]
     drill --> impl["implement + verify<br/>test first, prove it"]
-    impl --> land["land<br/>you pick merge or PR"]
+    impl --> land["land<br/>opens a PR"]
 ```
 
 The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does). These are shared project artifacts: committed, human-readable, reviewed in PRs. Claude's auto-memory is per-user preference and never replaces them; neither writes to the other.
@@ -89,7 +91,7 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | About to claim done, fixed, or passing | `verify` |
 | Quality no command can settle: a design, a UI, prose | `rubric` |
 | Reading legwork | `research` |
-| Branch done, needs merging or a PR | `land` |
+| Branch done: open a PR, or merge locally when you ask | `land` |
 | Independent failures or tasks, two or more | `parallel` |
 | Authoring or editing anything an agent reads | `write-skill` |
 | A slice the agent wrote landed, test your understanding of it | `recall` |
