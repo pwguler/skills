@@ -13,13 +13,13 @@ Fast path: when the first cause is directly visible in the error output (the sta
 4. Form one hypothesis. State it with the observation that would confirm or refute it, then get that observation before touching any fix: a log line, an assertion, a probe. Add instrumentation when the evidence is not already there; keep it minimal and reversible, and remove it once it has answered.
 5. When two hypotheses compete, design the one observation that distinguishes them, rather than trying fixes in turn.
 6. Add the regression test that would have caught this and run it: red on the old code.
-7. Fix the root cause until the regression test is green. One fix at a time. Unrelated problems found on the way get flagged, not fixed. Open [fix root causes](references/fix-root-causes.md) before a fix that adds a guard, a catch, or a comment defending it, when the same cause could recur elsewhere, or when the failure shows only after a restart.
+7. Fix the root cause until the regression test is green. One fix at a time. Unrelated problems found on the way get flagged, not fixed. Open the `principle-fix-root-causes` skill before a fix that adds a guard, a catch, or a comment defending it, when the same cause could recur elsewhere, or when the failure shows only after a restart.
 8. Run the `verify` skill before claiming it is fixed. Inside a slice, the reproduction and the regression test are this step's check, and the full gate waits for the slice's commit; outside one, follow implement's rules on the branch question and the commit.
 
 Rules:
 
 - No shotgun fixes, no "try this and see if it helps".
 - Three refuted hypotheses in a row, or no reproduction reachable with the evidence available, stop the loop: report what was tried and which observation is missing, and let the user decide. Do not keep cycling.
-- If the fix does not make the reproduction pass, the hypothesis was wrong: return to step 4, do not stack a second fix on top. When two failed fixes shared one assumption, open [attack the premise](references/attack-the-premise.md).
+- If the fix does not make the reproduction pass, the hypothesis was wrong: return to step 4, do not stack a second fix on top. When two failed fixes shared one assumption, open the `principle-attack-the-premise` skill.
 - If the root cause reveals a design problem, say so and stop instead of burying a workaround.
 - Two or more failures are reproduced one by one and grouped by first cause: groups with separate causes go to `parallel`; a single group stays here.
