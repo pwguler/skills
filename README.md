@@ -48,15 +48,15 @@ Restart Claude Code after updating.
 
 ## The loop
 
-The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/deep` is user-only and, for the session, turns off every fast path in the skills under its dial. `/pecut` is the other door, also user-only: it routes a task to its playbook or to the one skill that owns it, and every playbook runs its steps through the same skills.
+The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/deep` is user-only and, for the session, turns off every fast path in the skills under its dial. `/auto` is the other door, also user-only: it routes a task to its playbook or to the one skill that owns it, and every playbook runs its steps through the same skills.
 
 ```mermaid
 flowchart TD
     task([a task, an idea, or codebase friction])
     task -- "plain request: the skill whose description fits fires" --> drill
-    task -- "/pecut: one route per task" --> pecut{"pecut"}
-    pecut -- "one of 14 playbooks" --> playbook[["playbook: When, steps, Done when"]]
-    pecut -- "the one skill that owns the flow" --> owner["land, write-skill, prototype, or drill"]
+    task -- "/auto: one route per task" --> router{"auto"}
+    router -- "one of 14 playbooks" --> playbook[["playbook: When, steps, Done when"]]
+    router -- "the one skill that owns the flow" --> owner["land, write-skill, prototype, or drill"]
     playbook -- "each step runs the skill it names" --> cycle
 
     drill["1. drill: settle the plan"]
@@ -101,20 +101,20 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | A slice the agent wrote landed, test your understanding of it | `recall` |
 | A task finished, you want the short version | `tldr` |
 | Risky or ambiguous work, full rigor wanted | `deep` |
-| Any task, routed to its playbook or to the one skill that owns it | `pecut` |
+| Any task, routed to its playbook or to the one skill that owns it | `auto` |
 
-## Routing with `pecut`
+## Routing with `auto`
 
-`pecut` (Indonesian for whip: it drives a task to done) matches a task to one route: the playbook for its type (bug fix, feature, refactoring, investigation, perf, and nine more), or the one skill that owns the whole flow (`land`, `write-skill`, `prototype`, or `drill`, which also takes any task nothing else fits). On a playbook route it copies the playbook's steps into the todo list and runs the skills it names; on a skill route it runs that skill. It runs only when you invoke it by name (`/skill:pecut <task>` in pi); every other skill except `deep` and `recall` fires on its own description.
+`auto` drives a task on its own and hands you the wheel at forks and decisions only you can make. It matches a task to one route: the playbook for its type (bug fix, feature, refactoring, investigation, perf, and nine more), or the one skill that owns the whole flow (`land`, `write-skill`, `prototype`, or `drill`, which also takes any task nothing else fits). On a playbook route it copies the playbook's steps into the todo list and runs the skills it names; on a skill route it runs that skill. It runs only when you invoke it by name (`/skill:auto <task>` in pi); every other skill except `deep` and `recall` fires on its own description.
 
-In pi, a prompt template turns it into `/pecut <task>`. Save it as `~/.pi/agent/prompts/pecut.md`:
+In pi, a prompt template turns it into `/auto <task>`. Save it as `~/.pi/agent/prompts/auto.md`:
 
 ```markdown
 ---
 description: Route a task to its playbook or skill and run it
 argument-hint: "<task>"
 ---
-Read ~/.agents/skills/pecut/SKILL.md and follow it for this task, resolving its references relative to that folder: $ARGUMENTS
+Read ~/.agents/skills/auto/SKILL.md and follow it for this task, resolving its references relative to that folder: $ARGUMENTS
 ```
 
-The template reads the skill file instead of calling `/skill:pecut`, because pi expands skill commands before prompt templates. Its path fits a global `npx skills` install; point it at wherever `pecut` is installed.
+The template reads the skill file instead of calling `/skill:auto`, because pi expands skill commands before prompt templates. Its path fits a global `npx skills` install; point it at wherever `auto` is installed.
