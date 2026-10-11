@@ -25,6 +25,9 @@ Rules:
 - Proving whether a change to a skill, a prompt, or an instruction file changes how agents behave: [eval](references/eval.md).
 - One open pull request taken to merge-ready: [babysit-pr](references/babysit-pr.md).
 - Work on one branch run unattended until a written exit: [autonomous-run](references/autonomous-run.md).
+- Resuming work an earlier session left: [session-pickup](references/session-pickup.md).
+- Stopping now so another session can resume: [pause-safely](references/pause-safely.md).
+- Reclaiming disk from old worktrees: [worktree-cleanup](references/worktree-cleanup.md).
 - Writing or editing a skill or other agent-facing prose: `write-skill`.
 - A plan for work across several phases: `drill`.
 - Merging a finished branch, keeping it, or discarding it: `land`.

@@ -85,3 +85,9 @@ test('suite: every relative link resolves to a file inside its own skill folder'
 test('verify: opens references/explain-the-number.md', () => {
   assert.ok(links(read(join(root, 'verify', 'SKILL.md'))).includes('references/explain-the-number.md'), 'verify/SKILL.md does not link references/explain-the-number.md');
 });
+
+test('suite: the plugin manifest lists every skill folder, and nothing else', () => {
+  const manifest = JSON.parse(readFileSync(join(root, '..', '.claude-plugin', 'plugin.json'), 'utf8'));
+  const listed = manifest.skills.map((p) => p.replace(/^\.\/skills\//, '')).sort();
+  assert.deepEqual(listed, [...skillNames].sort());
+});

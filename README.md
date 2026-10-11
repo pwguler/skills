@@ -94,3 +94,20 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | A slice the agent wrote landed, test your understanding of it | `recall` |
 | A task finished, you want the short version | `tldr` |
 | Risky or ambiguous work, full rigor wanted | `deep` |
+| Any task, routed to the playbook for its type | `do` |
+
+## Routing with `do`
+
+`do` matches a task to the playbook for its type (bug fix, feature, refactoring, investigation, perf, and nine more), copies the playbook's steps into the todo list, and runs the skills it names. It runs only when you invoke it by name (`/skill:do <task>` in pi); every other skill still fires on its own description.
+
+In pi, a prompt template turns it into `/do <task>`. Save it as `~/.pi/agent/prompts/do.md`:
+
+```markdown
+---
+description: Route a task to its playbook and run it
+argument-hint: "<task>"
+---
+Read ~/.agents/skills/do/SKILL.md and follow it for this task, resolving its references relative to that folder: $ARGUMENTS
+```
+
+The template reads the skill file instead of calling `/skill:do`, because pi expands skill commands before prompt templates.
