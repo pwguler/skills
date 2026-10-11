@@ -52,10 +52,13 @@ The base suite (drill → implement → verify → land) implements the run-unti
 
 ```mermaid
 flowchart LR
-    task([task]) --> door{"plain request<br/>or /auto"}
-    door -- "plan, feature" --> drill["drill<br/>settle the plan"]
-    door -- "bug" --> debug["debug<br/>root cause"]
-    door -- "branch done" --> land
+    task([task]) --> manual["manual<br/>you call each skill,<br/>or it fires on its own"]
+    task --> auto["auto<br/>/auto picks the playbook<br/>and runs its steps"]
+    manual --> enter(("enters at"))
+    auto --> enter
+    enter -- "plan, feature" --> drill["drill<br/>settle the plan"]
+    enter -- "bug" --> debug["debug<br/>root cause"]
+    enter -- "branch done" --> land
     drill --> implement["implement<br/>test first"]
     implement --> verify["verify<br/>prove it"]
     verify -- "fails" --> implement
