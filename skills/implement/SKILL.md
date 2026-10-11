@@ -3,7 +3,7 @@ name: implement
 description: "Implement a settled plan test-first, smallest slice at a time. Use when starting implementation of a feature or fix after the plan is settled, or when user says \"implement this\" or \"build it\"."
 ---
 
-Work the plan one thin slice at a time. A slice is the smallest piece that changes observable behavior. When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the plan: work criterion by criterion, and let the spec's non-goals fence every diff. A spec that still carries an `## Open decisions` section is a draft: stop and route it back to `drill`.
+Work the plan one thin slice at a time. A slice is the smallest piece that changes observable behavior. When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the plan: work criterion by criterion, and let the spec's non-goals fence every diff. A spec that still carries an `## Open decisions` section is a draft: stop and name its open decisions.
 
 1. Open a todo list (a checklist in the reply when the harness has no todo tool) before the first test: one item per acceptance criterion when a spec exists, one per slice otherwise, then `verify`, then `rubric` when the work touches a quality surface, as `rubric` defines it. A list of fewer than three items is not opened. Mark each item done as it lands; a skipped item stays as `skip: <reason>`, and a criterion is never skipped, only left open.
 2. Pick the smallest unfinished slice of the plan. When the plan has three slices or more, the harness dispatches subagents, and the user's instructions ask for them, run the slice as [subagent slices](references/subagent-slices.md) lays out; otherwise work steps 3 to 5 in this session.
@@ -12,11 +12,11 @@ Work the plan one thin slice at a time. A slice is the smallest piece that chang
 5. Refactor only with tests green. Match the surrounding style, including naming and layout.
 6. Gate the slice through `verify` and commit on its record.
 7. Repeat from step 2 until the plan has no unfinished slices.
-8. When no slice is left, run `verify` on the whole work, then the `rubric` skill when the work touches a quality surface, as `rubric` defines it, even when every claim is a behavior. Then offer the user `land`, which ends the work, and `/recall` on the code the agent wrote.
+8. When no slice is left, run `verify` on the whole work, then the `rubric` skill when the work touches a quality surface, as `rubric` defines it, even when every claim is a behavior.
 
 Rules:
 
-- With no spec and no one-sentence plan from drill's fast path, run `drill` first.
+- With no spec and no one-sentence plan, stop: there is nothing to build from yet.
 - On the repo's base branch (where the remote HEAD points), recommend a branch before the first test and ask, since working on the base branch is the user's call, never yours to assume. The answer holds for the session. A project instruction (AGENTS.md or CLAUDE.md) that settles where work goes answers it for every session.
 - One implementation at a time. Never drop unlanded work for a new task on your own: offer to finish and land it, land it partial, or park it, and let the user pick.
 - No production code before its failing test exists, except wiring whose only effect lives inside a host the tests cannot drive (a plugin entry point, a registration with a framework): its proof is an end-to-end run through `verify`, never a string match over source.
@@ -36,8 +36,6 @@ Rules:
 - Change a component's state only through its own operations, and hand out no reference to it that a caller could mutate or that changes under them ([minimize reader load](references/minimize-reader-load.md), opened before exposing a component's state).
 - Delete what your change orphaned ([migrate callers, then delete legacy APIs](references/migrate-callers-then-delete-legacy-apis.md), opened before writing a new API that replaces one that still has callers); flag dead code without removing it unasked.
 - Each slice's commit subject is one line in the repository's convention (read recent `git log`; imperative lowercase when there is none), names the criterion by what it says, never its spec id, and gives the why, not only the what. Stage the specific files, never `git add .`.
-- A bug or unexpected failure mid-slice routes to the `debug` skill; do not patch around symptoms.
-- A genuine fork found mid-slice is never guessed: stop, name it, and let the user answer or switch to deep. A fork is genuine when it changes an acceptance criterion, a non-goal, or a public interface, needs the user's authority, or cannot be undone; any other fork that running something can settle is settled by running it, per [never block on the human](references/never-block-on-the-human.md).
+- A bug or unexpected failure mid-slice goes through the `debug` skill before the slice resumes; do not patch around symptoms.
+- A genuine fork found mid-slice is never guessed: stop, name it, and let the user answer. A fork is genuine when it changes an acceptance criterion, a non-goal, or a public interface, needs the user's authority, or cannot be undone; any other fork that running something can settle is settled by running it, per [never block on the human](references/never-block-on-the-human.md).
 - Three failed attempts on the same slice stop the loop: escalate to the user with the criterion, what was tried, and the last error.
-
-Deep mode (the `deep` skill is active): no one-sentence plans; work only from a spec.

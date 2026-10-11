@@ -16,5 +16,3 @@ Rules:
 - A test harness changes mechanics, not the loop: when one exists, automate the baseline re-run.
 - When the document is a skill in this repo, follow the [conventions for skills in this repo](references/conventions.md).
 - The loop is skipped for a document no agent reads a second time. When a linter or hook could enforce the rule, the author builds that instead, per [encode lessons in structure](references/encode-lessons-in-structure.md).
-
-Deep mode (the `deep` skill is active): no fast path.

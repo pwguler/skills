@@ -12,5 +12,3 @@ Rules:
 - If a question can be answered by exploring the codebase, explore the codebase instead of asking. Facts are yours to find, never the user's. Look the fact up in this session before the question that depends on it.
 - When the user can't put the target behavior into words, ask for a reference implementation: source code, even in another language or library, whose semantics to reimplement. Source beats prose or a screenshot.
 - The closing summary lists every adopted assumption for a one-pass veto. A vetoed assumption reopens only that branch.
-
-Deep mode (the `deep` skill is active): ask every branch one at a time, adopt no assumptions.

@@ -5,7 +5,7 @@ description: "Question a plan or design until every decision in it is settled an
 
 Run the `core-interview` skill against the plan or design under discussion. The interview also tests the plan against the project's domain model, as [domain checks](references/domain-checks.md) lays out.
 
-Fast path: first, size the ask. If it has no real decision tree (one obvious change of fewer than 20 changed lines outside tests, a criterion statable in one sentence), say so and route straight to `implement` with that sentence as the plan; a spec for an obvious change is ceremony. The fast path still drills its sentence: state it, then test it. A sentence that cannot be stated, or that surfaces a fork or a second decision, was not obvious: run the interview. A genuine fork discovered mid-task is never guessed: stop, name it, let the user answer or switch to deep. If `verify` fails twice on a task judged obvious, the task was lying about its size: stop and drill it properly.
+Fast path: first, size the ask. If it has no real decision tree (one obvious change of fewer than 20 changed lines outside tests, a criterion statable in one sentence), say so: that sentence is the plan, and a spec for an obvious change is ceremony. The fast path still drills its sentence: state it, then test it. A sentence that cannot be stated, or that surfaces a fork or a second decision, was not obvious: run the interview. A genuine fork discovered mid-task is never guessed: stop, name it, and let the user answer.
 
 1. Explore the project context before the first question: code, docs, recent commits.
 2. Before the first question, look for `CONTEXT.md` at the root (or `CONTEXT-MAP.md` and the per-context `CONTEXT.md` files it lists) and for ADRs under `docs/adr/`, including any scoped to one context.
@@ -20,5 +20,3 @@ Rules:
 - Anything the stated constraints don't demand leaves the design. What stays is held to [experience first](references/experience-first.md), opened when a trade-off on product scope, UX, or an interface pits implementation convenience against the consumer's experience.
 - Files appear only when there is something to put in them: `CONTEXT.md` with the first settled term, `docs/adr/` with the first ADR that passes [decision-record.md](references/decision-record.md).
 - **Later sessions work the draft.** When a session opens a spec that still has an `## Open decisions` section, work it as [draft-spec.md](references/draft-spec.md) lays out.
-
-Deep mode (the `deep` skill is active): no sizing, no routing past the interview; the full session runs and the spec is always written.

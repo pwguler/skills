@@ -18,5 +18,3 @@ Rules:
 - Evidence per criterion: what in the artifact passes or fails it. A verdict without a pointer is an opinion.
 - No judge, no verdict. The maker never marks its own work, and a self-marked rubric is not a weaker verdict, it is the failure this skill exists to prevent. When no independent judge is reachable at all (no dispatch, no fresh session, no user), report the rubric and the artifact, name what blocked the judging, and stop.
 - A verdict is saved with the tree hash, taken without the Markdown exclusion when the judged work is Markdown, and reused while the hash matches, the verdict had as many judges as the current mode requires, and its criteria came from the same sources, or the new call hands over none; otherwise the work is judged again.
-
-Deep mode (the `deep` skill is active): no fast path, three judges minimum, and every failed criterion is fixed before the claim stands; with fewer than three judges reachable, report the lenses left unjudged and stop.

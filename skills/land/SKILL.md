@@ -23,5 +23,3 @@ Rules:
 - Never remove a worktree the harness created; only clean up ones under `.worktrees/` or `worktrees/`. Run `git worktree prune` after removal.
 - Never merge untested: the merged result runs the tests unless its tree hash matches an evidence record that verify's rule still counts fresh, which it does after a merge onto a base that has not moved since the branch forked.
 - Merge conflicts are resolved by intent, hunk by hunk, each side traced to its source; `--abort` is not a resolution.
-
-Deep mode (the `deep` skill is active): voids the whole fast path: the todo list opens, the post-merge tests re-run even when a record matches, and the spec question asked explicitly rather than inferred.

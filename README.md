@@ -48,7 +48,7 @@ Restart Claude Code after updating.
 
 ## The loop
 
-The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/deep` is user-only and, for the session, turns off every fast path in the skills under its dial. `/auto` is the other door, also user-only: it routes a task to its playbook or to the one skill that owns it, and every playbook runs its steps through the same skills.
+The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/auto` is the other door, and it is user-only: it routes a task to its playbook or to the one skill that owns it, and every playbook runs its steps through the same skills.
 
 A feature, both ways. The yellow steps are the commands you type.
 
@@ -98,5 +98,4 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Authoring or editing anything an agent reads | `write-skill` |
 | A slice the agent wrote landed, test your understanding of it | `recall` |
 | A task finished, you want the short version | `tldr` |
-| Risky or ambiguous work, full rigor wanted | `deep` |
 | Any task, routed to its playbook or to the one skill that owns it | `auto` |
