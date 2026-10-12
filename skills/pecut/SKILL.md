@@ -30,7 +30,7 @@ Rules:
 - Two or more independent changes the user asks to run at once: [parallel-tasks](references/parallel-tasks.md).
 - Finished work leaving its branch: a pull request, or the path the user names (merge the pull request, merge locally, keep, discard): [shipping](references/shipping.md).
 - A mock-up to react to before building: [prototype](references/prototype.md).
-- Several dependent pull requests driven to merge, live-process or trace forensics, and anything no other route fits: [figure-it-out](references/figure-it-out.md).
+- Several dependent pull requests driven to merge, changes the user asks to run at once that share files or state or need each other's results, live-process or trace forensics, and anything no other route fits: [figure-it-out](references/figure-it-out.md).
 - When `verify` stops a one-sentence plan because the task was not obvious, run `drill` on the task through its interview, then go on with the settled plan.
 - When `implement` or `verify` stops on a draft spec, run `drill` on its open decisions; go on from the step that stopped once the spec is settled, and stop for the user while a decision stays open.
 - When `debug` reports a design problem behind a failure, offer the feature playbook on the redesign and stop for the user.
