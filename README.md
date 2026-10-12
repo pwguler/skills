@@ -55,7 +55,7 @@ The base suite (drill → implement → verify → land) implements the run-unti
 A feature through pecut. The yellow step is the command you type.
 
 ```mermaid
-flowchart LR
+flowchart TD
     y1["/pecut #lt;task#gt;"] --> pb["picks the playbook"]
     pb --> drill["drill<br/>asks its questions"]
     drill --> impl["implement + verify<br/>test first, prove it"]
