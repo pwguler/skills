@@ -6,12 +6,12 @@ Built against the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.or
 
 ## Versions
 
-- **v2** (`main`, v2.0.0): `/pecut` routes each task to a playbook, and the playbook runs the skills in order. v2 is highly inspired by [pstack](https://github.com/cursor/plugins/tree/main/pstack), by Lauren Tan ([poteto](https://x.com/poteto)): pecut is modeled on its poteto-mode, and the playbooks and the 24 `principle-*` skills on its playbooks and principles. Where pstack is tightly tied to the Grok ecosystem, v2 runs in every harness that loads skills, on whatever model the session runs.
+- **v2** (`main`, v2.0.0): `/pecut` routes each task to a playbook, and the playbook runs the skills in order. v2 is highly inspired by [pstack](https://github.com/cursor/plugins/tree/main/pstack), by Lauren Tan ([poteto](https://x.com/poteto)): pecut is modeled on its poteto-mode, and the playbooks and the 24 `principle-*` skills on its playbooks and principles. Where pstack is built for Cursor, v2 runs in every harness that loads skills, on whatever model the session runs.
 - **v1** (the `v1` branch, v1.29.2): you run each skill yourself, or a skill starts when its description matches the request. Install shows how to pin it.
 
 ## Install
 
-Two paths, both for Claude Code. Pick one: installing both loads every skill twice.
+Two paths. `npx skills` installs into any agent the skills CLI supports, Claude Code and pi among them; the plugin is for Claude Code. In Claude Code, pick one: installing both loads every skill twice.
 
 **`npx skills`**:
 
@@ -55,7 +55,7 @@ Restart Claude Code after updating.
 
 ## The loop
 
-Start a session with `/pecut` (`/pwguler-skills:pecut` from the plugin, `/skill:pecut` in pi), with a task or without one. From then on every task goes through pecut: it routes the task to the playbook for its type, and the playbook runs the skills in order. Each skill checks its own work and stops, and the playbook starts the next one. You still answer drill's questions and every decision only you can make. `land` opens a pull request; it merges locally into the base branch only when you ask.
+Start a session with `/pecut` (`/pwguler-skills:pecut` from the plugin, `/skill:pecut` in pi), with a task or without one. From then on every task goes through pecut: it routes the task to the playbook for its type, and the playbook runs the skills in order. Each skill checks its own work and stops, and the playbook starts the next one. You still answer drill's questions and every decision only you can make. `land` opens a pull request; it merges, locally or through that pull request, only when you ask.
 
 The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was not obvious: `verify` stops, and pecut sends the task back through drill's interview.
 
