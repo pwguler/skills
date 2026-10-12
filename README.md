@@ -30,6 +30,8 @@ Or in a Claude Code session:
 
 Restart Claude Code after installing.
 
+Version 1 stays on the `v1` branch: append `#v1` to the source, as in `npx skills add pwguler/skills#v1` or `claude plugin marketplace add pwguler/skills#v1`.
+
 ## Update
 
 **`npx skills`**:
