@@ -1,11 +1,11 @@
 ---
 name: land
-description: Finish a development branch. Use when implementation is complete and the work needs to be merged, pushed as a PR, kept, or discarded.
+description: "Finish a branch: gate it, then open its pull request, or merge, keep, or discard it when the user asks. Run by a pecut playbook step that names it."
 ---
 
 Nothing lands unverified.
 
-Fast path: when the path is settled, the pull request by default or a path the user named (merge locally, keep, discard), skip the todo list and go. On the merge path, if the base has not moved since the branch forked, skip the post-merge test re-run; a merge onto that base produces the exact tree `verify` just passed. Any divergence from the base branch voids this: diverged merge results are new trees and get the full re-run.
+Fast path: when the user named the path in the invocation (a pull request, merge locally, keep, discard), skip the todo list and go. On the merge path, if the base has not moved since the branch forked, skip the post-merge test re-run; a merge onto that base produces the exact tree `verify` just passed. Any divergence from the base branch voids this: diverged merge results are new trees and get the full re-run.
 
 1. When the work has a spec, open a todo list (a checklist in the reply when the harness has no todo tool) with these steps as its items before you run anything; when a todo list is already open, add them to it. Each step is its own item. A step the chosen path does not take stays as `skip: <reason>`. Work without a spec runs the steps in order without one.
 2. Run the `verify` skill, or reuse its evidence record while verify's rule still counts it fresh. A fast-path record covers its criterion only and a record taken inside a declared phase covers its area only, so the merge path runs the full gate once, unless the change has no runtime behavior. Then run the `rubric` skill when the diff carries a quality surface, as `rubric` defines it, or the spec has a criterion that names a quality rather than a behavior: rubric's fast path decides whether a judge runs, the maker never judges, and a saved verdict is reused under rubric's rule. Failing work does not reach step 4.
@@ -23,5 +23,3 @@ Rules:
 - Never remove a worktree the harness created; only clean up ones under `.worktrees/` or `worktrees/`. Run `git worktree prune` after removal.
 - Never merge untested: the merged result runs the tests unless its tree hash matches an evidence record that verify's rule still counts fresh, which it does after a merge onto a base that has not moved since the branch forked.
 - Merge conflicts are resolved by intent, hunk by hunk, each side traced to its source; `--abort` is not a resolution.
-
-Deep mode (the `deep` skill is active): voids the whole fast path: the todo list opens, the post-merge tests re-run even when a record matches, and the spec question asked explicitly rather than inferred.

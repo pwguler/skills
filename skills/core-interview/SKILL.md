@@ -1,6 +1,6 @@
 ---
 name: core-interview
-description: The interview loop that drill and other skills run, one fork at a time until every decision is settled. Use only when a skill names it, never on your own; a user who asks to be questioned on a plan, design, or decision goes to drill.
+description: "The interview loop drill runs, one fork at a time until every decision is settled. Run by drill and by any skill or pecut playbook that names it, never on its own."
 ---
 
 Keep questioning the user until the two of you agree on every part of the topic. Treat it as a decision tree and settle decisions in dependency order, each before the ones that hang off it. Relentless means no branch left open, not one round-trip per branch.
@@ -12,5 +12,3 @@ Rules:
 - If a question can be answered by exploring the codebase, explore the codebase instead of asking. Facts are yours to find, never the user's. Look the fact up in this session before the question that depends on it.
 - When the user can't put the target behavior into words, ask for a reference implementation: source code, even in another language or library, whose semantics to reimplement. Source beats prose or a screenshot.
 - The closing summary lists every adopted assumption for a one-pass veto. A vetoed assumption reopens only that branch.
-
-Deep mode (the `deep` skill is active): ask every branch one at a time, adopt no assumptions.

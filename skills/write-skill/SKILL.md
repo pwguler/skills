@@ -1,6 +1,6 @@
 ---
 name: write-skill
-description: Create or edit a document an agent reads and prove it changes behavior. Use when writing or editing a skill, AGENTS.md, CLAUDE.md, a system prompt, or other agent-facing prose, or proving that one changes agent behavior.
+description: "Create or edit a document an agent reads and prove it changes behavior. Run by a pecut playbook step that names it."
 ---
 
 Writing for agents is test-first development applied to prose. The same loop ships every document an agent reads: skills, AGENTS.md, CLAUDE.md, system prompts.
@@ -15,6 +15,4 @@ Fast path: an edit that changes no instruction (a typo, formatting, a stale comm
 Rules:
 - A test harness changes mechanics, not the loop: when one exists, automate the baseline re-run.
 - When the document is a skill in this repo, follow the [conventions for skills in this repo](references/conventions.md).
-- The loop is skipped for a document no agent reads a second time. When a linter or hook could enforce the rule, the author builds that instead, per [encode lessons in structure](references/encode-lessons-in-structure.md).
-
-Deep mode (the `deep` skill is active): no fast path.
+- The loop is skipped for a document no agent reads a second time. When a linter or hook could enforce the rule, the author builds that instead, per the `principle-encode-lessons-in-structure` skill.

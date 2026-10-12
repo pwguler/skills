@@ -5,7 +5,7 @@ One spec per work item, at `docs/specs/<slug>.md` in the target project. `drill`
 A spec has two states, derived from its content, not a status field:
 
 - **Draft**: the plan is not settled yet. The spec carries the open decisions that must be resolved before implementation can start. `drill` writes it this way when the decision tree cannot resolve within one session (decisions await research, or the tree is too large for one context).
-- **Settled**: every open decision is resolved, the `## Open decisions` section is gone, and the spec carries goal, non-goals, decisions, acceptance criteria, and verification commands, and, for a phased migration, its phases. A draft settles in place: when its last open decision closes, the session writes those sections, gets the user's explicit agreement, then deletes `## Open decisions`. Only a settled spec steers `implement` and `verify`; both route a draft back to `drill`.
+- **Settled**: every open decision is resolved, the `## Open decisions` section is gone, and the spec carries goal, non-goals, decisions, acceptance criteria, and verification commands, and, for a phased migration, its phases. A draft settles in place: when its last open decision closes, the session writes those sections, gets the user's explicit agreement, then deletes `## Open decisions`. Only a settled spec steers `implement` and `verify`; both stop on a draft.
 
 ## Draft template
 
@@ -44,10 +44,10 @@ One sentence: what this work item delivers.
 What this work must not touch or change. These fence the diff.
 
 ## Decisions
-One line per settled fork: the option taken and its reason. `land` carries this section into the merge message.
+One line per settled fork: the option taken and its reason. `land` carries this section into the pull request body and the merge commit message.
 
 ## Phases
-Only for a rewrite or migration planned in phases: one line per phase, naming the criterion it ends at and the checks that may be red inside it, those of the code being replaced or of callers not yet moved. Every phase ends green; implement's outcome-oriented-execution principle works the phases.
+Only for a rewrite or migration planned in phases: one line per phase, naming the criterion it ends at and the checks that may be red inside it, those of the code being replaced or of callers not yet moved. Every phase ends green; the `principle-outcome-oriented-execution` skill works the phases.
 
 ## Acceptance criteria
 - AC-1: <a checkable statement; a command or test can prove it true or false>
