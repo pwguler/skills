@@ -28,7 +28,7 @@ Rules:
 - Reclaiming disk from old worktrees: [worktree-cleanup](references/worktree-cleanup.md).
 - Writing or editing a skill, AGENTS.md, CLAUDE.md, a system prompt, or other prose an agent reads: [authoring-a-skill](references/authoring-a-skill.md).
 - A plan for work that runs in phases on one branch: [multi-phase-plan](references/multi-phase-plan.md).
-- Finished work leaving its branch: a pull request, or the path the user names (merge locally, keep, discard): [shipping](references/shipping.md).
+- Finished work leaving its branch: a pull request, or the path the user names (merge the pull request, merge locally, keep, discard): [shipping](references/shipping.md).
 - A mock-up to react to before building: [prototype](references/prototype.md).
 - Several dependent pull requests driven to merge, live-process or trace forensics, and anything no other route fits: [figure-it-out](references/figure-it-out.md).
 - When `verify` stops a one-sentence plan because the task was not obvious, run `drill` on the task through its interview, then go on with the settled plan.

@@ -6,7 +6,7 @@ description: "Report a finished task as its result, not its transcript. Run by p
 A task just finished. Give its result, not its transcript.
 
 Rules:
-- Write in Simplified Technical English: one meaning per word, active voice, short sentences, no idioms.
+- Write in the user's language, with Simplified Technical English's rules: one meaning per word, active voice, short sentences, no idioms.
 - The length adapts to the task: a small task gets two or three lines, a large or noisy one gets more. Every line carries a result, a path, a number, or an action.
 - Choose the shape that reads fastest for this result: prose for a few outcomes, bullets or a table when several distinct items need scanning.
 - Lead with the result: what the task produced or decided.

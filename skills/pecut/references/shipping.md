@@ -1,6 +1,6 @@
 # Shipping
 
-When: finished work leaves its branch: through a pull request, or by the path the user names (merge locally, keep, discard).
+When: finished work leaves its branch: through a pull request, or by the path the user names (merge the pull request, merge locally, keep, discard).
 Not when: a pull request for the branch is already open and has to reach merge-ready (babysit-pr).
 
 1. Run `land`.
