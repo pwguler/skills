@@ -43,6 +43,8 @@ Version 1 stays on the `v1` branch: append `#v1` to the source, as in `npx skill
 npx skills update
 ```
 
+`update` refreshes the skills you have; it adds none and removes none. When a release adds skills, as v2 did, run `npx skills add pwguler/skills --skill '*'` again. From v1, also run `npx skills remove deep`. For a global install, add `-g` to each command.
+
 **Plugin**:
 
 ```bash
@@ -53,7 +55,7 @@ Restart Claude Code after updating.
 
 ## The loop
 
-Start a session with `/pecut` (`/skill:pecut` in pi), with a task or without one. From then on every task goes through pecut: it routes the task to the playbook for its type, and the playbook runs the skills in order. Each skill checks its own work and stops, and the playbook starts the next one. You still answer drill's questions and every decision only you can make. `land` opens a pull request; it merges locally into the base branch only when you ask.
+Start a session with `/pecut` (`/pwguler-skills:pecut` from the plugin, `/skill:pecut` in pi), with a task or without one. From then on every task goes through pecut: it routes the task to the playbook for its type, and the playbook runs the skills in order. Each skill checks its own work and stops, and the playbook starts the next one. You still answer drill's questions and every decision only you can make. `land` opens a pull request; it merges locally into the base branch only when you ask.
 
 The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was not obvious: `verify` stops, and pecut sends the task back through drill's interview.
 
