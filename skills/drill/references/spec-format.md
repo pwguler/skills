@@ -72,4 +72,3 @@ The exact commands that prove the criteria, one per line. A quality criterion ha
 - **One decision per session**, except research decisions already dispatched as subagents. Claim the decision you work: mark it claimed before starting.
 - **Refer to decisions by name**, never by number or slug. Names read at a glance; ids do not.
 - **Fog or decision?** What counts is whether the question can already be phrased exactly, not whether it can already be answered. Phrasable → `Open decisions`; still too coarse → `Not yet specified`.
-- **A decision that turns out to sit beyond the destination is ruled out of scope**, not resolved. Close it and leave one line in `Out of scope`; it does not enter `Decisions so far`.
