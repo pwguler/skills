@@ -1,4 +1,4 @@
-# Hillclimb
+# Hill climb
 
 When: the user asks to push one metric as far as it goes, round after round.
 Not when: something is slow and only has to get faster (perf-issue).

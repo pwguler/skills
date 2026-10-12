@@ -18,7 +18,7 @@ Rules:
 - A change to structure that keeps every caller-visible behavior: [refactoring](references/refactoring.md).
 - A question about how or why the code, or a library or service it uses, behaves as it does, answered without changing it: [investigation](references/investigation.md).
 - Something too slow or too costly that the user wants faster or cheaper: [perf-issue](references/perf-issue.md).
-- A metric the user asks to push as far as it goes, round after round: [hillclimb](references/hillclimb.md).
+- A metric the user asks to push as far as it goes, round after round: [hill-climb](references/hill-climb.md).
 - A surface made to match a reference image, design file, or page: [visual-parity](references/visual-parity.md).
 - Proving whether a change to a skill, a prompt, or an instruction file changes how agents behave: [eval](references/eval.md).
 - One open pull request taken to merge-ready: [babysit-pr](references/babysit-pr.md).

@@ -1,7 +1,7 @@
 # Perf issue
 
 When: something is too slow or too costly, and the user wants it faster or cheaper.
-Not when: the user asks to push one metric as far as it goes, round after round (hillclimb).
+Not when: the user asks to push one metric as far as it goes, round after round (hill-climb).
 
 1. Write down the metric, the target (the user's, or one proposed and stated when the user gave none), the command that measures it, a round limit, and what must not change: the tests that must still pass and the output that must stay the same.
 2. Measure a baseline on the current tree with that command, repeated enough times to show the spread, and keep the output.
