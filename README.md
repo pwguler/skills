@@ -4,6 +4,11 @@
 
 Built against the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.org/abs/2603.22106))
 
+## Versions
+
+- **v2** (`main`, v2.0.0): `/pecut` routes each task to a playbook, and the playbook runs the skills in order. v2 is highly inspired by [pstack](https://github.com/cursor/plugins/tree/main/pstack), by Lauren Tan ([poteto](https://x.com/poteto)): pecut is modeled on its poteto-mode, and the playbooks and the 24 `principle-*` skills on its playbooks and principles.
+- **v1** (the `v1` branch, v1.29.2): you run each skill yourself, or a skill starts when its description matches the request. Install shows how to pin it.
+
 ## Install
 
 Two paths, both for Claude Code. Pick one: installing both loads every skill twice.
