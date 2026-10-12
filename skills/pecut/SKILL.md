@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 Pecut is on for this session: every task the user gives from now on, the one given with /pecut included, starts at the route table under Rules, until the user says "pecut off" or the session ends. A turn that asks for no work gets a plain reply. A playbook is the only place the order of the suite's skills is written: each skill checks its own work and stops, and the playbook starts the next one.
 
-1. Name the task's type and match it to one route under Rules. When two routes fit, the narrower one wins: autonomous-run over the route of the work it runs, multi-phase-plan over refactoring, and any other narrower route over bug-fix, feature, or perf-issue. When two routes still fit, ask the user one question naming both; when none fits, the route is figure-it-out.
+1. Name the task's type and match it to one route under Rules. When two routes fit, the narrower one wins: autonomous-run over the route of the work it runs, and any other narrower route over bug-fix, feature, or perf-issue. When two routes still fit, ask the user one question naming both.
 2. Open the playbook and check its `When:` and `Not when:` against the task; when `Not when:` matches, take the playbook it names instead. Otherwise copy its steps into a todo list (a checklist in the reply when the harness has no todo tool); when a todo list is already open, add them to it.
 3. Run the steps in order. A step that names a skill or a principle runs it on the task; any other step is done in this session as the playbook words it. When a skill stops on a condition a rule below names, that rule decides the next move.
 4. Stop when the playbook's `Done when:` holds, or when a step stops the work for the user; either way, report the result against `Done when:` the way `tldr` reports a finished task.
@@ -14,7 +14,7 @@ Pecut is on for this session: every task the user gives from now on, the one giv
 Rules:
 
 - A bug, an error, a crash, a failing test, wrong output, or a regression: [bug-fix](references/bug-fix.md).
-- A new feature, or a change to what the product does: [feature](references/feature.md).
+- A new feature, a change to what the product does, or a named edit to docs or config, in one change or in phases: [feature](references/feature.md).
 - A change to structure that keeps every caller-visible behavior: [refactoring](references/refactoring.md).
 - A question about how or why the code, or a library or service it uses, behaves as it does, answered without changing it: [investigation](references/investigation.md).
 - Something too slow or too costly that the user wants faster or cheaper: [perf-issue](references/perf-issue.md).
@@ -27,7 +27,7 @@ Rules:
 - Stopping now so another session can resume: [pause-safely](references/pause-safely.md).
 - Reclaiming disk from old worktrees: [worktree-cleanup](references/worktree-cleanup.md).
 - Writing or editing a skill, AGENTS.md, CLAUDE.md, a system prompt, or other prose an agent reads: [authoring-a-skill](references/authoring-a-skill.md).
-- A plan for work that runs in phases on one branch: [multi-phase-plan](references/multi-phase-plan.md).
+- Two or more independent changes the user asks to run at once: [parallel-tasks](references/parallel-tasks.md).
 - Finished work leaving its branch: a pull request, or the path the user names (merge the pull request, merge locally, keep, discard): [shipping](references/shipping.md).
 - A mock-up to react to before building: [prototype](references/prototype.md).
 - Several dependent pull requests driven to merge, live-process or trace forensics, and anything no other route fits: [figure-it-out](references/figure-it-out.md).

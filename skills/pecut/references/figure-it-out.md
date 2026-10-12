@@ -1,6 +1,6 @@
 # Figure it out
 
-When: no other route fits the task: several dependent pull requests driven to merge, live-process or trace forensics, or work of a type the table in `pecut` does not name.
+When: several dependent pull requests driven to merge, changes the user asks to run at once that share files or state or need each other's results, live-process or trace forensics, or work of a type the table in `pecut` does not name.
 
 1. Run `drill` on the task.
 2. Route the settled plan once more through the table in `pecut`, to any route but figure-it-out.

@@ -1,7 +1,7 @@
 # Feature
 
-When: the task adds to what the product does or changes how it behaves.
-Not when: every caller-visible behavior stays the same (refactoring), or the user wants a mock-up first (prototype).
+When: the task, in one change or a plan in phases, adds to what the product does, changes how it behaves, or is a named edit to docs or config.
+Not when: the code's structure changes and every caller-visible behavior stays the same (refactoring), the phases ship as several dependent pull requests (figure-it-out), or the user wants a mock-up first (prototype).
 
 1. Run `drill` when no settled spec at `docs/specs/<slug>.md` covers the change.
 2. Run `implement` on the settled spec, or on the one-sentence plan from `drill`.
