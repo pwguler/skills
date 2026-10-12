@@ -18,6 +18,7 @@ Rules:
 
 - With no spec and no one-sentence plan, stop: there is nothing to build from yet.
 - On the repo's base branch (where the remote HEAD points), recommend a branch before the first test and ask, since working on the base branch is the user's call, never yours to assume. The answer holds for the session. A project instruction (AGENTS.md or CLAUDE.md) that settles where work goes answers it for every session.
+- Outside a git repository there is no branch or commit; a change no test covers, such as a config edit, is proven by reading the result back. When the directory holds several related files, such as a config tree, add one line to the report offering `git init`, even when the change touches one file.
 - One implementation at a time. Never drop unlanded work for a new task on your own: offer to finish and land it, land it partial, or park it, and let the user pick.
 - No production code before its failing test exists, except wiring whose only effect lives inside a host the tests cannot drive (a plugin entry point, a registration with a framework): its proof is an end-to-end run through `verify`, never a string match over source.
 - A change that preserves behavior (a refactor, a rename, a deletion) is the other exception: the tests that cover it, green before and after, are its test; when none covers it, first add one that passes on the current code and pins what it does. A change with no runtime behavior (docs, comments, assets) needs no test, and its quality surface waits for step 8.
