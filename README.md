@@ -43,7 +43,7 @@ Version 1 stays on the `v1` branch: append `#v1` to the source, as in `npx skill
 npx skills update
 ```
 
-`update` refreshes the skills you have; it adds none and removes none. When a release adds skills, as v2 did, run `npx skills add pwguler/skills --skill '*'` again. From v1, also run `npx skills remove deep`. For a global install, add `-g` to each command.
+You may need to reinstall to get all skills.
 
 **Plugin**:
 
