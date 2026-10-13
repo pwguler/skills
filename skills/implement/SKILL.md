@@ -1,16 +1,20 @@
 ---
 name: implement
-description: "Implement a settled plan test-first, smallest slice at a time. Use when starting implementation of a feature or fix after the plan is settled, or when user says \"implement this\" or \"build it\"."
+description: "Implement a settled plan test-first, smallest slice at a time, with an optional type sketch before new boundaries and a blast-radius check before a commit you do not trust. Use when starting implementation of a feature or fix after the plan is settled, or when user says \"implement this\" or \"build it\"."
 ---
 
 Work the plan one thin slice at a time. A slice is the smallest piece that changes observable behavior. When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the plan: work criterion by criterion, and let the spec's non-goals fence every diff. A spec that still carries an `## Open decisions` section is a draft, not a plan: stop and route back to `drill`; implementation cannot start until the draft is settled.
 
-1. Open a todo list before the first test: one item per acceptance criterion when a spec exists, one per slice otherwise, then `verify`, then `rubric` when the work is a UI, a public interface, a name, or a doc. A list of fewer than three items is not opened. Mark each item done as it lands. An item you skip stays in the list as `skip: <reason>`; a criterion is never skipped, only left open.
-2. Pick the smallest unfinished slice of the plan. When the plan has three slices or more and the harness dispatches subagents, brief one subagent with the slice and this skill to work steps 3 to 5 and stop before the gate; read its diff, have a second subagent run the slice's gate, and commit on that record. Otherwise work steps 3 to 5 in this session.
-3. Write the test that fails for it. Test external behavior through the interface, never implementation details. If no failing test can be written, the seam is wrong: stop and fix the plan, not the test.
-4. Write the minimum code that makes it pass.
-5. Refactor only with tests green. Match the existing style of the surrounding code.
-6. Repeat from step 2 until the plan has no unfinished slices.
+Fast path: when the plan introduces no new types or module boundary, skip the sketch. When the slice touches only one file and no shared contract, skip blast-radius.
+
+1. Open a todo list before the first test: one item per acceptance criterion when a spec exists, one per slice otherwise, then `sketch` when the work introduces new types or a module boundary, then `verify`, then `rubric` when the work is a UI, a public interface, a name, or a doc. A list of fewer than three items is not opened. Mark each item done as it lands. An item you skip stays in the list as `skip: <reason>`; a criterion is never skipped, only left open.
+2. Sketch when the next unfinished work introduces new types, public signatures, or a module boundary: follow [sketch.md](references/sketch.md), modeling the domain per [model-the-domain.md](references/model-the-domain.md) and types per [type-system-discipline.md](references/type-system-discipline.md). A sketch that changes the settled shape routes back to `drill` for agreement; do not invent agreement on a new shape.
+3. Pick the smallest unfinished slice of the plan. When the plan has three slices or more and the harness dispatches subagents, brief one subagent with the slice and this skill to work steps 4 to 6 and stop before the gate; read its diff, have a second subagent run the slice's gate, and commit on that record. Otherwise work steps 4 to 6 in this session.
+4. Write the test that fails for it. Test external behavior through the interface, never implementation details. If no failing test can be written, the seam is wrong: stop and fix the plan, not the test.
+5. Write the minimum code that makes it pass. Walk [laziness-protocol.md](references/laziness-protocol.md) and [subtract-before-you-add.md](references/subtract-before-you-add.md) before growing the surface.
+6. Refactor only with tests green. Match the existing style of the surrounding code.
+7. Before the slice's commit gate: when the diff crosses a boundary you do not trust, or deletes or renames a shared symbol, run [blast-radius.md](references/blast-radius.md) and prove the one safety fact by running code. Then run the gate through `verify` as today.
+8. Repeat from step 3 until the plan has no unfinished slices.
 
 Rules:
 
@@ -34,4 +38,4 @@ Rules:
 - Three failed attempts on the same slice stop the loop: escalate to the user with the criterion, what was tried, and the last error.
 - When the last slice lands, run the `verify` skill before claiming the work is done. When the work is a UI, a public interface, a name, or a doc, its quality is a claim of its own: run the `rubric` skill on it too, since the maker never judges its own taste.
 
-Deep mode (the `deep` skill is active): work only from the spec, criterion by criterion. No one-sentence plans.
+Deep mode (the `deep` skill is active): work only from the spec, criterion by criterion. No one-sentence plans. Sketch every new boundary; blast-radius before every commit that touches a shared contract.
