@@ -1,5 +1,6 @@
 {
   "core-interview": "Internal support skill, the relentless interview loop other skills delegate to. Use only when another skill or the user explicitly triggers it, never on your own.",
+  "correct": "Find mistakes agents keep repeating in this repo and make each one impossible, and mine a finished session for durable learnings to route into skill or instruction edits. Use only when the user runs /correct, or asks to encode a repeated agent mistake or reflect on the session.",
   "debug": "Find the root cause of a bug before fixing it. Use whenever the user says \"fix\", \"broken\", \"not working\", \"error\", \"failing\", or \"bug\", and whenever a bug, test failure, or unexpected behavior appears, before proposing any fix.",
   "deep": "Full ceremony mode for the whole suite. Run /deep before risky or ambiguous work; /deep off returns to fast-first.",
   "drill": "\"Question a plan or design until every decision in it is settled and agreed. Use when the user wants a plan stress-tested, a design pinned down before building, or the structure of a new codebase or area settled, or says \\\"drill this\\\" or \\\"drill me\\\".\"",

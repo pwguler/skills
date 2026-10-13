@@ -15,6 +15,7 @@ Fast path: when the diff is small and the user already named the path in the inv
 6. Write the PR body and the merge commit message from the spec: lead the body with the demo (the `verify` evidence: what was run and what it showed, or how to exercise the change), then the goal as the summary line, acceptance criteria as the change list, non-goals as scope notes. The reasoning enters the permanent record where `git blame` points, whether or not the file survives.
 7. Merge path, in this order: from the main checkout merge the branch, test the merged result (a matching evidence record counts), remove the worktree, then delete the branch. Branch deletion before worktree removal fails; worktree removal from inside the worktree fails.
 8. PR and keep paths preserve the worktree; the user needs it to iterate.
+9. After the chosen path finishes, offer `correct` when this session showed the same agent mistake twice, or when the user had to restate a constraint the repo should enforce. One line is enough; `correct` is user-only and runs only if they take it.
 
 Rules:
 
