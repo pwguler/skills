@@ -18,6 +18,7 @@ Fast path: first, size the ask. If it has no real decision tree (one obvious cha
 
 Rules:
 - Cut ruthlessly: anything the stated constraints don't demand leaves the design.
+- After agreement, reversible mid-slice choices do not re-open the interview per [never-block-on-the-human.md](references/never-block-on-the-human.md). Ask-first rules (base branch, land path, discard, unsettled forks, shape changes) always win.
 - Files appear only when there is something to put in them: `CONTEXT.md` with the first settled term, `docs/adr/` with the first ADR.
 - While interviewing: **Hold the user to the glossary.** A word used against its `CONTEXT.md` meaning gets named at once: "the glossary says a Refund is X; you seem to mean Y. Which?"
 - While interviewing: **Replace vague words.** A loose or overloaded word gets a precise candidate: "by 'user', do you mean the Account holder or the Operator? They differ."
