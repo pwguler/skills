@@ -15,7 +15,7 @@ pi install git:github.com/pwguler/skills
 **`npx skills`**:
 
 ```bash
-px skills add pwguler/skills
+npx skills add pwguler/skills
 ```
 
 For the same reason, a pi package install needs any older copy of these skills gone from `~/.agents/skills/` and `~/.pi/agent/skills/`.
