@@ -1,5 +1,7 @@
 # skills
 
+[![skills.sh](https://skills.sh/b/pwguler/skills)](https://skills.sh/pwguler/skills)
+
 Built against the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.org/abs/2603.22106)). It names three debts that pile up when code arrives faster than people can follow it, and the suite works against each:
 
 - **Technical debt**, in the code: `implement` builds test-first in thin slices, `debug` fixes the root cause, and `verify` and `rubric` check the result against evidence and fresh reviewers.
