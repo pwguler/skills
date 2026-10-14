@@ -4,19 +4,37 @@ Built against the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.or
 
 ## Install
 
-The suite runs in [pi](https://pi.dev).
+The suite runs in [pi](https://pi.dev). Two ways in; pick one, since with both every skill loads twice and pi keeps the first copy it finds.
+
+**pi package**:
 
 ```bash
 pi install git:github.com/pwguler/skills
 ```
 
-Install it once. A second copy of the same skill names, for example in `~/.agents/skills/` or `~/.pi/agent/skills/`, collides with it, and pi keeps the first one it finds.
+**`npx skills`**:
+
+```bash
+px skills add pwguler/skills
+```
+
+For the same reason, a pi package install needs any older copy of these skills gone from `~/.agents/skills/` and `~/.pi/agent/skills/`.
 
 ## Update
+
+**pi package**:
 
 ```bash
 pi update git:github.com/pwguler/skills
 ```
+
+**`npx skills`**:
+
+```bash
+npx skills update
+```
+
+You may need to reinstall to get all skills.
 
 Run `/reload` in an open session to load the new version.
 
