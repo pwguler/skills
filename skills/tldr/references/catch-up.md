@@ -1,6 +1,6 @@
 # Catch-up
 
-The user asks what happened since their last message, or asks to resume. Assume they remember that message and nothing after it. Their last message is the last thing they typed; notifications and subagent reports do not count.
+The user asks what happened since their last message in this session. Assume they remember that message and nothing after it. Their last message is the last thing they typed; notifications and subagent reports do not count.
 
 The reply only reads. Do not edit code, start apps, or post anything to produce status.
 
@@ -8,7 +8,6 @@ The reply only reads. Do not edit code, start apps, or post anything to produce 
 
 - Everything since their last message that changed an outcome: your own steps, subagent results, other people's messages in the session.
 - The live state of every PR, CI run, and background job the session touched. Name the ones still running and the ones you could not check.
-- On resume, also the current record: recent commits and PRs, tickets the session named, and `git status`. Cite real ids.
 
 An action item waits on the user and nobody else: a product choice, an approval, an action that cannot be undone, access you lack. Anything you can still finish yourself stays off that list. An action item raised before their last message counts while it still waits.
 

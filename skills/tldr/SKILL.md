@@ -1,12 +1,12 @@
 ---
 name: tldr
-description: Report a finished task as its result, not its transcript, or catch the user up on what happened since their last message. Use when a task that produced an artifact or a run (a build, a workflow, a background agent, an implement or verify run, a release) has just finished and you are about to report it, when the user types /skill:tldr, and when the user asks to catch up or resume.
+description: Report a finished task as its result, not its transcript, or catch the user up on what happened since their last message. Use when a task that produced an artifact or a run (a build, a workflow, a background agent, an implement or verify run, a release) has just finished and you are about to report it, when the user types /skill:tldr, and when the user asks to catch up on this session.
 ---
 
 A task just finished, or the user asks to catch up. Give the result, not the transcript.
 
 Rules:
-- When the user asks to catch up on what happened since their last message, or to resume, report per [catch-up.md](references/catch-up.md): its reply order replaces the lead and close rules below, and the rest still apply.
+- When the user asks to catch up on what happened since their last message, report per [catch-up.md](references/catch-up.md): its reply order replaces the lead and close rules below, and the rest still apply. Work from earlier sessions is `/skill:recall`'s to rebuild, not this skill's.
 - Write in ASD-STE100 Simplified Technical English: one meaning per word, active voice, short sentences, no idioms.
 - The length adapts to the task: a small task gets two or three lines, a large or noisy one gets more, never longer than the result needs.
 - Choose the shape that reads fastest for this result: prose for a few outcomes, bullets or a table when several distinct items need scanning.
