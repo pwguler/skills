@@ -4,16 +4,7 @@ Built against the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.or
 
 ## Install
 
-The suite runs in [pi](https://pi.dev). Its skills call tools from these pi packages:
-
-```bash
-pi install npm:pi-subagents                         # subagent, with the reviewer, worker, researcher, and scout agents
-pi install npm:@juicesharp/rpiv-todo                # todo
-pi install npm:@juicesharp/rpiv-ask-user-question   # ask_user_question
-pi install npm:pi-web-access                        # web_search and fetch_content
-```
-
-Then the suite:
+The suite runs in [pi](https://pi.dev).
 
 ```bash
 pi install git:github.com/pwguler/skills@pstack-lean
