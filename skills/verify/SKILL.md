@@ -26,5 +26,3 @@ Rules:
 - Review feedback is a claim: verify it before implementing. Unclear feedback is checked, not obeyed.
 - Partial verification gets a partial claim: "tests pass; behavior not exercised" is honest, "done" is not.
 - A claim no command can prove (good design, not slop, reads well) is `rubric`'s to settle: never fail it as unprovable, and never pass it because everything a command could check came back green.
-
-Deep mode (the `deep` skill is active): exercise the changed path end to end unconditionally and gate every criterion; when a recipe exists, drive every feature it maps. A partial claim is not accepted as final.

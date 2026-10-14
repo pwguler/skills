@@ -22,5 +22,3 @@ Rules:
 - Evidence per criterion and per finding: what in the artifact passes or fails it. A verdict without a pointer is an opinion.
 - Reviewers and judges never edit. A finding that needs a change, a comment removal included, goes back to `implement` as an act-on finding.
 - No judge, no verdict. The maker never marks its own work, and a self-marked rubric is not a weaker verdict, it is the failure this skill exists to prevent. When a `subagent` launch fails, report the failure; the user may judge in its place, given only the rubric and the artifact. Otherwise report the rubric and the artifact, and stop.
-
-Deep mode (the `deep` skill is active): three defect reviewers with every lens that fits, three taste judges minimum, and every act-on finding and failed taste criterion is fixed before the claim stands.

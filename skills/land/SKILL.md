@@ -23,5 +23,3 @@ Rules:
 - Never remove a worktree a `subagent` run manages; only clean up ones under `.worktrees/` or `worktrees/`. Run `git worktree prune` after removal.
 - Never merge untested: the merged result runs the tests unless its tree hash matches the evidence record, which a fast-forward's does.
 - Merge conflicts are resolved by intent, hunk by hunk, each side traced to its source; `--abort` is not a resolution.
-
-Deep mode (the `deep` skill is active): voids the whole fast path: full menu, unconditional re-run, the spec question asked explicitly rather than inferred, and the defect pass run with or without a spec.

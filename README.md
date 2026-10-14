@@ -40,7 +40,7 @@ Run `/reload` in an open session to load the new version.
 
 ## The loop
 
-The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Before work with a spec lands, `rubric`'s defect pass sends the diff to fresh reviewers. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/skill:deep` is user-only and turns every fast path off for the session.
+The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Before work with a spec lands, `rubric`'s defect pass sends the diff to fresh reviewers. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill.
 
 The 24 engineering principles the work rests on (fix root causes, test behavior not implementation, make operations idempotent, explain the number, and the rest) live in the skill whose step or rule they deepen, and open at that step, so a session pays for one only when it reaches it.
 
@@ -87,4 +87,3 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Authoring or editing anything an agent reads | `write-skill` |
 | A slice the agent wrote landed, test your understanding of it | `recall` |
 | A task finished, or you want to catch up since your last message | `tldr` |
-| Risky or ambiguous work, full rigor wanted | `deep` |
