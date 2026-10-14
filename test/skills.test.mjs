@@ -22,6 +22,7 @@ const referencePlacement = {
   'spec-format.md': ['drill'],
   'architecture-format.md': ['land'],
   'look.md': ['prototype'],
+  'design-red-flags.md': ['drill'],
   // The 24 engineering principles, each in the skill whose step or rule it deepens.
   'attack-the-premise.md': ['debug'],
   'fix-root-causes.md': ['debug'],
