@@ -9,4 +9,4 @@ When: a new internal API replaces an old one while callers of the old one remain
 - An adapter between old and new is the exception, never the design, and it lives for a short, stated time.
 - Rewrite tests to check the new contract, and delete tests that guarded only details of the old implementation; [test-behavior-not-implementation](test-behavior-not-implementation.md) says which is which.
 
-Where it stops: an API the migration left without callers counts as orphaned by the change, so implement's "Delete what your change orphaned" removes it; other dead code found along the way is flagged, not removed. When outside users depend on the old API, this file does not apply, and whether to break them is a fork for the user.
+Where it stops: an API the migration left without callers counts as orphaned by the change, so implement's "Delete what your change orphaned" removes it; other dead code goes too when it sits in a file the slice changes, and is flagged when it sits elsewhere. When outside users depend on the old API, this file does not apply, and whether to break them is a fork for the user.
