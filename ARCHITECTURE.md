@@ -25,6 +25,7 @@ A suite of agent skills for pi that carries work from a fuzzy plan to a landed b
 - A skill folder holds `SKILL.md` and at most one `references/` folder with every file the skill links. No link leaves its skill's folder; a file two skills use is copied into both, byte for byte.
 - Every SKILL.md body runs in one order: the law, `Fast path:`, numbered steps, `Rules:`, and the deep line last.
 - Skill text names no coding agent other than pi, and no upstream project or skill.
-- `npm test` checks these three invariants and every description.
+- Each of the 24 engineering principles lives in the `references/` of the skill whose step or rule it deepens (debug, drill, implement, research, verify, write-skill), linked from that line.
+- `npm test` checks these four invariants and every description.
 - Skill prose is decisive present tense, with no em dashes.
 - A claim is made only on fresh command output, or, for a taste claim, on the verdict of a judge that did not make the work. Findings from `rubric`'s defect pass are not taste; they go back to `implement` or `debug`.

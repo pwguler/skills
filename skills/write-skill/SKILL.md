@@ -13,4 +13,4 @@ Writing for agents is test-first development applied to prose. The same loop shi
 Rules:
 - An eval script changes mechanics, not the loop: when one exists, it runs the baseline and the re-run.
 - When the document is a skill in this repo, follow the [conventions for skills in this repo](references/conventions.md).
-- Skip it when the work is a one-off, when standard practice is already well documented, or when a linter or hook could enforce the rule mechanically.
+- Skip it when the work is a one-off, when standard practice is already well documented, or when a linter or hook could enforce the rule mechanically; in that last case build the linter or hook instead, per [encode lessons in structure](references/encode-lessons-in-structure.md).
