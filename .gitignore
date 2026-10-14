@@ -1,6 +1,6 @@
 find-skills/
 *.txt
+docs/research/
 docs/
 __pycache__/
-ARCHITECTURE.md
-test/
+evals/

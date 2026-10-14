@@ -1,84 +1,72 @@
 # skills
 
-[![skills.sh](https://skills.sh/b/pwguler/skills)](https://skills.sh/pwguler/skills)
-
 Built against the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.org/abs/2603.22106))
-
-## Versions
-
-- **v2** (`main`, v2.0.0): `/pecut` routes each task to a playbook, and the playbook runs the skills in order. v2 is highly inspired by [pstack](https://github.com/cursor/plugins/tree/main/pstack), by Lauren Tan ([poteto](https://x.com/poteto)): pecut is modeled on its poteto-mode, and the playbooks and the 24 `principle-*` skills on its playbooks and principles. Where pstack is built for Cursor, v2 runs in every harness that loads skills, on whatever model the session runs.
-- **v1** (the `v1` branch, v1.29.2): you run each skill yourself, or a skill starts when its description matches the request. Install shows how to pin it.
 
 ## Install
 
-Two paths. `npx skills` installs into any agent the skills CLI supports, Claude Code and pi among them; the plugin is for Claude Code. In Claude Code, pick one: installing both loads every skill twice.
-
-**`npx skills`**:
+The suite runs in [pi](https://pi.dev).
 
 ```bash
-npx skills add pwguler/skills
+pi install git:github.com/pwguler/skills@pstack-lean
 ```
 
-**Plugin** (updates via version):
-
-```bash
-claude plugin marketplace add pwguler/skills
-claude plugin install pwguler-skills
-```
-
-Or in a Claude Code session:
-
-```bash
-/plugin marketplace add pwguler/skills
-/plugin install pwguler-skills
-```
-
-Version 1 stays on the `v1` branch: append `#v1` to the source, as in `npx skills add pwguler/skills#v1` or `claude plugin marketplace add pwguler/skills#v1`.
+Install it once. A second copy of the same skill names, for example in `~/.agents/skills/` or `~/.pi/agent/skills/`, collides with it, and pi keeps the first one it finds.
 
 ## Update
 
-**`npx skills`**:
-
 ```bash
-npx skills update
+pi update git:github.com/pwguler/skills@pstack-lean
 ```
 
-You may need to reinstall to get all skills.
-
-**Plugin**:
-
-```bash
-claude plugin update pwguler-skills
-```
-
-Restart Claude Code after updating.
+Run `/reload` in an open session to load the new version.
 
 ## The loop
 
-Start a session with `/pecut` (`/pwguler-skills:pecut` from the plugin, `/skill:pecut` in pi), with a task or without one. From then on every task goes through pecut: it routes the task to the playbook for its type, and the playbook runs the skills in order. Each skill checks its own work and stops, and the playbook starts the next one. You still answer drill's questions and every decision only you can make. `land` opens a pull request; it merges, locally or through that pull request, only when you ask.
+The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Before work with a spec lands, `rubric`'s defect pass sends the diff to fresh reviewers. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/skill:deep` is user-only and turns every fast path off for the session.
 
-The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was not obvious: `verify` stops, and pecut sends the task back through drill's interview.
-
-A feature through pecut. The yellow step is the command you type.
+The 24 engineering principles the work rests on (fix root causes, test behavior not implementation, make operations idempotent, explain the number, and the rest) live in the skill whose step or rule they deepen, and open at that step, so a session pays for one only when it reaches it.
 
 ```mermaid
 flowchart TD
-    y1["/pecut #lt;task#gt;"] --> pb["picks the playbook"]
-    pb --> drill["drill<br/>asks its questions"]
-    drill --> impl["implement + verify<br/>test first, prove it"]
-    impl --> land["land<br/>opens a PR"]
-    classDef you fill:#fde68a,stroke:#b45309,color:#1f2937
-    class y1 you
+    idea([idea or codebase friction]) --> drill["1. drill: settle the plan"]
+    drill -- "goal, non-goals, acceptance criteria" --> spec[("docs/specs/*.md")]
+    drill -- "tree too big for one session" --> draft[("spec as draft: open decisions")]
+    draft -- "sessions resolve decisions one at a time" --> spec
+    spec --> impl
+
+    subgraph cycle["2. the maker / checker cycle"]
+        impl["implement (maker): failing test, minimum code, blast radius when a slice changes a contract"] --> verify["verify (checker): reject by default, quotes evidence, drives the runtime surface"]
+        verify -- "criterion fails" --> impl
+        impl -. "bug: root cause first" .-> debug
+        debug -.-> impl
+        rub["rubric (checker): defect pass by fresh reviewers, taste by a fresh judge"] -- "act-on finding or failed criterion" --> impl
+    end
+
+    verify -- "taste claim: no command can settle it" --> rub
+    impl -- "quality surface: UI, interface, name, doc" --> rub
+    rub -- "criteria met" --> land
+    verify -- "every criterion proven" --> land["3. land: fresh-eyes gate, defect pass when a spec exists"]
+    impl -- "3 failed attempts on one slice" --> you(["escalate to you"])
+    land -- "residue to ADRs, CONTEXT.md, ARCHITECTURE.md; spec kept unless dropped" --> done([branch closed])
 ```
 
-The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does). These are shared project artifacts: committed, human-readable, reviewed in PRs. Claude's auto-memory is per-user preference and never replaces them; neither writes to the other.
+The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does), `.pi/skills/verify-<app>/` (the recipe `verify` drives the app with, written and updated only when you ask). These are shared project artifacts: committed, human-readable, reviewed in PRs.
 
-## What pecut runs
+## When to use what
 
-| Part | What it is |
+| Moment | Skill |
 |---|---|
-| `/pecut` | The way in: it routes each task to the playbook for its type. |
-| Playbooks | The order of the work for one type of task, in `skills/pecut/references/`: bug fix, feature, refactoring, investigation, shipping, and the rest. |
-| Skills | One job each, from `drill` to `land`: each checks its own work and stops. |
-| Principles | The `principle-*` skills: one rule each, applied by a skill or a playbook at a named moment. |
-| `/recall` | Yours to run when pecut offers it, after a playbook that wrote code: it tests your understanding of that code. |
+| New plan, feature, or design, including the structure of a new codebase or area | `drill` |
+| Any topic you want settled by being questioned one fork at a time (`drill` runs it for plans) | `core-interview` |
+| A design fork needs a throwaway to react to | `prototype` |
+| Implementing a settled plan | `implement` |
+| Bug or unexpected behavior | `debug` |
+| About to claim done, fixed, or passing; write or update the app's verification recipe | `verify` |
+| A defect review of a change, or quality no command can settle | `rubric` |
+| Reading legwork, or why code is shaped the way it is | `research` |
+| Branch done, needs merging or a PR | `land` |
+| Parallel work you ask for: independent tasks, a race between attempts, or coverage across slices | `parallel` |
+| Authoring or editing anything an agent reads | `write-skill` |
+| A slice the agent wrote landed, test your understanding of it | `recall` |
+| A task finished, or you want to catch up since your last message | `tldr` |
+| Risky or ambiguous work, full rigor wanted | `deep` |

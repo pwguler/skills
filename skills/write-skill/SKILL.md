@@ -1,18 +1,17 @@
 ---
 name: write-skill
-description: "Create or edit a document an agent reads and prove it changes behavior. Run by a pecut playbook step that names it."
+description: Create or edit a document an agent reads and prove it changes behavior, and lock a lesson agents keep relearning into structure. Use when writing or editing a skill, AGENTS.md, CLAUDE.md, a system prompt, or other agent-facing prose, when verifying one before it ships, and when the user corrects the same agent mistake a second time.
 ---
 
 Writing for agents is test-first development applied to prose. The same loop ships every document an agent reads: skills, AGENTS.md, CLAUDE.md, system prompts.
 
-Fast path: an edit that changes no instruction (a typo, formatting, a stale command or path, a deleted line nothing follows anymore) needs no loop. A one-line addition that records a correction the user made in this session takes that correction as its baseline and re-runs once.
-
-1. Baseline first: run the scenario the document targets on an agent that has not seen the document, and record exactly how it fails or rationalizes. That agent is a subagent when the harness dispatches one, otherwise a fresh session the user opens with the scenario alone; with neither, stop and say so. No observed failure means the document has nothing to teach.
+1. Baseline first: run the scenario the document targets on an agent WITHOUT it, and record exactly how it fails or rationalizes. In pi the baseline is a `subagent` whose agent loads no skills and no context files (`inheritSkills`, `inheritProjectContext`, and `inheritGlobalContext` all false). No observed failure means the document has nothing to teach.
 2. Write the minimum prose that fixes those specific failures. Not a manual: the shortest process that changes the behavior.
-3. Re-run the scenario with the document loaded. It passes or the document is wrong. The re-run passes when the failure recorded in step 1 is absent from its transcript, decided by the test harness's check when one exists and by `rubric` otherwise; the author never marks the pass.
+3. Re-run the scenario with the document loaded. It passes or the document is wrong.
 4. Close loopholes: new rationalizations found on re-runs get plugged, then verified again.
 
 Rules:
-- A test harness changes mechanics, not the loop: when one exists, automate the baseline re-run.
+- An eval script changes mechanics, not the loop: when one exists, it runs the baseline and the re-run.
+- A correction the user makes a second time is a lesson that did not hold: open [encode lessons in structure](references/encode-lessons-in-structure.md) and fix its class at the highest rung that holds, a mechanism before any prose. Only what no mechanism can hold goes through steps 1 to 4.
 - When the document is a skill in this repo, follow the [conventions for skills in this repo](references/conventions.md).
-- The loop is skipped for a document no agent reads a second time. When a linter or hook could enforce the rule, the author builds that instead, per the `principle-encode-lessons-in-structure` skill.
+- Skip it when the work is a one-off, when standard practice is already well documented, or when a linter or hook could enforce the rule mechanically; in that last case build the linter or hook instead, per [encode lessons in structure](references/encode-lessons-in-structure.md).

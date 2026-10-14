@@ -1,6 +1,9 @@
 {
   "name": "pwguler-skills",
-  "version": "2.0.0",
+  "version": "1.24.0",
   "private": true,
-  "description": "Skills that leave no debt"
+  "description": "Skills for pi",
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\""
+  }
 }
