@@ -1,13 +1,13 @@
 # Spec Format
 
-One spec per work item, at `docs/specs/<slug>.md` in the target project. `drill` creates it when the decision tree resolves into implementation work; `land` closes it when the branch closes, keeping the file unless the user asks for it to go. A spec steers a branch; keeping it afterward is a choice, not the default state of the world.
+One spec per work item, at `docs/specs/<slug>.md` in the target project. `drill` creates it when the decision tree resolves into implementation work; `land` closes it when the branch closes, keeping the file unless the user asks for it to go. A spec steers a branch; once the branch closes, a kept spec is the record of why the code looks the way it does.
 
 A spec has two states, derived from its content, not a status field:
 
 - **Draft**: the plan is not settled yet. The spec carries the open decisions that must be resolved before implementation can start. `drill` writes it this way when the decision tree cannot resolve within one session (decisions await research, or the tree is too large for one context).
 - **Settled**: every open decision is resolved, the `## Open decisions` section is gone, and the spec carries goal, non-goals, acceptance criteria, and verification commands, and, for a phased migration, its phases. Only a settled spec steers `implement` and `verify`.
 
-The transition is mechanical: resolve the open decisions one session at a time, and when the last one closes, delete the `## Open decisions` section. The spec does not need rewriting; it matures in place.
+The transition: resolve the open decisions one session at a time. When the last one closes, turn the draft into the settled template in place: `Destination` becomes `Goal`, `Out of scope` becomes `Non-goals`, the acceptance criteria and their `Verification` lines are written from `Decisions so far` (with `Phases` for a phased migration), and the `## Open decisions` and `## Not yet specified` sections go. `Decisions so far` stays as the record of why.
 
 ## Draft template
 
@@ -54,7 +54,7 @@ Only for a rewrite or migration planned in phases: one line per phase, naming th
 - AC-3: ...
 
 ## Verification
-The exact commands that prove the criteria, one per line. A quality criterion has no command: its line names `rubric` instead. When the work has a runtime surface, one line names the artifact a reviewer re-runs to see it work: a script, a fixture, a recorded transcript, or the exact command sequence. A demo nobody can repeat is a claim.
+The exact commands that prove the criteria, one per line. A quality criterion has no command: its line names `rubric` instead. When the work has a runtime surface, one line names the artifact a reviewer re-runs to see it work: a script, a fixture, a recorded transcript, or the exact command sequence. A demo nobody can repeat is a claim. The demo shows the change working and proves no criterion on its own, so a script written on the branch may serve as one.
 ```
 
 ## Rules

@@ -4,9 +4,9 @@ Independent reviewers look for defects in a diff or in named files before any ta
 
 ## Reviewers
 
-Write the diff to a file first: `git diff <base>...HEAD` plus any uncommitted changes. A `reviewer` subagent runs no shell, and its diff tool does not read committed ranges.
+Write the diff to a file first: `git diff <base>...HEAD`, any uncommitted changes, and each untracked file the change adds, in full (`git ls-files --others --exclude-standard`), since `git diff` leaves those out. A `reviewer` subagent runs no shell, and its diff tool does not read committed ranges.
 
-Launch two `reviewer` subagents in parallel with `context: "fresh"`, each given the same brief: the diff file, the paragraph of intent, and the lenses below. One runs on the session's model (`$PI_PROVIDER/$PI_MODEL`), the other on a model from a different family, set through the `model` option of `subagent`; an unknown model id makes `subagent` list the valid ones. None sees another's findings.
+Launch two `reviewer` subagents with `context: "fresh"` in one `subagent` workflow call, as one `runs.all` batch, each given the same brief: the diff file, the paragraph of intent, and the lenses below. One runs on the session's model (`$PI_PROVIDER/$PI_MODEL`), the other on a model from a different family, each set by its item's `model`; `subagent({ action: "models" })` lists the valid ids. None sees another's findings.
 
 A finding carries a severity (`critical`, `warning`, or `nit`), a concrete path or call chain, and the failure a user or caller would observe. "I would have written it differently" is not a finding.
 

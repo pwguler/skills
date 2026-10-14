@@ -8,8 +8,8 @@ Parallel work runs only when the user asks for it. Otherwise the tasks run one a
 1. Choose the mode. **Partition** (the default): independent tasks that share no files or state, one `worker` subagent each. **Race**: several full attempts at one task, per [race.md](references/race.md). **Coverage**: many slices of one job with a done check, per [coverage.md](references/coverage.md). Related failures fit no mode: investigate them together first.
 2. For a race or a coverage run, state the cost first (how many subagents, how many full attempts) and launch only after the user agrees.
 3. For partition, brief each `worker` with scope, context, constraints, and expected return. Scope: one file, one subsystem, one problem; "fix all the tests" loses the agent. Context, pasted in: error messages, test names, relevant paths; agents inherit nothing from the session. Constraints: what must not change ("tests only", "do not touch production code"). Expected return: a summary of root cause and changes, so integration is reviewable.
-4. Launch every subagent in one parallel `subagent` call. Workers that edit files run with `worktree: true`, so no two share a checkout.
-5. Integrate when they return: read each summary, check the diffs for conflicts, then run the `verify` skill, whose full gate covers the suite, before claiming the batch done.
+4. Launch every subagent in one `subagent` workflow call, as one `runs.all` batch. Workers that edit files run with `worktree: true`, so no two share a checkout; pi-subagents launches those only from a clean checkout.
+5. Integrate when they return. A `worktree: true` worker's changes come back as a patch, not in this checkout: the handoff manifest in its `artifactPaths` names the `patchPath`. Read each summary, apply each patch with `git apply --3way`, resolve any conflict by intent, then run the `verify` skill, whose full gate covers the suite, before claiming the batch done.
 
 Rules:
 

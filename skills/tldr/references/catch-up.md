@@ -1,6 +1,6 @@
 # Catch-up
 
-The user asks what happened since their last message in this session. Assume they remember that message and nothing after it. Their last message is the last thing they typed; notifications and subagent reports do not count.
+The user asks what happened since their last message in this session. Assume they remember that message and nothing after it. Their last message is the last thing they typed before asking; notifications and subagent reports do not count.
 
 The reply only reads. Do not edit code, start apps, or post anything to produce status.
 

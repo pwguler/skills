@@ -74,7 +74,7 @@ flowchart TD
     land -- "residue to ADRs, CONTEXT.md, ARCHITECTURE.md; spec kept unless dropped" --> done([branch closed])
 ```
 
-The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does), `.pi/skills/verify-<app>/` (the recipe `verify` drives the app with; `verify` offers one when the app has none, and writes or updates it only when you ask). These are shared project artifacts: committed, human-readable, reviewed in PRs.
+The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term; a repo with several contexts keeps one per context, listed in `CONTEXT-MAP.md`), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it, and `implement` builds UI from it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does), `docs/research/` (the findings a draft spec's AFK decisions are resolved from), `.pi/skills/verify-<app>/` (the recipe `verify` drives the app with; `verify` offers one when the app has none, and writes or updates it only when you ask). These are shared project artifacts: committed, human-readable, reviewed in PRs.
 
 ## When to use what
 

@@ -13,4 +13,4 @@ The question is what the slice breaks outside its own diff, beyond the call site
    5. reproduced in the running app.
 5. Give every risk left after step 3 a likelihood, a cost, and a `file:line`. When a search comes back empty, report it as empty; no caller is invented.
 
-The slice commits once the safety fact reaches grade 4. Below grade 4, the commit message names the fact as unproven. The proof script becomes a regression test in this slice or is deleted before the commit. A fix the check reveals is a new slice, never an edit made inside this check.
+The slice commits when the safety fact reaches grade 4. When it cannot get there, the slice still commits, and its commit message names the fact as unproven and the grade it reached. The proof script becomes a regression test in this slice or is deleted before the commit. A fix the check reveals is a new slice, never an edit made inside this check.
