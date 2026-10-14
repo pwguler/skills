@@ -2,8 +2,5 @@
   "name": "pwguler-skills",
   "version": "1.24.0",
   "private": true,
-  "description": "Skills for pi",
-  "scripts": {
-    "test": "node --test \"test/*.test.mjs\""
-  }
+  "description": "Skills for pi"
 }
