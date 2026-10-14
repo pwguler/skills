@@ -7,7 +7,7 @@ No fix before root cause. Symptoms are where the search starts, never where it e
 
 Fast path: when the first cause is directly visible in the error output (the stack line points at it), skip the hypothesis loop but never the reproduction or the regression test. If the visible fix does not make the reproduction pass on the first try, the cause was not visible: run the full discipline.
 
-1. Open a `todo` list with these steps as its items before you reproduce anything; when a `todo` list is already open, add them to it. Each step is its own item. A step you skip, as the fast path skips the hypothesis loop, is marked `completed` with `skip: <reason>` added to its subject; returning to an earlier step reopens its item and the ones after it.
+1. Open a `todo` list with these steps as its items before you reproduce anything; when a `todo` list is already open, add them to it. Each step is its own item. A step you skip, as the fast path skips the hypothesis loop, is marked `completed` with `skip: <reason>` added to its subject. A completed item cannot reopen, so returning to an earlier step adds it and the steps after it again as new items.
 2. Reproduce first. Build the smallest deterministic reproduction. If it cannot be reproduced, gather evidence (logs, inputs, versions) until it can; do not guess.
 3. Read the actual error and trace it back to the first cause in the chain, not the nearest symptom.
 4. Form one hypothesis. State it with the observation that would confirm or refute it, then get that observation before touching any fix: a log line, an assertion, a probe. Add instrumentation when the evidence is not already there; keep it minimal and reversible, and remove it once it has answered.

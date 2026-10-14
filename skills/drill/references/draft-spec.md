@@ -17,6 +17,6 @@ When a session opens a spec that still has an `## Open decisions` section:
 2. Pick the next open decision; if the user named one, use that. Claim it before working it.
 3. Resolve it: AFK decisions read the findings left at `docs/research/<slug>-<decision-slug>.md`, or run the `research` skill now when no session has produced them yet; HITL decisions are worked with the user through the `core-interview` skill.
 4. Record the resolution in `Decisions so far`, and remove the decision from `Open decisions`. Graduate anything now sharp from `Not yet specified` into fresh open decisions. A decision revealed to sit beyond the destination is ruled out of scope instead of resolved.
-5. When the last open decision closes, settle the spec in place per [spec-format.md](spec-format.md): write its goal, non-goals, acceptance criteria, and verification from the draft, and drop the draft-only sections. The loop takes over from there.
+5. When the last open decision closes, settle the spec in place per [spec-format.md](spec-format.md), which first clears `Not yet specified`. The loop takes over from there.
 
 One decision per session, except AFK decisions already dispatched. If no fog surfaces at all (the way is clear and the journey fits one session), there is no draft; settle normally.

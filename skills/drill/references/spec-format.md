@@ -7,7 +7,7 @@ A spec has two states, derived from its content, not a status field:
 - **Draft**: the plan is not settled yet. The spec carries the open decisions that must be resolved before implementation can start. `drill` writes it this way when the decision tree cannot resolve within one session (decisions await research, or the tree is too large for one context).
 - **Settled**: every open decision is resolved, the `## Open decisions` section is gone, and the spec carries goal, non-goals, acceptance criteria, and verification commands, and, for a phased migration, its phases. Only a settled spec steers `implement` and `verify`.
 
-The transition: resolve the open decisions one session at a time. When the last one closes, turn the draft into the settled template in place: `Destination` becomes `Goal`, `Out of scope` becomes `Non-goals`, the acceptance criteria and their `Verification` lines are written from `Decisions so far` (with `Phases` for a phased migration), and the `## Open decisions` and `## Not yet specified` sections go. `Decisions so far` stays as the record of why.
+The transition: resolve the open decisions one session at a time. When the last one closes, fog still in `Not yet specified` is graduated into open decisions or ruled out of scope; only with both sections empty does the draft turn into the settled template in place: `Destination` becomes `Goal`, `Out of scope` becomes `Non-goals`, the acceptance criteria and their `Verification` lines are written from `Decisions so far` (with `Phases` for a phased migration), and the two empty sections go. `Decisions so far` stays below the template as the record of why.
 
 ## Draft template
 
