@@ -7,7 +7,7 @@ Built against the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.or
 The suite runs in [pi](https://pi.dev).
 
 ```bash
-pi install git:github.com/pwguler/skills@pstack-lean
+pi install git:github.com/pwguler/skills
 ```
 
 Install it once. A second copy of the same skill names, for example in `~/.agents/skills/` or `~/.pi/agent/skills/`, collides with it, and pi keeps the first one it finds.
@@ -15,7 +15,7 @@ Install it once. A second copy of the same skill names, for example in `~/.agent
 ## Update
 
 ```bash
-pi update git:github.com/pwguler/skills@pstack-lean
+pi update git:github.com/pwguler/skills
 ```
 
 Run `/reload` in an open session to load the new version.
