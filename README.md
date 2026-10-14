@@ -85,5 +85,5 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | Branch done, needs merging or a PR | `land` |
 | Parallel work you ask for: independent tasks, a race between attempts, or coverage across slices | `parallel` |
 | Authoring or editing anything an agent reads | `write-skill` |
-| A slice the agent wrote landed, test your understanding of it | `recall` |
+| Starting or resuming work: where it stands, from past sessions | `recall` |
 | A task finished, or you want to catch up since your last message | `tldr` |

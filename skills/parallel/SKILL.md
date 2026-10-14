@@ -13,6 +13,5 @@ Parallel work runs only when the user asks for it. Otherwise the tasks run one a
 
 Rules:
 
-- A batch is the biggest slice you did not write; `/skill:recall` after integration pays the understanding back.
 - Partition does not fit when failures are related (fixing one may fix the rest), when the problem is still exploratory, or when agents would touch the same files.
 - A race never averages divergent designs: attempts that disagree in shape mean the brief was too loose, so rewrite it. A coverage run never starts without a done check.
