@@ -6,7 +6,7 @@ Independent reviewers look for defects in a diff or in named files before any ta
 
 Write the diff to a file first: `git diff <base>...HEAD` plus any uncommitted changes. A `reviewer` subagent runs no shell, and its diff tool does not read committed ranges.
 
-Launch two `reviewer` subagents in parallel with `context: "fresh"`, each given the same brief: the diff file, the paragraph of intent, and the lenses below. Deep mode launches three. None sees another's findings.
+Launch two `reviewer` subagents in parallel with `context: "fresh"`, each given the same brief: the diff file, the paragraph of intent, and the lenses below. One runs on the session's model (`$PI_PROVIDER/$PI_MODEL`), the other on a model from a different family, set through the `model` option of `subagent`; an unknown model id makes `subagent` list the valid ones. Deep mode launches three, across at least two families. None sees another's findings.
 
 A finding carries a severity (`critical`, `warning`, or `nit`), a concrete path or call chain, and the failure a user or caller would observe. "I would have written it differently" is not a finding.
 
@@ -31,4 +31,4 @@ The lead session sorts every finding, with the context the reviewers lack:
 - **Noted:** true, and not actionable in this change.
 - **Dismissed:** inflated nits, hypotheticals the call chain blocks, speculative abstractions, preference rewrites, findings that ignore a known constraint. Each one with its reason.
 
-Two reviewers reporting the same defect is the strongest signal. A correctness or security finding from one reviewer alone still needs a stated reason before it is dismissed.
+Two reviewers reporting the same defect is the strongest signal, and two from different model families stronger still. A correctness or security finding from one reviewer alone still needs a stated reason before it is dismissed.

@@ -13,7 +13,7 @@ Each attempt returns its artifact and a short note on what it considered and rej
 
 ## Pick
 
-Grade every attempt against the criteria, one criterion at a time. For a second opinion, a `reviewer` subagent with `context: "fresh"` grades them too: agreement confirms the pick, and disagreement sends you back to both notes. Pick the base the next maintainer can extend most easily; on a tie, the one with the smaller public surface.
+Grade every attempt against the criteria, one criterion at a time. For a second opinion, a `reviewer` subagent with `context: "fresh"`, on a model from a different family than the attempts', grades them too: agreement confirms the pick, and disagreement sends you back to both notes. Pick the base the next maintainer can extend most easily; on a tie, the one with the smaller public surface.
 
 ## Graft
 

@@ -18,7 +18,7 @@ A suite of agent skills for pi that carries work from a fuzzy plan to a landed b
 - The deep line: a skill under `deep`'s dial ends its SKILL.md with the line that says what full rigor changes there, and `deep` applies that line.
 - The spec at `docs/specs/<slug>.md` in the target project: `drill` writes it, `implement` builds from it, `verify` gates against it, and `land` closes it.
 - The pi tools the skills call by name, each from a pi package: `subagent` (pi-subagents, with its `reviewer`, `worker`, `researcher`, and `scout` agents), `todo` (rpiv-todo), `ask_user_question` (rpiv-ask-user-question), and `web_search` with `fetch_content` (pi-web-access).
-- A subagent runs only where a skill names one: `rubric`'s reviewers and judges, `write-skill`'s baseline, `drill`'s AFK research, a hand-off or parallel run the user asked for, and a payload too large for the session.
+- A subagent runs only where a skill names one: `rubric`'s reviewers and judges, `write-skill`'s baseline, `drill`'s AFK research, a hand-off or parallel run the user asked for, and a payload too large for the session. `rubric`'s taste judges and a race's grader run on a model from a different family than the one that made the work, and the defect pass pairs a reviewer on the session's model with one from another family; every other subagent runs on the session's model.
 - A project's app recipe at `.pi/skills/verify-<app>/`: `verify` drives it in the form the base branch has, and writes or updates it only when the user asks.
 
 ## Invariants
