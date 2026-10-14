@@ -1,26 +1,16 @@
-# Blast Radius
+# Blast radius
 
-Before a commit you do not trust, find what else the change could break beyond the greppable callers, and prove the one safety fact by running code.
+The question is what the slice breaks outside its own diff, beyond the call sites a symbol search already lists.
 
-## Certainty ladder
+1. State what the change now does, including behavior the diff implies but does not show.
+2. Name the safety fact: the one claim that makes the change safe when it holds, for example "every reader of this column accepts null". Most of the risk hangs on it.
+3. Search where the symbol index does not reach: serialized shapes (JSON, database columns, wire formats, files another process reads), configuration and feature flags, the dependency's own source at the version the lockfile pins, ordering at startup and teardown, and callers several hops away.
+4. Grade the evidence for the safety fact and say which grade it reached:
+   1. asserted;
+   2. pointed at a `file:line`;
+   3. traced through the failing case to the point where it cannot happen;
+   4. checked by a script or test that runs the actual code and fails loudly when the fact is false;
+   5. reproduced in the running app.
+5. Give every risk left after step 3 a likelihood, a cost, and a `file:line`. When a search comes back empty, report it as empty; no caller is invented.
 
-For the fact the change is safe because of, get as far down this list as is cheap, and say where it stopped:
-
-1. Said so.
-2. Pointed at a real `file:line` (or the library's own source).
-3. Walked the bad case and showed it cannot happen.
-4. Ran a script or test that calls the real code and fails loud if wrong.
-5. Reproduced in the running app.
-
-Aim for step 4 or better. A writeup alone is not proof.
-
-## Pass
-
-1. Read the change, including behavior the diff does not spell out.
-2. Name the one load-bearing safety fact. If it holds, most scary cases clear at once.
-3. Look where grep stops: pinned library source and version, timing and teardown, wire or DB shapes, feature flags, code a few hops downstream.
-4. For each remaining risk, give a real likelihood and cost. Cite `file:line`. A search that finds nothing is still an answer; never invent a caller.
-5. Prove the one fact by running code. Paste the output.
-6. Hand back: what it does, the one safety fact and proof level, confirmed risks, cleared cases, and the cheapest pre-merge check.
-
-Edit nothing under blast-radius except a disposable proof script you remove or keep as a test. Product fixes go back through the normal slice loop.
+The slice commits once the safety fact reaches grade 4. Below grade 4, the commit message names the fact as unproven. The proof script becomes a regression test in this slice or is deleted before the commit. A fix the check reveals is a new slice, never an edit made inside this check.

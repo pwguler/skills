@@ -3,7 +3,7 @@ name: debug
 description: Find the root cause of a bug before fixing it. Use whenever the user says "fix", "broken", "not working", "error", "failing", or "bug", and whenever a bug, test failure, or unexpected behavior appears, before proposing any fix.
 ---
 
-No fix before root cause. Symptoms are where the search starts, never where it ends. Follow [fix-root-causes.md](references/fix-root-causes.md).
+No fix before root cause. Symptoms are where the search starts, never where it ends.
 
 Fast path: when the first cause is directly visible in the error output (the stack line points at it), skip the hypothesis loop but never the reproduction or the regression test. If the visible fix does not make the reproduction pass on the first try, the cause was not visible: run the full discipline.
 

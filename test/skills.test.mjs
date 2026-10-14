@@ -32,9 +32,20 @@ const descriptions = JSON.parse(
 // Skills under the deep dial, whose body ends with the deep line.
 const deepDial = ['drill', 'core-interview', 'implement', 'debug', 'verify', 'rubric', 'land'];
 
-const frontmatterKeys = ['name', 'description', 'argument-hint', 'disable-model-invocation'];
+const frontmatterKeys = ['name', 'description', 'disable-model-invocation'];
 const deepPrefix = 'Deep mode (the `deep` skill is active):';
 const lawForbidden = /^(- |\d+\. |Fast path:|Rules:|Deep mode|#)/;
+
+// Skill text is written for pi alone and in this repo's own words: no other coding agent, no upstream source.
+const foreignNames = [
+  [/harness/i, 'a harness conditional; name the pi mechanism'],
+  [/claude code|\.claude\//i, 'Claude Code'],
+  [/\bCursor\b/, 'Cursor'],
+  [/\b(codex|grok|gemini|opencode)\b/i, 'another coding agent'],
+  [/(^|[\s`(])\/design\b/, 'the /design canvas'],
+  [/npx skills/i, 'npx skills'],
+  [/pstack|poteto|\b(ketchup|arena|swarm)\b|\binterrogat/i, 'an upstream name'],
+];
 
 // Frontmatter lines and body lines of a SKILL.md, or null when it has no frontmatter.
 function splitSkillFile(text) {
@@ -257,6 +268,19 @@ for (const skill of skills) {
     const value = (key) => fields.find((f) => f.key === key).value;
     assert.equal(value('name'), skill, 'name differs from the folder name');
     assert.equal(value('description'), descriptions[skill], 'description differs from the base');
+  });
+
+  test(`${skill}: AC-7 text names no coding agent but pi and no upstream source`, () => {
+    const found = [];
+    for (const file of markdownFiles(skill)) {
+      readFileSync(file, 'utf8').split('\n').forEach((line, n) => {
+        for (const [pattern, what] of foreignNames) {
+          const match = line.match(pattern);
+          if (match) found.push(`${relative(skillDir, file)}:${n + 1}: "${match[0].trim()}" is ${what}`);
+        }
+      });
+    }
+    assert.deepEqual(found, [], found.join('\n'));
   });
 }
 

@@ -1,19 +1,18 @@
 # Coverage
 
-Opt-in only. Costly: N workers across slices or a race mix. Use for broad parallel coverage the user asked for. Never start because spare capacity exists.
+Many slices of one job at once: a test sweep across packages, a check across every route, a migration across modules. Coverage costs one subagent per slice.
 
-## Frame
+## Before launch
 
-1. State the done predicate and the artifact or report to return.
-2. Choose the shape: partition into slices, race identical briefs, or mix. For a race or mix, declare the selection rule up front: `first pass`, `rank all`, or `best-of`.
-3. Set N from the user or from the shape. Say the cost before spawning, and stop if the user declines.
-4. Prefer different model families when the harness allows and judgment diversity matters; otherwise the parent model in fresh contexts.
-5. Each worker gets its own writable outputs. Measurement briefs name exact SHAs and the method (sample count, what one sample is, order).
+1. State the done check (what makes a slice finished) and the report to return.
+2. Split the job into slices that share no files and no state.
+3. State the count and the cost.
+4. Every worker writes only its own outputs; a worker that edits files runs with `worktree: true`. A brief that measures something names the exact commits and the method: the sample count, what one sample is, and the run order.
 
-## Fan out
+## Launch
 
-Every brief stands alone: goal, scope, slice or race arm, how to verify, what to report. Status is `PASS`, `ISSUES`, or `BLOCKED` with evidence. A worker that can prove defects lists every proven issue, not only the first. Dropouts proceed with N-1 and are noted.
+Launch the slices as `worker` subagents in one parallel `subagent` call. Every brief stands alone: the goal, the slice, how to check it, and what to report. Each worker reports one status (`PASS`, `ISSUES`, or `BLOCKED`) with its evidence, and names every issue it can prove rather than stopping at the first. A worker that fails to return is noted, and the rest go on.
 
-## Aggregate and report
+## Report
 
-Drop a result that omits required SHAs or method; respawn that worker once, then record a gap. Gaps are not passes. Apply the declared race rule when used. Return one compact table, one-line evidenced issues, and explicit gaps or dropouts. Do not paste raw worker dumps.
+A result that leaves out the commits or the method its brief named is dropped; that slice is launched once more, then recorded as a gap. A gap is never a pass. Return one compact table, one line per proven issue, and the gaps and dropouts by name. Raw worker output stays out of the report.

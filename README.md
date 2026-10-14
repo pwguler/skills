@@ -1,54 +1,37 @@
 # skills
 
-[![skills.sh](https://skills.sh/b/pwguler/skills)](https://skills.sh/pwguler/skills)
-
 Built against the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.org/abs/2603.22106))
 
 ## Install
 
-Two paths, both for Claude Code. Pick one: installing both loads every skill twice.
-
-**`npx skills`**:
+The suite runs in [pi](https://pi.dev). Its skills call tools from these pi packages:
 
 ```bash
-npx skills add pwguler/skills
+pi install npm:pi-subagents                         # subagent, with the reviewer, worker, researcher, and scout agents
+pi install npm:@juicesharp/rpiv-todo                # todo
+pi install npm:@juicesharp/rpiv-ask-user-question   # ask_user_question
+pi install npm:pi-web-access                        # web_search and fetch_content
 ```
 
-**Plugin** (updates via version):
+Then the suite:
 
 ```bash
-claude plugin marketplace add pwguler/skills
-claude plugin install pwguler-skills
+pi install git:github.com/pwguler/skills@pstack-lean
 ```
 
-Or in a Claude Code session:
-
-```bash
-/plugin marketplace add pwguler/skills
-/plugin install pwguler-skills
-```
-
-Restart Claude Code after installing.
+Install it once. A second copy of the same skill names, for example in `~/.agents/skills/` or `~/.pi/agent/skills/`, collides with it, and pi keeps the first one it finds.
 
 ## Update
 
-**`npx skills`**:
-
 ```bash
-npx skills update
+pi update git:github.com/pwguler/skills@pstack-lean
 ```
 
-**Plugin**:
-
-```bash
-claude plugin update pwguler-skills
-```
-
-Restart Claude Code after updating.
+Run `/reload` in an open session to load the new version.
 
 ## The loop
 
-The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. `verify` drives a real runtime surface when one exists (app-check). `rubric` interrogates the diff for defects before judging taste. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/deep` is user-only and turns every fast path off for the session. After land, `/correct` is user-only and encodes repeated agent mistakes; `/recall` tests your grasp of code the agent wrote.
+The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Before work with a spec lands, `rubric`'s defect pass sends the diff to fresh reviewers. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill. `/skill:deep` is user-only and turns every fast path off for the session.
 
 ```mermaid
 flowchart TD
@@ -59,28 +42,22 @@ flowchart TD
     spec --> impl
 
     subgraph cycle["2. the maker / checker cycle"]
-        impl["implement (maker): optional sketch, failing test, minimum code, blast-radius before a shaky commit"] --> verify["verify (checker): reject by default, quotes evidence, app-check on a runtime surface"]
+        impl["implement (maker): failing test, minimum code, blast radius when a slice changes a contract"] --> verify["verify (checker): reject by default, quotes evidence, drives the runtime surface"]
         verify -- "criterion fails" --> impl
         impl -. "bug: root cause first" .-> debug
         debug -.-> impl
-        impl -. "independent / race / coverage" .-> par["parallel (opt-in modes)"]
-        par -.-> impl
-        rub["rubric: interrogate defects, then taste with a fresh judge"] -- "act-on or criterion fails" --> impl
+        rub["rubric (checker): defect pass by fresh reviewers, taste by a fresh judge"] -- "act-on finding or failed criterion" --> impl
     end
 
     verify -- "taste claim: no command can settle it" --> rub
     impl -- "quality surface: UI, interface, name, doc" --> rub
-    verify -- "ship claim with a diff" --> rub
     rub -- "criteria met" --> land
-    verify -- "every criterion proven" --> land["3. land: fresh-eyes gate"]
+    verify -- "every criterion proven" --> land["3. land: fresh-eyes gate, defect pass when a spec exists"]
     impl -- "3 failed attempts on one slice" --> you(["escalate to you"])
     land -- "residue to ADRs, CONTEXT.md, ARCHITECTURE.md; spec kept unless dropped" --> done([branch closed])
-    land -. "repeated agent mistakes" .-> correct["correct (user-only)"]
-    land -.-> recall["recall (user-only)"]
-    correct -. "skill edits" .-> writeskill["write-skill"]
 ```
 
-The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does). These are shared project artifacts: committed, human-readable, reviewed in PRs. Claude's auto-memory is per-user preference and never replaces them; neither writes to the other.
+The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does), `.pi/skills/verify-<app>/` (the recipe `verify` drives the app with, written and updated only when you ask). These are shared project artifacts: committed, human-readable, reviewed in PRs.
 
 ## When to use what
 
@@ -91,13 +68,12 @@ The documents the suite maintains, all created lazily with no setup step: `CONTE
 | A design fork needs a throwaway to react to | `prototype` |
 | Implementing a settled plan | `implement` |
 | Bug or unexpected behavior | `debug` |
-| About to claim done, fixed, or passing; drive the real app | `verify` |
-| Interrogate a diff for defects, or judge quality no command can settle | `rubric` |
-| Reading legwork, or why code is shaped this way | `research` |
+| About to claim done, fixed, or passing; write or update the app's verification recipe | `verify` |
+| A defect review of a change, or quality no command can settle | `rubric` |
+| Reading legwork, or why code is shaped the way it is | `research` |
 | Branch done, needs merging or a PR | `land` |
-| Independent failures or tasks; opt-in race or coverage | `parallel` |
+| Parallel work you ask for: independent tasks, a race between attempts, or coverage across slices | `parallel` |
 | Authoring or editing anything an agent reads | `write-skill` |
 | A slice the agent wrote landed, test your understanding of it | `recall` |
-| Encode repeated agent mistakes, or reflect a session | `correct` |
-| A task finished, or catch up since your last message | `tldr` |
+| A task finished, or you want to catch up since your last message | `tldr` |
 | Risky or ambiguous work, full rigor wanted | `deep` |

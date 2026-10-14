@@ -4,7 +4,7 @@
 
 The draft has these sections: `Destination`, `Decisions so far` (empty), `Open decisions`, `Not yet specified` (fog), `Out of scope`. Each open decision carries a Mode:
 
-- **AFK**: the `research` skill can resolve it alone. Fire one research pass per AFK decision, in parallel when the harness dispatches subagents, each writing its findings to `docs/research/<slug>-<decision-slug>.md`. Without dispatch, the draft names the AFK decisions and their output paths, and later sessions work them one at a time.
+- **AFK**: the `research` skill can resolve it alone. Launch one subagent per AFK decision in a single parallel `subagent` call (a `researcher` for an outside fact, a `scout` for the code's history), each briefed with the decision and the `research` skill's citation rule, and each writing its findings to `docs/research/<slug>-<decision-slug>.md`.
 - **HITL**: only a live exchange with the user resolves it. Never answer your own HITL question.
 
 Writing the draft is one session's work: name the destination, sketch the frontier, write the draft, fire the AFK subagents, stop. It resolves nothing itself.
