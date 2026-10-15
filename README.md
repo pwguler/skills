@@ -109,3 +109,26 @@ You can also run any skill on demand: type `/skill:<name>`.
 | A document that an agent reads, to write or edit, or the same agent mistake corrected a second time | `write-skill` |
 | The start or continuation of work: where it stands, from past sessions. It runs only on `/skill:recall` | `recall` |
 | A finished task, or a catch-up on this session since your last message | `tldr` |
+
+## Release
+
+Each release publishes to npm from CI when its version tag reaches GitHub. The message of the annotated tag holds the release notes.
+
+```sh
+VERSION=1.33.0
+npm version "$VERSION" --no-git-tag-version
+git add package.json
+git commit -m "release $VERSION"
+NOTES="/tmp/skills-v$VERSION.md"   # write the release notes in this file
+git tag -a --cleanup=verbatim -F "$NOTES" "v$VERSION"
+git push origin main "v$VERSION"
+```
+
+`.github/workflows/publish.yml` first checks the package. pi must load every skill, and the package holds only the skills, README.md, and LICENSE. Then the workflow refuses the release in four cases:
+
+- the tag does not match the version in `package.json`;
+- the tagged commit is not on `main`;
+- the version is already on npm;
+- the tag is not annotated, or its message is empty.
+
+Then it publishes to npm with a provenance attestation, and creates the GitHub release from the tag message. The publish step needs the `NPM_TOKEN` secret of this repository. If npm has the version but the GitHub release failed, run only the failed job again. A full run stops at the npm check, because the version is already there.
