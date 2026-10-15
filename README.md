@@ -4,7 +4,7 @@
 
 This suite works against the three debts of the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.org/abs/2603.22106)). These debts grow when code arrives faster than people can follow it:
 
-- **Technical debt** is in the code. `implement` builds test-first in thin slices, and `debug` fixes the root cause. `verify` checks the result against evidence, and `rubric` sends it to fresh reviewers.
+- **Technical debt** is in the code. `implement` builds test-first in thin slices, and `debug` fixes the root cause. `perf` measures before it changes code for speed. `verify` checks the result against evidence, and `rubric` sends it to fresh reviewers.
 - **Cognitive debt** is in the people, when their shared understanding of the system fades. `tldr` reports results, not transcripts. `recall` rebuilds where work stands from past sessions. `research` finds out why code has its shape. `CONTEXT.md` and `ARCHITECTURE.md` keep the shared knowledge of the system current.
 - **Intent debt** is in what nobody wrote down: reasons, goals, and constraints. `drill` writes the goal and the constraints into a spec, and decisions that are hard to undo into ADRs. `land` keeps the spec as the record of why.
 
@@ -101,6 +101,7 @@ You can also run any skill on demand: type `/skill:<name>`.
 | A design decision that needs a throwaway to react to | `prototype` |
 | A settled plan to implement | `implement` |
 | A bug or unexpected behavior | `debug` |
+| Slow code, high latency or memory use, a hang, or a profile or trace file to read | `perf` |
 | Before you say done, fixed, or passing, or to write or update the verification recipe of the app | `verify` |
 | A defect review of a change, or a quality that no command can settle | `rubric` |
 | A fact from the owner of a library, service, or standard, why code has its shape, or reading to give to a subagent | `research` |
