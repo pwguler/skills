@@ -1,6 +1,6 @@
 ---
 name: tldr
-description: Report a finished task as its result, not its transcript. Or tell the user what happened since their last message. Use when a task that made an artifact or a run just finished, and you are about to report it. Examples are a build, a workflow, a background agent, an implement or verify run, or a release. Use it also when the user types /skill:tldr, or asks to catch up on this session.
+description: Report a finished task as its result, not its transcript. Or tell the user what happened since their last message. Read this skill before your final report on a task that changed files, made an artifact, or ran a check. Examples are a build, a workflow, a background agent, an implement or verify run, or a release. Use it also when the user asks what happened since their last message. Use it when the user asks to catch up on this session.
 ---
 
 A task just finished, or the user asks what happened. Give the result, not the transcript.
@@ -18,6 +18,6 @@ Rules:
 - Add one small visual when the result is a new structure that prose would only list. Examples are a tree of files or calls, a flow between parts, or a layout. One new or moved file is a path in prose, not a tree. Build the visual as [visual.md](references/visual.md) says. Add one visual at most. A second visual is transcript again.
 - Leave out the story of the tool calls. Keep the outcomes. If the task made nothing, say so. Never invent progress.
 - Unless asked, never explain what you were about to do, how you reasoned, or why the approach is sound.
-- The user sees the diff and the output. Do not repeat them.
+- The user sees the diff and the output. Do not repeat them, except the evidence that `verify` requires: what ran, and what it showed.
 - This register applies to this reply only. It never becomes the standard register of the session. The reasoning that it leaves out still goes into ADRs and specs on the land path.
 - Write no introduction and no closing words. The summary is the whole reply. Stop.

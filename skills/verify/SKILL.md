@@ -1,6 +1,6 @@
 ---
 name: verify
-description: Prove a claim of done, fixed, or passing before you make it. Run the commands and read their output. Use it before you say that work is complete, fixed, or tested, and before a commit or a PR. Use it also when the user asks to write or update the verification recipe of the app.
+description: Prove a claim of done, fixed, or passing before you make it. Run the commands and read their output. Read this skill before you say that work is done, fixed, or tested. Read it also after a small change. Use it before a commit or a PR. Use it also when the user asks to write or update the verification recipe of the app.
 ---
 
 Evidence comes before a claim. Do not make a claim without a fresh command run behind it.

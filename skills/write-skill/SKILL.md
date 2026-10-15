@@ -1,6 +1,6 @@
 ---
 name: write-skill
-description: Create or edit a document that an agent reads, and prove that it changes behavior. Put a lesson that agents keep learning again into structure. Use when you write or edit a skill, AGENTS.md, CLAUDE.md, a system prompt, or other text for agents. Use it to verify such a document before it ships. Use it also when the user corrects the same agent mistake a second time.
+description: Create or edit a document that an agent reads, and prove that it changes behavior. Put a lesson that agents keep learning again into structure. Read this skill before you write or edit a skill, AGENTS.md, CLAUDE.md, a system prompt, or other text for agents. Use it to verify such a document before it ships. Use it also when the user corrects the same agent mistake a second time.
 ---
 
 Writing for agents is test-first development, applied to text. The same loop ships every document that an agent reads: skills, AGENTS.md, CLAUDE.md, and system prompts.

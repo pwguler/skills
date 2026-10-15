@@ -1,6 +1,6 @@
 ---
 name: research
-description: Find out what is true about a library, service, or standard from the owner of the facts. Or find out from its history why code has its shape. Write the answer down with a citation for each claim. Use when the user asks to look something up, or to check how an API or tool really behaves. Use it when the user asks why a design exists. Use it also to give reading to a subagent while other work continues.
+description: Find out what is true about a library, service, or standard from the owner of the facts. Or find out from its history why code has its shape. Write the answer down with a citation for each claim. Read this skill when the user asks why code, a constant, or a setting has its current form. Use it when the user asks to look something up, or to check how an API or tool really behaves. Use it also to give reading to a subagent while other work continues.
 ---
 
 Do research in this session. A subagent reads instead in three cases. The user asks to give the reading to a subagent. A draft spec launches its AFK decisions. Or the payload is too large for the session: over about 2,000 lines, or images. [Guard the context window](references/guard-the-context-window.md) tells how. Use a `researcher` for an outside fact, and a `scout` for the history of the code. The subagent returns the note, not the payload.

@@ -1,6 +1,6 @@
 ---
 name: prototype
-description: Build a throwaway UI prototype for the user to react to before any real code. Use when a design decision depends on look, feel, or flow that text cannot settle. Use it also when the user asks for a prototype or a mockup.
+description: Build a throwaway UI prototype for the user to react to before any real code. Read this skill when the user asks for a mockup or a prototype of a UI. Use it when a design decision depends on look, feel, or flow that text cannot settle.
 ---
 
 The user wants a throwaway prototype to react to before any real code. It settles a question of look, feel, or flow that text cannot settle.

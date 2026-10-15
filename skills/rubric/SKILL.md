@@ -1,6 +1,6 @@
 ---
 name: rubric
-description: Find defects in a change with independent read-only reviewers. Judge quality that no command can settle, such as "this API design is good" or "this UI is not slop". Judge it against criteria written before anyone looks at the work. Use when the user asks for a defect review or a bug hunt on a change. Use it when the user asks how something looks, or whether it is any good. Use it when a UI, public interface, name, or doc needs a quality judgment before it ships. Use it when a spec criterion names a quality, not a behavior. Use it when verify meets a claim that its commands cannot settle.
+description: Find defects in a change with independent read-only reviewers. Judge quality that no command can settle, such as "this API design is good" or "this UI is not slop". Judge it against criteria written before anyone looks at the work. Use when the user asks for a defect review or a bug hunt on a change. Read this skill when the user asks whether a design, a UI, a name, or prose is good. Use it when a UI, public interface, name, or doc needs a quality judgment before it ships. Use it when a spec criterion names a quality, not a behavior. Use it when verify meets a claim that its commands cannot settle.
 ---
 
 Look for defects before you judge taste. Reviewers who did not write the change look for defects in it. Then verify a taste claim the way you verify a fact. Use criteria written first, and a judge who did not make the work.

@@ -1,9 +1,9 @@
 ---
 name: implement
-description: "Implement a settled plan test-first, one small slice at a time. Use it to start the implementation of a feature or fix after the plan is settled. Use it also when the user says \"implement this\" or \"build it\"."
+description: "Implement a settled plan test-first, one small slice at a time. Read this skill before you write code for a spec or a settled plan. Read it also when the plan is small. Use it when the user says \"implement this\" or \"build it\", or names a spec to implement."
 ---
 
-Do the plan in thin slices, one slice at a time. A slice is the smallest change to observable behavior. When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the plan. Work through them one criterion at a time. The diff must not change anything that a non-goal of the spec excludes. A spec that still has an `## Open decisions` section is a draft. Send it back to `drill`.
+Do the plan in thin slices, one slice at a time. A slice is the smallest change to observable behavior. When a spec exists at `docs/specs/<slug>.md`, its acceptance criteria are the plan. Work through them one criterion at a time. The diff must not change anything that a non-goal of the spec excludes. A spec that still has an `## Open decisions` section is a draft. Send it back to `drill`. A request with no spec and no settled plan goes to `drill` first. Its fast path gives the one-sentence plan.
 
 1. Before the first test, create a `todo` list. Add one item for each acceptance criterion when a spec exists. When no spec exists, add one item for each slice. Then add `verify`, and add `rubric` when the work is a UI, a public interface, a name, or a doc. Do not create a list of fewer than three items. Mark each item done when its work is committed. When you skip an item, mark it `completed` and add `skip: <reason>` to its subject. Never skip a criterion. Leave it open.
 2. Pick the smallest unfinished slice, and do steps 3 to 7 on it in this session. When the user asked to give slices to workers, launch a `worker` subagent with `skill: "implement"`. It does steps 3 to 5 on one slice. Read its diff, then do steps 6 and 7 here.
@@ -11,7 +11,7 @@ Do the plan in thin slices, one slice at a time. A slice is the smallest change 
 4. Write the minimum code that makes the test pass.
 5. Refactor only while the tests pass. Use the style of the code around it.
 6. Do the check in [blast-radius.md](references/blast-radius.md) before the gate when the diff deletes or renames a symbol that other code uses. Do it also when the diff changes a contract that another module, stored data, or an outside caller depends on.
-7. Run the `verify` gate on the slice, and commit on its evidence record.
+7. Read the `verify` skill, and run its gate on the slice. Commit on its evidence record.
 8. Go back to step 2 until no slice is left.
 
 Rules:
@@ -39,4 +39,4 @@ Rules:
 - Send a bug or an unexpected failure in a slice to the `debug` skill. Do not hide symptoms with a patch.
 - Never guess a decision for the user that you find in a slice. Stop, name it, and let the user answer. A decision is for the user when it changes an acceptance criterion, a non-goal, or a public interface. It is also for the user when it needs the authority of the user or cannot be undone. Settle every other decision that a run can answer by running it, as [never block on the human](references/never-block-on-the-human.md) says.
 - Stop the loop after three failed attempts on the same slice. Report to the user the criterion, what you tried, and the last error.
-- When the last slice is committed, run `verify` before you say that the work is done. Run `rubric` too when the work is a UI, a public interface, a name, or a doc. The maker never judges its own taste.
+- When the last slice is committed, read the `verify` skill and follow it. Do this before you say that the work is done. For a UI, a public interface, a name, or a doc, also read the `rubric` skill and follow it. The maker never judges its own taste.
