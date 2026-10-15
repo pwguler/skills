@@ -1,15 +1,15 @@
 # Make operations idempotent
 
-Every operation that changes state converges on the correct end state however many times it runs and wherever a previous run stopped. Commands, lifecycle steps, and processing loops live among crashes, restarts, and retries.
+Every operation that changes state reaches the correct end state. This is true however many times it runs, and wherever an earlier run stopped. Commands, lifecycle steps, and processing loops must survive crashes, restarts, and retries.
 
-When: designing a command, a startup or shutdown step, a scheduler, or a loop that writes state, and when listing the ways a slice can fail.
+When: you design a command, a startup or shutdown step, a scheduler, or a loop that writes state. It applies also when you list the ways that a slice can fail.
 
-- Ask two questions of each state-changing operation: what happens when it runs twice in a row, and what happens when the run before it died partway through, at each point it could have died?
-- Startup converges: it scans for state already present, clears stale leftovers, and adopts sessions that are still alive.
-- Cleanup compares by content, never by which thing was created first.
-- A lock heals itself: a lock whose holder no longer runs is detected as stale and reclaimed.
-- Scheduling is repeatable: failed work respawns cleanly, and fresh input is regenerated after every cycle.
-- A retried write carries an idempotency key, as implement's network rule already requires; this file extends the same guarantee to local state, restarts, and partial runs.
-- The operation passes when rerunning it reaches the same end state. When the honest answer is "that depends on what the last run left behind", add a reconciliation step that inspects the leftovers and settles them first.
+- Ask two questions about each operation that changes state. What happens when it runs twice in a row? What happens when the run before it stopped partway, at each point where it could stop?
+- Startup reaches the correct state. It scans for state that is already present, removes stale leftovers, and takes over sessions that are still alive.
+- Cleanup compares by content, never by which item was created first.
+- A lock repairs itself. When the holder of a lock no longer runs, the system finds the lock stale and takes it back.
+- Scheduling can repeat. Failed work starts again cleanly, and the system makes new input after every cycle.
+- A retried write has an idempotency key, as the implement rule on network calls requires. This file applies the same guarantee to local state, restarts, and partial runs.
+- The operation passes when a second run reaches the same end state. Sometimes the honest answer is "that depends on what the last run left". Then add a reconciliation step that examines the leftovers and settles them first.
 
-Where it stops: a rerun and a crash midway are failure modes for the slice's list; test them when losing or doubling data is the cost. Two actors writing the same state at once is a separate question, answered by [separate-before-serializing-shared-state](separate-before-serializing-shared-state.md).
+Where it stops: a second run and a crash in the middle are failure modes for the slice's list. Test them when the cost is lost or doubled data. Two actors that write the same state at the same time are a different question. [Separate-before-serializing-shared-state](separate-before-serializing-shared-state.md) answers it.

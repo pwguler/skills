@@ -1,14 +1,14 @@
 # Exhaust the design space
 
-A decision with no precedent in the codebase settles only after two or three concrete alternatives are built or sketched and compared side by side. Exploring three options costs less than building the wrong one.
+A decision with no example in the codebase settles only after a comparison. Build or sketch two or three concrete alternatives, and compare them side by side. Three options cost less to explore than the wrong option costs to build.
 
-When: a novel UI interaction, an architectural choice with more than one viable shape, or a product decision whose outcome turns on feel rather than logic, with nothing in the codebase to copy.
+When: there is nothing in the codebase to copy, and the decision is one of these. It is a new UI interaction, or an architectural choice with more than one possible shape. Or it is a product decision that depends on feel more than on logic.
 
-- Make each alternative concrete: a sketch, a data shape, a call site, or a prototype, never only a name.
-- Each alternative takes its own shape. The first idea with other parameters is the same alternative; this is designing it twice, and the second design starts from a blank page.
-- Compare them against the same trade-offs, side by side, and lead with the pick, as step 5 asks.
-- A fork that turns on feel goes to the prototype skill, per step 5.
-- Commit to nothing until the comparison is done.
-- When a new requirement lands in an existing design, one alternative is the blank-page shape from [redesign from first principles](redesign-from-first-principles.md). When the fork is about what the consumer gets, weigh it by [experience first](experience-first.md).
+- Make each alternative concrete: a sketch, a data shape, a call site, or a prototype. A name alone is not an alternative.
+- Each alternative has its own shape. The first idea with different parameters is the same alternative. Design the solution twice. Start the second design from the requirements, not from the first design.
+- Compare the alternatives on the same trade-offs, side by side. Put your choice first, as step 5 asks.
+- Send a decision that depends on feel to the prototype skill, as step 5 says.
+- Commit to nothing until the comparison is complete.
+- When a new requirement comes into an existing design, one alternative is the new design from [redesign from first principles](redesign-from-first-principles.md). When the decision is about what the consumer gets, weigh it with [experience first](experience-first.md).
 
-Where it stops: an established pattern, a bug fix or refactor with a clear target, or constraints that leave one viable approach need no built alternatives; step 5's comparison stays in prose and names the pattern or constraint that settles it, and an ask with no real fork takes drill's fast path. The prototype skill builds alternatives for look and flow; this file decides when they are needed.
+Where it stops: some decisions need no built alternatives. Examples are established patterns, bug fixes or refactors with a clear target, and constraints that leave only one approach. For these, the step 5 comparison stays in text. It names the pattern or the constraint that settles the decision. A request with no real decision takes the drill fast path. The prototype skill builds alternatives for look and flow. This file decides when alternatives are necessary.

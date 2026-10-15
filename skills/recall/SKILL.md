@@ -1,23 +1,23 @@
 ---
 name: recall
-description: Rebuild where recent work stands from past pi sessions, the live repository, and the project's history, and hand back a short brief. Run /skill:recall before starting or resuming work, with a topic or without one.
+description: Rebuild where recent work stands, from past pi sessions, the live repository, and the history of the project. Give back a short brief. Run /skill:recall before you start or continue work, with or without a topic.
 disable-model-invocation: true
 ---
 
-Before work starts or resumes, rebuild where it stands and hand back a short brief: what the work is, the state of each thread, the problems that keep coming back, and the next move. Read only what the topic needs, then stop.
+Before work starts or continues, rebuild where it stands, and give back a short brief. Read only what the topic needs, then stop.
 
-Fast path: when the user's message already holds the state (paths, the branch, the change in flight), use it and skip the session search.
+Fast path: when the message of the user already holds the state, use it and skip the session search. The state is paths, the branch, and the change in progress.
 
-1. Lock the scope and say it back in one line: the window (the last 7 days unless the user names another), the topic when one is named, and the project (this working directory; another project's sessions are read only when the user asks). "All" stays all, never quietly cut to the latest few.
-2. Find the sessions: the `.jsonl` files directly under `~/.pi/agent/sessions/--<path>--/`, where `<path>` is the working directory with its leading `/` dropped and each `/` turned into `-`. When the `sessionDir` setting or `PI_CODING_AGENT_SESSION_DIR` is set, every project's sessions sit directly in that folder instead: keep the ones whose first line, the `session` header, has this working directory as its `cwd`. Sort them by modification time (`ls -t`), and leave out the current session (`$PI_SESSION_FILE`) and the subdirectories, which hold subagent runs.
-3. Search before reading: grep each session for the topic, then read only the stretches that match. Each line is one JSON entry: `message` entries hold the user's and the agent's turns, and `compaction` and `branch_summary` entries hold summaries pi already wrote. When the matching stretches run past about 2,000 lines, split the sessions across `scout` subagents, each returning one block per session: the topic, the user's goal, decisions, open threads, corrections the user had to make, and artifacts (branches, PRs, commits, tickets), each tagged with its session id.
-4. When the topic names a feature, a file, an area, or a bug, also run the `research` skill's history path, asking what the current state is, what was tried and did not hold, and what users still report.
-5. Check every branch, PR, commit, and ticket the search surfaced against live state with `git` and `gh`. What an agent did (the commands it ran, the errors it hit) is read from the session's own entries, never inferred.
-6. Write the brief in four parts: **Where it stands**, at most five bullets; **Threads**, one line each, opening with exactly one tag (`[in flight <branch>]`, `[open PR #N]`, `[merged #N]`, `[reverted #N]`, `[done, uncommitted]`, or `[planned]`); **Problems**, at most five, the ones that recur, including complaints users still raise and any fix that landed and was later reverted; **Next move**, one concrete action.
+1. Fix the scope, and say it back in one line. The window is the last 7 days, unless the user names another. Add the topic when one is named. The project is this working directory. Read the sessions of another project only when the user asks. "All" stays all. Never reduce it to the latest few without saying so.
+2. Find the sessions: the `.jsonl` files directly under `~/.pi/agent/sessions/--<path>--/`. `<path>` is the working directory without its leading `/`, with each `/` changed to `-`. When the `sessionDir` setting or `PI_CODING_AGENT_SESSION_DIR` is set, the sessions of every project are directly in that folder. Then keep the sessions whose first line, the `session` header, has this working directory as its `cwd`. Sort the sessions by modification time (`ls -t`). Leave out the current session (`$PI_SESSION_FILE`), and the subdirectories, which hold subagent runs.
+3. Search before you read. Grep each session for the topic, then read only the lines that match. Each line is one JSON entry. `message` entries hold the turns of the user and the agent. `compaction` and `branch_summary` entries hold summaries that pi already wrote. When the matching lines total more than about 2,000, split the sessions across `scout` subagents. Each subagent returns one block for each session. The block gives the topic, the user's goal, decisions, open threads, the user's corrections, and artifacts. Artifacts are branches, PRs, commits, and tickets. Tag each block with its session id.
+4. When the topic names a feature, file, area, or bug, also run the history path of the `research` skill. Ask what the current state is, what was tried and did not work, and what users still report.
+5. Check every branch, PR, commit, and ticket that the search found against the live state, with `git` and `gh`. Read what an agent did from its session entries: the commands that it ran, and the errors that it hit. Never infer it.
+6. Write the brief in four sections. **Where it stands** has five bullets at most. **Threads** has one line for each thread. Each line starts with exactly one tag: `[in flight <branch>]`, `[open PR #N]`, `[merged #N]`, `[reverted #N]`, `[done, uncommitted]`, or `[planned]`. **Problems** has five items at most: the problems that recur. Include complaints that users still make, and any fix that landed and was reverted later. **Next move** is one concrete action.
 
 Rules:
 
-- Stay on the topic: a neighboring thread enters only when it blocks this one. When the brief outgrows a screen, cut detail before cutting threads.
-- Cite every finding: a session by its id, the history by its source (commit, PR, ticket).
-- Recall only reads: it changes no file, branch, or ticket.
-- Redact secrets found in a session: a token, key, password, or connection string becomes a placeholder.
+- Stay on the topic. A thread next to it goes in only when it blocks this one. When the brief is longer than one screen, cut detail before you cut threads.
+- Cite every finding: a session by its id, and the history by its source (commit, PR, or ticket).
+- Recall only reads. It changes no file, branch, or ticket.
+- Redact secrets found in a session. Replace a token, key, password, or connection string with a placeholder.

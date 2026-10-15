@@ -1,19 +1,19 @@
 # Model the domain
 
-The domain lives in one data structure that matches it, not in conditionals spread through the code. A fitting structure makes invalid states impossible to write and removes branches, and it costs least when chosen while the code is first written.
+Put the domain in one data structure that matches it, not in conditions spread through the code. A structure that fits makes invalid states impossible to write, and it removes branches. It costs least when you choose it while you write the code for the first time.
 
-When: a slice's logic holds state, branches on a shape, or lays down a type later slices share.
+When: the logic of a slice holds state, branches on a shape, or creates a type that later slices share.
 
 - A state machine replaces loose booleans, phase flags, and lifecycle checks.
-- A named model with typed fields replaces loose parameters and a shape assumed again at each use.
-- A map, registry, lookup table, or tagged variant replaces branching spread across files.
-- A reducer, or a model of commands and events, replaces state changed ad hoc.
-- A module owns one body of domain knowledge, not one pipeline step such as loading, checking, transforming, or saving. The order things run in is not who owns them.
-- A small module boundary gathers behavior, ownership, or invariants that repeat.
-- An index, a cache, a queue, a tree or graph, or a normalized collection goes where the way the data is read calls for it.
-- A fitting structure beyond these is fair too. When nothing listed fits, name the states the code must forbid and the ways its data is read, and pick the structure that encodes those and no more.
-- Never force an abstraction. Plain code wins when what is there reads clearly, stays local, and is not about to grow.
-- Distrust an abstraction that adds a layer without removing a branch, a duplicated rule, an invalid state, or a lifecycle risk; [minimize reader load](minimize-reader-load.md) weighs that layer.
-- The sign this was skipped: a feature that adds one more branch to an if/else chain, a second boolean that must stay in step with the first, or modules named for phases that each repeat the same domain rules.
+- A named model with typed fields replaces loose parameters, and a shape that each use assumes again.
+- A map, a registry, a lookup table, or a tagged variant replaces branches spread across files.
+- A reducer, or a model of commands and events, replaces state that changes without a plan.
+- A module owns one body of domain knowledge, not one pipeline step such as loading, checking, transforming, or saving. The order in which things run does not decide who owns them.
+- A small module boundary collects behavior, ownership, or invariants that repeat.
+- Use an index, cache, queue, tree or graph, or normalized collection when the way the code reads data needs it.
+- Another structure that fits is also correct. When no structure in this list fits, name the states that the code must forbid. Name also the ways it reads its data. Then pick the structure that encodes those and nothing more.
+- Never force an abstraction. Plain code wins when it reads clearly, stays local, and will not grow soon.
+- Do not trust an abstraction that adds a layer but removes no branch, duplicated rule, invalid state, or lifecycle risk. [Minimize reader load](minimize-reader-load.md) weighs that layer.
+- These signs show that this step was skipped. A feature adds one more branch to an if/else chain. A second boolean must change together with the first. Modules named for phases each repeat the same domain rules.
 
-Where it stops: the structure is chosen for the code the slice writes, with its types held to [type-system discipline](type-system-discipline.md) and the order of shape before logic set by [foundational thinking](foundational-thinking.md). Recasting existing code into it happens only in a slice the plan holds, per implement's "Keep every diff surgical", and a structure that changes the plan is a fork: stop and name it.
+Where it stops: choose the structure for the code that the slice writes. Its types follow [type-system discipline](type-system-discipline.md). [Foundational thinking](foundational-thinking.md) puts the shape before the logic. Change existing code into the structure only in a slice that the plan holds. The implement rule on diffs requires this. A structure that changes the plan is a decision for the user: stop and name it.

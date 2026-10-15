@@ -1,13 +1,13 @@
 # Explain the number
 
-A measured number is a claim about what was measured, and it is only as good as the account of what bounds it. A speedup made of cache hits, or a one-time load landing on whichever arm ran first, passes every check and means nothing.
+A measured number is a claim about what was measured. It is only as good as the explanation of what limits it. A speedup that comes from cache hits passes every check and means nothing. So does a one-time load that falls on the arm that ran first.
 
-When: a claim rests on a measured number: a benchmark, a speedup, a latency, a size, a pass rate, or a count of runs.
+When: a claim depends on a measured number. Examples are a benchmark, a speedup, a latency, a size, a pass rate, or a run count.
 
-- Name what bounds the number (the CPU, the disk, the network, a lock, the measuring setup itself), and show it with a measurement, not a guess.
-- Rule out what else it could be measuring: a warm cache, a one-time load or compile, the order the arms ran in, a repeated input, background load. When order can matter, run the arms interleaved or in both orders.
+- Name what limits the number: the CPU, the disk, the network, a lock, or the measurement setup itself. Show it with a measurement, not a guess.
+- Rule out what else the number could measure. Examples are a warm cache, a one-time load or compile, arm order, a repeated input, and background load. When order can matter, alternate the arms, or run them in both orders.
 - Measure both sides the same way: the same input, machine, build mode, and settings.
 - Keep the run count, the spread, and the setup with the number. A difference smaller than the spread is no difference.
-- Report the number with its unit, its run count, its spread, and what bounds it.
+- Report the number with its unit, its run count, its spread, and what limits it.
 
-Where it stops: verify decides when a claim needs evidence; this file decides what evidence a number needs. What to measure, and the target, belong to the plan of the work that measures it.
+Where it stops: verify decides when a claim needs evidence. This file decides what evidence a number needs. What to measure, and the target, belong to the plan of the work that measures it.

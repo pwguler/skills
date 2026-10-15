@@ -1,25 +1,25 @@
 ---
 name: debug
-description: Find the root cause of a bug before fixing it. Use whenever the user says "fix", "broken", "not working", "error", "failing", or "bug", and whenever a bug, test failure, or unexpected behavior appears, before proposing any fix.
+description: Find the root cause of a bug before you fix it. Use when the user says "fix", "broken", "not working", "error", "failing", or "bug". Use it also when a bug, a test failure, or unexpected behavior appears, before you propose a fix.
 ---
 
-No fix before root cause. Symptoms are where the search starts, never where it ends.
+Do not fix a bug before you know its root cause. The search starts at the symptom, but it does not end there.
 
-Fast path: when the first cause is directly visible in the error output (the stack line points at it), skip the hypothesis loop but never the reproduction or the regression test. If the visible fix does not make the reproduction pass on the first try, the cause was not visible: run the full discipline.
+Fast path: when the error output shows the first cause directly, skip the hypothesis steps. An example is a stack line that points at the cause. Do not skip the reproduction or the regression test. If the visible fix does not make the reproduction pass on the first try, the cause was not visible. Then do all the steps.
 
-1. Open a `todo` list with these steps as its items before you reproduce anything; when a `todo` list is already open, add them to it. Each step is its own item. A step you skip, as the fast path skips the hypothesis loop, is marked `completed` with `skip: <reason>` added to its subject. A completed item cannot reopen, so returning to an earlier step adds it and the steps after it again as new items, and deletes the open items they replace.
-2. Reproduce first. Build the smallest deterministic reproduction. If it cannot be reproduced, gather evidence (logs, inputs, versions) until it can; do not guess.
-3. Read the actual error and trace it back to the first cause in the chain, not the nearest symptom.
-4. Form one hypothesis. State it with the observation that would confirm or refute it, then get that observation before touching any fix: a log line, an assertion, a probe. Add instrumentation when the evidence is not already there; keep it minimal and reversible, and remove it once it has answered.
-5. When two hypotheses compete, design the one observation that distinguishes them, rather than trying fixes in turn.
-6. Fix the root cause. One fix at a time; another problem found on the way, such as a second bug, is flagged, not fixed. Dead code is not another problem: before the fix goes in, delete it from each file the fix changes, as `implement` does, whether or not the bug touched it: functions, imports, and parameters no caller uses, branches no caller reaches, stale flags, validators that repeat a check an edge already made, and comments that restate the code or excuse a workaround, unless a non-goal fences them. Open [fix root causes](references/fix-root-causes.md) before a fix that adds a guard, a catch, or a comment defending it, when the same cause could recur elsewhere, or when the failure shows only after a restart.
-7. Add the regression test that would have caught this: red on the old code, green on the fix.
-8. Run the `verify` skill before claiming it is fixed. When the bug surfaced inside a slice, the reproduction and the regression test are this step's check; the full gate waits for the slice's commit.
+1. Before you reproduce the bug, create a `todo` list with these steps as its items. If a `todo` list already exists, add the steps to it. Each step is one item. When you skip a step, mark it `completed` and add `skip: <reason>` to its subject. The fast path skips the hypothesis steps this way. A completed item cannot open again. To go back to an earlier step, add that step and each step after it again as new items. Then delete the unfinished items that the new items replace.
+2. Reproduce the bug first. Build the smallest reproduction that fails every time. If you cannot reproduce the bug, collect evidence until you can: logs, inputs, and versions. Do not guess.
+3. Read the actual error. Find the first cause in the chain of causes, not the nearest symptom.
+4. Make one hypothesis. Write it with the observation that would confirm it or refute it. Get that observation before you start a fix: a log line, an assertion, or a probe. If the evidence does not exist yet, add instrumentation. Keep the instrumentation small and easy to remove, and remove it when it has given its answer.
+5. When two hypotheses compete, design one observation that shows which one is true. Do not try fixes one after another.
+6. Fix the root cause, one fix at a time. Flag another problem that you find, such as a second bug, but do not fix it. Dead code is not another problem. Before the fix, delete the dead code in each file that the fix changes, as `implement` does. Do this also when the bug did not touch that code. Dead code is functions, imports, and parameters that no caller uses, and branches that no caller reaches. It is also stale flags, and validators that repeat a check that a boundary already did. It is also comments that repeat the code or excuse a workaround. Keep dead code that a non-goal puts out of scope. Read [fix root causes](references/fix-root-causes.md) before a fix that adds a guard, a catch, or a comment that defends it. Read it also when the same cause can occur elsewhere, or when the failure shows only after a restart.
+7. Add the regression test that would have caught this bug. It fails on the old code and passes with the fix.
+8. Run the `verify` skill before you say that the bug is fixed. When the bug appeared inside a slice, this step checks only the reproduction and the regression test. The full gate waits for the slice's commit.
 
 Rules:
 
-- No shotgun fixes, no "try this and see if it helps".
-- Three refuted hypotheses in a row, or no reproduction reachable with the evidence available, stop the loop: report what was tried and which observation is missing, and let the user decide.
-- If the fix does not make the reproduction pass, the hypothesis was wrong: return to step 4, do not stack a second fix on top. When two failed fixes shared one assumption, open [attack the premise](references/attack-the-premise.md).
-- If the root cause reveals a design problem, say so and offer to run `drill` on the redesign instead of burying a workaround.
-- When finding the cause took more than one hypothesis, propose a cheap signal that stays on (a log line, a metric, an assertion) and would have exposed this cause right away; add it when the user agrees.
+- Do not try several fixes at random to see if one helps.
+- Stop the loop after three refuted hypotheses in a row. Stop it also when the available evidence cannot give a reproduction. Then report what you tried and which observation is missing, and let the user decide.
+- If the fix does not make the reproduction pass, the hypothesis was wrong. Go back to step 4. Do not keep the failed fix and add a second fix. When two failed fixes shared one assumption, read [attack the premise](references/attack-the-premise.md).
+- If the root cause shows a design problem, say so. Offer to run `drill` on the redesign. Do not hide the problem under a workaround.
+- When the cause took more than one hypothesis to find, propose a cheap signal that stays on. It is a log line, a metric, or an assertion that would have shown this cause at once. Add it when the user agrees.

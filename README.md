@@ -46,7 +46,7 @@ Run `/reload` in an open session to load the new version.
 
 ## The loop
 
-The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Before work with a spec lands, `rubric`'s defect pass sends the diff to two fresh reviewers, one of them on another model family. Fast path: an obvious task skips the interview; one sentence is the plan, once it passes the fork test. If `verify` fails twice on a fast-path task, the task was lying: route back through drill.
+The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Before work with a spec lands, `rubric`'s defect pass sends the diff to two fresh reviewers, one of them on another model family. Fast path: an obvious task skips the interview; one sentence is the plan, once it shows no decision to make. If `verify` fails twice on a fast-path task, the task was lying: route back through drill.
 
 Subtraction comes first: in each file a slice or a fix changes, the dead code goes before anything is added, and so does any comment that restates the code or excuses a workaround.
 
@@ -85,8 +85,8 @@ Any skill also runs on demand: type `/skill:<name>`.
 | Moment | Skill |
 |---|---|
 | New plan, feature, or design, including the structure of a new codebase or area | `drill` |
-| Any topic you want settled by being questioned one fork at a time (`drill` runs it for plans) | `core-interview` |
-| A design fork needs a throwaway to react to | `prototype` |
+| Any topic you want settled by being questioned one decision at a time (`drill` runs it for plans) | `core-interview` |
+| A design decision needs a throwaway to react to | `prototype` |
 | Implementing a settled plan | `implement` |
 | Bug or unexpected behavior | `debug` |
 | About to claim done, fixed, or passing; write or update the app's verification recipe | `verify` |

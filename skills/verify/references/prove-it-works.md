@@ -1,14 +1,14 @@
 # Prove it works
 
-A result is checked by looking at the real thing it produced, never at a proxy for it. A wrong inference acted on costs far more than the look that would have caught it.
+Check a result by looking at the real thing that it produced, never at a proxy for it. An action on a wrong inference costs much more than the look that would have found the error.
 
-When: the changed path's result is read through a proxy (a timestamp, a status file, a cached value, a screenshot, or a report from another agent), a check fails, or the work is a port or a migration whose trail is audited later.
+When: you read the result of the changed path through a proxy. A proxy is a timestamp, a status file, a cached value, a screenshot, or a report from another agent. It applies also when a check fails, or for a port or migration that someone examines later.
 
-- A self-report, a subagent's summary, and "it compiles" are not evidence, per the default stance.
-- Look at the thing itself: a running process is checked directly, not through state derived from it, such as a file timestamp, an output that looks fresh, or an old screenshot.
+- A self-report, the summary of a subagent, and "it compiles" are not evidence, as the default answer of verify says.
+- Look at the thing itself. Check a running process directly, not through state that comes from it. Examples of such state are a file timestamp, an output that looks fresh, or an old screenshot.
 - Read the value itself, never a cached or derived copy of it.
-- When a check fails, suspect the way it observed before suspecting the system.
-- A comparison that reruns beats a single look. The rerunnable form is the project's test runner, build, or linter, and its saved output in the evidence record is the trail a reviewer can rerun.
-- Show that saved output to the user, and commit it only when the work is large enough that the trail must be audited later, such as a port or a migration.
+- When a check fails, suspect the way that it observed before you suspect the system.
+- A comparison that you can run again is better than one look. The test runner, the build, or the linter of the project can run again. Its saved output in the evidence record is the evidence that a reviewer can run again.
+- Show that saved output to the user. Commit it only for large work that someone must examine later, such as a port or a migration.
 
-Where it stops: the proof is the project's own test runner, build, and linter, plus the changed path driven end to end; a script written on the same branch as the change never proves the claim, whatever it prints. A claim no command can settle goes to rubric.
+Where it stops: the proof is the test runner, the build, and the linter of the project. The changed path, driven end to end, is part of the proof too. A script written on the same branch as the change never proves the claim, whatever it prints. A claim that no command can settle goes to rubric.

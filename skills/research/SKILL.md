@@ -1,16 +1,16 @@
 ---
 name: research
-description: Find out what is true about a library, service, or standard by reading whoever owns the facts, or why code is shaped the way it is from its history, and write the answer down with a citation per claim. Use when the user asks to look something up, to check how an API or tool really behaves, to ask why a design exists, or to hand off reading while other work continues.
+description: Find out what is true about a library, service, or standard from the owner of the facts. Or find out from its history why code has its shape. Write the answer down with a citation for each claim. Use when the user asks to look something up, or to check how an API or tool really behaves. Use it when the user asks why a design exists. Use it also to give reading to a subagent while other work continues.
 ---
 
-Research runs in this session. A subagent reads instead only when the user asks to hand the reading off, a draft spec fires its AFK decisions, or the payload is too large for the session (over about 2,000 lines, or images), as [guard the context window](references/guard-the-context-window.md) lays out: a `researcher` for an outside fact, a `scout` for the code's history. It returns the note, not the payload.
+Do research in this session. A subagent reads instead in three cases. The user asks to give the reading to a subagent. A draft spec launches its AFK decisions. Or the payload is too large for the session: over about 2,000 lines, or images. [Guard the context window](references/guard-the-context-window.md) tells how. Use a `researcher` for an outside fact, and a `scout` for the history of the code. The subagent returns the note, not the payload.
 
-1. Sort the question. How a library, service, or standard behaves goes to its owner (step 2). Why our code is shaped as it is goes to its history (step 3).
-2. Read the party that owns the fact: the vendor's own documentation, the source code, the specification, or a response from the live endpoint. A blog post, a forum answer, or a summary is at most a lead toward the owner, never the citation.
-3. Read the history per [why.md](references/why.md): pin the code first, then read each source it lists, and name every source the session cannot reach.
-4. Return one Markdown note, each claim followed by where it came from. It goes to the path the caller asked for. No path given: follow wherever the repo keeps similar notes. No such convention: choose a location and name it in the reply.
+1. Sort the question. A question about how a library, service, or standard behaves goes to its owner, in step 2. A question about why our code has its shape goes to its history, in step 3.
+2. Read the owner of the fact: the vendor documentation, the source code, the specification, or a live endpoint response. A blog post, a forum answer, or a summary only points you to the owner. It is never the citation.
+3. Read the history as [why.md](references/why.md) says. First pin the code. Then read each source that why.md lists. Name every source that the session cannot reach.
+4. Return one Markdown note, with the source after each claim. Write the note to the path that the caller asked for. When the caller gave no path, use the place where the repo keeps similar notes. When there is no such place, choose a location, and name it in the reply.
 
 Rules:
 
-- A citation points at the owner: for behavior, the vendor, source, spec, or live endpoint; for intent, the commit, PR, ticket, doc, or message that carries the decision.
-- Never invent a citation. A search that finds nothing is an answer and goes in the note as a gap.
+- A citation points at the owner. For behavior, that is the vendor, the source, the spec, or the live endpoint. For intent, it is the commit, PR, ticket, doc, or message that holds the decision.
+- Never invent a citation. A search that finds nothing is an answer. Write it in the note as a gap.

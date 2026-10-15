@@ -1,17 +1,18 @@
 ---
 name: write-skill
-description: Create or edit a document an agent reads and prove it changes behavior, and lock a lesson agents keep relearning into structure. Use when writing or editing a skill, AGENTS.md, CLAUDE.md, a system prompt, or other agent-facing prose, when verifying one before it ships, and when the user corrects the same agent mistake a second time.
+description: Create or edit a document that an agent reads, and prove that it changes behavior. Put a lesson that agents keep learning again into structure. Use when you write or edit a skill, AGENTS.md, CLAUDE.md, a system prompt, or other text for agents. Use it to verify such a document before it ships. Use it also when the user corrects the same agent mistake a second time.
 ---
 
-Writing for agents is test-first development applied to prose. The same loop ships every document an agent reads: skills, AGENTS.md, CLAUDE.md, system prompts.
+Writing for agents is test-first development, applied to text. The same loop ships every document that an agent reads: skills, AGENTS.md, CLAUDE.md, and system prompts.
 
-1. Baseline first: run the scenario the document targets on an agent WITHOUT it, and record exactly how it fails or rationalizes. In pi the baseline is a `subagent` run of an agent defined with `inheritSkills`, `inheritProjectContext`, and `inheritGlobalContext` false, so it loads no skills and no context files, and with `systemPromptMode: "append"`, so it keeps pi's base prompt. No builtin agent is, so check with `subagent({ action: "get", agent: "baseline" })`. When there is none, create it with `subagent({ action: "create", options: { config: { name: "baseline", description, scope: "user", systemPromptMode: "append", inheritSkills: false, inheritProjectContext: false, inheritGlobalContext: false } } })`. When `get` shows one that inherits anything or whose system prompt mode is `replace`, which drops pi's base prompt, offer to fix it with `subagent({ action: "update", agent: "baseline", options: { config: { ... } } })`. No observed failure means the document has nothing to teach.
-2. Write the minimum prose that fixes those specific failures. Not a manual: the shortest process that changes the behavior.
-3. Re-run the scenario with the document loaded. It passes or the document is wrong.
-4. Close loopholes: new rationalizations found on re-runs get plugged, then verified again.
+1. Run the baseline first. Run the scenario that the document targets on an agent WITHOUT the document. Record exactly how it fails, or what excuse it gives. In pi, the baseline is a `subagent` run of an agent with `inheritSkills`, `inheritProjectContext`, and `inheritGlobalContext` false. So it loads no skills and no context files. It also has `systemPromptMode: "append"`, so it keeps the base prompt of pi. No builtin agent is like this, so check with `subagent({ action: "get", agent: "baseline" })`. When there is none, create it with `subagent({ action: "create", options: { config: { name: "baseline", description, scope: "user", systemPromptMode: "append", inheritSkills: false, inheritProjectContext: false, inheritGlobalContext: false } } })`. When `get` shows a baseline that inherits anything, offer to fix it with `subagent({ action: "update", agent: "baseline", options: { config: { ... } } })`. Make the same offer when its system prompt mode is `replace`, which drops the base prompt of pi. When you observe no failure, the document has nothing to teach.
+2. Write the minimum text that fixes those specific failures. Do not write a manual. Write the shortest process that changes the behavior.
+3. Run the scenario again with the document loaded. It passes, or the document is wrong.
+4. Close loopholes. When a new run shows a new excuse, block it in the text, and verify again.
 
 Rules:
-- An eval script changes mechanics, not the loop: when one exists, it runs the baseline and the re-run.
-- A correction the user makes a second time is a lesson that did not hold: open [encode lessons in structure](references/encode-lessons-in-structure.md) and fix its class at the highest rung that holds, a mechanism before any prose. Only what no mechanism can hold goes through steps 1 to 4.
+
+- An eval script changes the mechanics, not the loop. When one exists, it runs the baseline and the second run.
+- A correction that the user makes a second time is a lesson that did not hold. Read [encode lessons in structure](references/encode-lessons-in-structure.md). Fix its class at the highest level that holds: a mechanism before any text. Only what no mechanism can hold goes through steps 1 to 4.
 - When the document is a skill in this repo, follow the [conventions for skills in this repo](references/conventions.md).
-- Skip it when the work is a one-off, when standard practice is already well documented, or when a linter or hook could enforce the rule mechanically; in that last case build the linter or hook instead, per [encode lessons in structure](references/encode-lessons-in-structure.md).
+- Skip this skill for work done once, or when standard practice is already well documented. Skip it also when a linter or hook could enforce the rule. In that case, build the linter or hook instead, as [encode lessons in structure](references/encode-lessons-in-structure.md) says.

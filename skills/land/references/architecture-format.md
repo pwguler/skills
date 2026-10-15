@@ -1,6 +1,6 @@
 # Architecture Document Format
 
-`ARCHITECTURE.md` at the target project's root describes the system as it currently is. It is a living document: skills update it inline the moment the system's shape changes, so it is never allowed to drift from the code.
+`ARCHITECTURE.md` at the root of the target project describes the system as it is now. Skills update it in place when the shape of the system changes, so it always matches the code.
 
 ## Template
 
@@ -8,22 +8,22 @@
 # Architecture
 
 ## What this is
-Two or three sentences: what the system does and for whom.
+Two or three sentences: what the system does, and for whom.
 
 ## Modules
-One line per major module: name (CONTEXT.md vocabulary) and its single responsibility.
+One line for each major module: its name in the words of CONTEXT.md, and its single responsibility.
 
 ## Seams
-The load-bearing interfaces: where behavior can be changed without editing in place, and what sits behind each.
+The interfaces that the design depends on: where behavior can change without an edit in place, and what is behind each one.
 
 ## Invariants
-What must stay true, system-wide. One line each.
+What must stay true across the whole system. One line each.
 ```
 
 ## Rules
 
-- Only what stays true for years: modules, responsibilities, seams, invariants. Never API signatures, never file-by-file listings, never anything a grep answers better.
-- A page is the budget. If it grows past that, it is describing implementation, not architecture.
-- Update inline at the moment the shape changes (a `land` that adds a module, moves a seam, or introduces an invariant), never in batch cleanups.
-- Use `CONTEXT.md` vocabulary for domain names.
-- Created lazily: the first `land` that changes the system's shape creates it.
+- Write only what stays true for years: modules, responsibilities, seams, and invariants. Never write API signatures, lists of files, or anything that a grep answers better.
+- The limit is one page. A longer document describes implementation, not architecture.
+- Update it in place when the shape changes, never in a later cleanup. Examples are a `land` that adds a module, moves a seam, or adds an invariant.
+- Use the words of `CONTEXT.md` for domain names.
+- Create it only when it is needed: the first `land` that changes the shape of the system creates it.

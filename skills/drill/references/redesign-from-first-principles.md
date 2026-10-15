@@ -1,12 +1,12 @@
 # Redesign from first principles
 
-A new requirement enters an existing design as if it had been a founding assumption, never as a part bolted onto the old shape. Designing around it keeps later options open.
+Add a new requirement to an existing design as if it was an assumption from the start. Do not attach it to the old shape as an extra part. A design built around the requirement keeps later options open.
 
-When: a settled design meets a requirement it was not built for, whether in the interview or in the middle of other work.
+When: a settled design meets a requirement that it was not built for. This can happen in the interview or in the middle of other work.
 
-- Read every file the requirement touches and state how the current design works before proposing a change.
-- Ask what a blank page would produce with the requirement known on day one, and put that design on the table as one of step 5's approaches.
-- List every reference the change reaches: types, docs, examples, rationale sections. The settled design names them all.
-- Design the whole change first, then deliver it in pieces: the spec's criteria become implement's slices, and each slice carries the references it touches.
+- Read every file that the requirement touches. State how the current design works before you propose a change.
+- Ask what design you would make if the requirement was known on the first day. Show that design as one of the step 5 approaches.
+- List every reference that the change reaches: types, docs, examples, and rationale sections. The settled design names all of them.
+- Design the whole change first, then deliver it in parts. The criteria of the spec become the slices of implement. Each slice updates the references that it touches.
 
-Where it stops: a redesign found mid-slice is a fork, routed through drill: implement stops and names it rather than growing the slice, and debug's design-problem rule routes the same way. This file rebuilds a design around a new requirement; questioning a fact the current design assumes, after fixes built on it fail, is debug's attack-the-premise principle.
+Where it stops: a redesign found mid-slice is a decision for the user, and drill handles it. Implement stops and names it, and does not make the slice larger. The debug rule on design problems sends a design problem to drill the same way. This file rebuilds a design around a new requirement. To question a fact that the current design assumes, after fixes built on it fail, use debug's attack-the-premise principle.

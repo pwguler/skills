@@ -1,14 +1,15 @@
 ---
 name: core-interview
-description: Internal support skill, the relentless interview loop other skills delegate to. Use only when another skill or the user explicitly triggers it, never on your own.
+description: Internal support skill that runs the interview loop for other skills, until every decision is settled. Use it only when another skill or the user starts it, never on your own.
 ---
 
-Keep questioning the user until the two of you agree on every part of the topic. Treat it as a decision tree and settle decisions in dependency order, each before the ones that hang off it. Relentless means no branch left open, not one round-trip per branch.
+Question the user until the two of you agree on every part of the topic. Treat the topic as a decision tree. Settle each decision before the decisions that depend on it. Leave no branch open. Not every branch needs a question to the user. The code can settle it, or an assumption that the rules below allow.
 
 Rules:
-- Ask only questions whose answer would change what gets built. When your recommendation is strong and the cost of being wrong is low, don't ask: adopt it, record it as an assumption, move on.
-- Real forks are put one at a time through the `ask_user_question` tool, waiting for each answer, the options carrying your candidate answers with the recommended one first. Low-stakes clarifications batch into a single call.
-- Typing an answer the options missed stays open, so the tool never narrows a fork.
-- If a question can be answered by exploring the codebase, explore the codebase instead of asking. Facts are yours to find, never the user's. Look a fact up in this session before the question that depends on it.
-- When the user can't put the target behavior into words, ask for a reference implementation: source code, even in another language or library, whose semantics to reimplement. Source beats prose or a screenshot.
-- The closing summary lists every adopted assumption for a one-pass veto. A vetoed assumption reopens only that branch.
+
+- Ask only questions whose answer would change what gets built. When your recommendation is strong and a wrong choice costs little, do not ask. Adopt the recommendation, record it as an assumption, and continue.
+- Put one real decision at a time to the user, through the `ask_user_question` tool. Wait for its answer before you ask the next one. The options are your candidate answers, with the recommended answer first. Put low-risk clarifications together in one call.
+- The user can always type an answer that the options do not have. So the tool never limits the choices of a decision.
+- If the codebase can answer a question, look in the codebase. Do not ask the user. You find the facts, not the user. Look up a fact in this session before you ask the question that depends on it.
+- When the user cannot describe the target behavior in words, ask for a reference implementation. That is source code whose behavior you reproduce, also in another language or library. Source code is better than a description or a screenshot.
+- The final summary lists every assumption that you adopted. The user can then reject any of them in one reply. A rejected assumption opens only its own branch again.

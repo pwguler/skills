@@ -1,38 +1,38 @@
 # Decision Record
 
-An ADR records one decision the code cannot explain on its own. ADRs live in `docs/adr/` as `0001-<slug>.md`, `0002-<slug>.md`, and so on: the next file takes the highest number present plus one. The directory appears with the first ADR, not before.
+An ADR records one decision that the code cannot explain. ADRs are in `docs/adr/` as `0001-<slug>.md`, `0002-<slug>.md`, and so on. The next file takes the highest number plus one. Create the directory with the first ADR, not before.
 
 ## Shape
 
 ```md
 # <The decision, as a short title>
 
-<What forced the choice, what was chosen, and the reason. One to three sentences.>
+<What made the choice necessary, what you chose, and why. One to three sentences.>
 ```
 
-One paragraph is a complete ADR. What it preserves is the fact that the choice was deliberate, and the reason.
+One paragraph is a complete ADR. It keeps two facts: the choice was deliberate, and the reason for it.
 
-Add a section only when it pays for itself:
+Add a section only when it is worth its length:
 
-- `Status` frontmatter (`proposed`, `accepted`, `superseded by ADR-NNNN`, `deprecated`), once the decision gets revisited.
-- `Considered options`, when a losing option is likely to be proposed again.
-- `Consequences`, when an effect downstream would surprise a reader.
+- `Status` frontmatter (`proposed`, `accepted`, `superseded by ADR-NNNN`, `deprecated`), when someone examines the decision again.
+- `Considered options`, when someone is likely to propose a rejected option again.
+- `Consequences`, when an effect in another part would surprise a reader.
 
-## The bar
+## The tests
 
-Write an ADR only for a decision that passes all three:
+Write an ADR only for a decision that passes all three tests:
 
-1. **Costly to undo.** Changing course later takes real work.
-2. **Puzzling from the code.** Someone reading the code would ask why it is this way.
-3. **Won against a real rival.** Another option was viable and lost for a stated reason.
+1. **Costly to undo.** A later change of direction takes real work.
+2. **Puzzling from the code.** A reader of the code would ask why it is this way.
+3. **Won against a real alternative.** Another option was possible, and it lost for a stated reason.
 
-A decision that fails one test gets no ADR. A cheap choice gets reversed instead of recorded, an obvious one raises no question, and a choice with no rival has no reason to preserve.
+A decision that fails one test gets no ADR. Reverse a cheap choice instead of recording it. An obvious choice causes no question. A choice with no alternative has no reason to keep.
 
-Decisions that tend to pass:
+Decisions that often pass:
 
-- The system's overall shape: one repo or many, calls or events between parts, how state is stored.
-- A technology that would take a quarter to leave: the database, the queue, the identity provider, the host. An ordinary library does not count.
-- Who owns what: which part alone writes some data, and what the others may do with it. A recorded refusal is worth as much as a permission.
-- A deliberate break from the usual approach, recorded so nobody "fixes" it later.
-- A limit set from outside that the code cannot show: a regulation, a contract, a partner's latency budget.
+- The overall shape of the system: one repo or many, calls or events between components, and how it stores state.
+- A technology that would take about three months to replace: the database, the queue, the identity provider, or the host. An ordinary library does not count.
+- Ownership: which part alone writes some data, and what the other parts can do with it. A recorded refusal is as useful as a permission.
+- A deliberate change from the usual approach, recorded so that nobody "fixes" it later.
+- An outside limit that the code cannot show: a regulation, a contract, or the latency budget of a partner.
 - A rejected option whose rejection was not obvious.

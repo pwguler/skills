@@ -1,16 +1,16 @@
 # Minimize reader load
 
-Code is as maintainable as the work a reader does to understand it, measured on two axes: the layers between a question and its answer, and the hidden or mutable state the reader must carry in mind. Line counts, complexity scores, and architecture labels only stand in for that work, and code is read far more often than it is written.
+Code is as easy to maintain as the work that a reader does to understand it. Measure that work on two axes. One is the number of layers between a question and its answer. The other is the hidden or changeable state that the reader must keep in mind. Line counts, complexity scores, and architecture labels only estimate that work. People read code much more often than they write it.
 
-When: before adding a wrapper, a layer, or a piece of state, and whenever code in the slice is hard to trace.
+When: before you add a wrapper, a layer, or a piece of state. It applies also when code in the slice is hard to follow.
 
-- Guard both axes, since they move apart: a flat file of fifty globals weighs as much as a stack of six adapters.
-- Inline a layer that costs more than it saves: a wrapper with one caller, an adapter with no second implementation, indirection added for a need that never came.
-- Each layer changes the abstraction of the one beside it. A layer whose methods and arguments mirror its neighbor's only passes calls through, and collapses.
-- An interface earns its breadth by hiding a real decision. A wide surface over little logic makes a reader learn the surface and the logic both.
-- Shrink the scope of state: return values over mutation, locals over fields, fields over module state, module state over globals. Derive a value rather than keep two copies in sync.
-- Name an invariant once, at the boundary, not in each consumer; [boundary discipline](boundary-discipline.md) places that boundary.
-- A new layer or new piece of state must remove at least as much reader load elsewhere as it adds.
-- The test: a new reader finds where a value comes from and what can change it within half a minute. When not, cut layers or cut state.
+- Watch both axes, because they move separately. A flat file of fifty globals is as hard to read as six layers of adapters.
+- Inline a layer that costs more than it saves. Examples: a wrapper with one caller, an adapter with no second implementation, and indirection for a need that never came.
+- Each layer changes the abstraction of the layer next to it. A layer whose methods and arguments copy those of its neighbor only passes calls through. Remove it.
+- Make an interface wide only when it hides a real decision. A wide interface over little logic makes a reader learn both the interface and the logic.
+- Make the scope of state smaller. Prefer return values to mutation, locals to fields, fields to module state, and module state to globals. Derive a value instead of keeping two copies the same.
+- Name an invariant once, at the boundary, not in each consumer. [Boundary discipline](boundary-discipline.md) places that boundary.
+- A new layer or piece of state must remove at least as much reader load elsewhere as it adds.
+- The test: a new reader finds where a value comes from, and what can change it, within half a minute. If not, remove layers or remove state.
 
-Where it stops: the slice's own code is held to this; a layer outside the slice that fails it is flagged, not collapsed, unless the plan includes it, since each changed line traces to the slice. Fewest layers for a new need starts at [laziness protocol](laziness-protocol.md), and a component's own state stays behind its operations as implement's rule on state requires.
+Where it stops: this file applies to the code of the slice. Flag a layer outside the slice that fails the test, but do not remove it, unless the plan includes it. Each changed line belongs to the slice. For the fewest layers for a new need, start at [laziness protocol](laziness-protocol.md). The state of a component stays behind its operations, as the implement rule on state requires.

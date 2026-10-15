@@ -1,28 +1,29 @@
 ---
 name: drill
-description: "Question a plan or design until every decision in it is settled and agreed. Use when the user wants a plan stress-tested, a design pinned down before building, or the structure of a new codebase or area settled, or says \"drill this\" or \"drill me\"."
+description: "Question a plan or design until every decision in it is settled and agreed. Use when the user wants a plan stress-tested or a design settled before building. Use it also to settle the structure of a new codebase or area. Use it when the user says \"drill this\" or \"drill me\"."
 ---
 
-Run the `core-interview` skill against the plan or design under discussion. The interview also tests the plan against the project's domain model.
+Run the `core-interview` skill on the plan or design under discussion. The interview also tests the plan against the domain model of the project.
 
-Fast path: first, size the ask. If it has no real decision tree (one obvious change, a small diff, a criterion statable in one sentence), say so and route straight to `implement` with that sentence as the plan; a spec for an obvious change is ceremony. The fast path still drills its sentence: state it, then test it. A sentence that cannot be stated, or that surfaces a fork or a second decision, was not obvious: run the interview. A genuine fork discovered mid-task is never guessed: stop, name it, let the user answer. If `verify` fails twice on a task judged obvious, the task was lying about its size: stop and drill it properly.
+Fast path: first, find the size of the request. A request with no real decision tree is obvious. Examples are one obvious change, a small diff, or a criterion that one sentence can state. Say that the request is obvious, and go directly to `implement` with that sentence as the plan. Do not write a spec for an obvious change. The fast path still tests its sentence: state the sentence, then test it. If you cannot state the sentence, or the sentence shows a decision to make, the request was not obvious. Then run the interview.
 
-1. Explore the project context before the first question: code, docs, recent commits.
-2. Before the first question, look for `CONTEXT.md` at the root (or `CONTEXT-MAP.md` and the per-context `CONTEXT.md` files it lists) and for ADRs under `docs/adr/`, including any scoped to one context.
-3. First contact: on a nontrivial codebase with no `CONTEXT.md`, offer one seeding pass: collect candidate terms from the code and the existing docs, then put each to the user during the interview. A term enters the glossary only after the user confirms it.
-4. If the ask bundles several independent pieces, say so and drill the first piece; the rest queue up.
-5. Before settling a direction, put 2 or 3 genuinely different approaches on the table with trade-offs, leading with a recommendation, per [exhaust the design space](references/exhaust-the-design-space.md); when a new requirement lands in an existing design, one of them is the [redesign from first principles](references/redesign-from-first-principles.md). Screen each architectural shape against [design red flags](references/design-red-flags.md). When a fork turns on look, feel, or flow that prose can't settle, run the `prototype` skill to build a throwaway to react to, and discard it once the direction is picked.
-6. The session ends when every branch of the decision tree is resolved: state the settled design in a short summary and get explicit agreement before any implementation starts.
-7. When the settled design is implementation work, write the spec to `docs/specs/<slug>.md` in the target project using [spec-format.md](references/spec-format.md): goal, non-goals, checkable acceptance criteria, verification commands, and phases for a phased migration. The spec steers the loop: `implement` builds from it, `verify` gates against it, `land` closes it out and asks whether to keep or delete the file.
-8. When the decision tree cannot resolve here (decisions await research beyond this context, or the tree is simply too large for one session), do not force a settled spec out of an unsettled design. Write the spec as a **draft** instead: [draft-spec.md](references/draft-spec.md).
+1. Before the first question, read the project context: code, docs, and recent commits.
+2. Before the first question, look for `CONTEXT.md` at the root. Look also for `CONTEXT-MAP.md` and each `CONTEXT.md` that it lists. Look for ADRs under `docs/adr/`, also for ADRs that apply to one context only.
+3. On a nontrivial codebase with no `CONTEXT.md`, offer to collect candidate terms from the code and the docs. Put each term to the user during the interview. A term goes into the glossary only after the user confirms it.
+4. If the request holds several independent parts, say so. Drill the first part, and keep the other parts for later.
+5. Before you choose a direction, show 2 or 3 different approaches with their trade-offs, not variations of one approach. Put your recommendation first, as [exhaust the design space](references/exhaust-the-design-space.md) says. When a new requirement comes into an existing design, one approach is the [redesign from first principles](references/redesign-from-first-principles.md). Check each architectural shape against the [design red flags](references/design-red-flags.md). Some decisions depend on look, feel, or flow that text cannot settle. For these, run the `prototype` skill to build a throwaway that the user reacts to. Discard it when the user picks the direction.
+6. The session ends when every branch of the decision tree is resolved. Then state the settled design in a short summary. Get the explicit agreement of the user before any implementation starts.
+7. When the settled design is implementation work, write the spec to `docs/specs/<slug>.md` in the target project. Use [spec-format.md](references/spec-format.md): goal, non-goals, checkable acceptance criteria, verification commands, and phases for a phased migration.
+8. Sometimes this session cannot resolve the decision tree. Decisions can wait for research outside this context, or the tree can be too large for one session. Then do not write a settled spec for a design that is not settled. Write the spec as a **draft**: [draft-spec.md](references/draft-spec.md).
 
 Rules:
-- Cut ruthlessly: anything the stated constraints don't demand leaves the design. What stays is held to [experience first](references/experience-first.md), opened when a trade-off on product scope, UX, or an interface pits implementation convenience against the consumer's experience.
-- Files appear only when there is something to put in them: `CONTEXT.md` with the first settled term, `docs/adr/` with the first ADR.
-- While interviewing: **Hold the user to the glossary.** A word used against its `CONTEXT.md` meaning gets named at once: "the glossary says a Refund is X; you seem to mean Y. Which?"
-- While interviewing: **Replace vague words.** A loose or overloaded word gets a precise candidate: "by 'user', do you mean the Account holder or the Operator? They differ."
-- While interviewing: **Test with cases.** Where two concepts touch, pick a concrete case at their edge and ask what happens.
-- While interviewing: **Check claims against the code.** When the user says how something works, look. Name any disagreement: "the code refunds whole Payments; you described partial refunds. Which is true?"
-- While interviewing: **Write terms as they settle.** Update `CONTEXT.md` the moment a term is settled, not at the end. It is a glossary only: no plans, notes, or implementation choices. Format: [terms.md](references/terms.md).
-- While interviewing: **Keep ADRs rare.** Offer one only for a decision that passes the three tests in [decision-record.md](references/decision-record.md): costly to undo, puzzling from the code, won against a real rival.
-- **Later sessions work the draft.** When a session opens a spec that still has an `## Open decisions` section, work it as [draft-spec.md](references/draft-spec.md) lays out.
+
+- Remove from the design everything that the stated constraints do not demand. Check what stays against [experience first](references/experience-first.md). Read it when a trade-off on product scope, UX, or an interface puts ease of building against the consumer's experience.
+- Create a file only when it has content. Create `CONTEXT.md` with the first settled term, and `docs/adr/` with the first ADR.
+- In the interview, **hold the user to the glossary.** When the user gives a word a meaning that is different from `CONTEXT.md`, say so at once. For example: "The glossary says a Refund is X. You seem to mean Y. Which is it?"
+- In the interview, **replace vague words.** For a vague word or a word with many meanings, offer an exact term. For example: "By 'user', do you mean the Account holder or the Operator? They are different."
+- In the interview, **test with cases.** Where two concepts meet, pick a concrete case at the border between them. Ask what happens.
+- In the interview, **check claims against the code.** When the user says how something works, look at the code. Name each difference. For example: "The code refunds whole Payments. You described partial refunds. Which is true?"
+- In the interview, **write terms when they settle.** Update `CONTEXT.md` when a term is settled, not at the end. It is only a glossary: no plans, notes, or implementation choices. Use the format in [terms.md](references/terms.md).
+- In the interview, **keep ADRs rare.** Offer an ADR only for a decision that passes the three tests in [decision-record.md](references/decision-record.md). The decision is costly to undo, puzzling from the code, and won against a real alternative.
+- **Later sessions work on the draft.** When a session opens a spec that still has an `## Open decisions` section, follow [draft-spec.md](references/draft-spec.md).

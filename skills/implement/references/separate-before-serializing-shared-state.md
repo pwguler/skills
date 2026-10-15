@@ -1,13 +1,13 @@
 # Separate before serializing shared state
 
-If several actors running at once could write one piece of mutable state, remove the sharing first, and serialize access by structure only when a single common target is truly required. Races on shared state are intermittent, hard to reproduce, and costly to track down.
+When several actors that run at the same time can write one piece of changeable state, remove the sharing first. Serialize access by structure only when one common target is really necessary. Races on shared state happen at random, are hard to reproduce, and cost much to find.
 
-When: two or more actors (processes, tasks, workers, agents) could read and write the same file, key, branch, record, or state object.
+When: two or more actors can read and write the same file, key, branch, database row, or state object. Actors are processes, tasks, workers, or agents.
 
-- Find the shared mutable state: files that more than one actor both reads and writes, branches more than one actor pushes to, interfaces one side defines while another consumes them.
-- Ask whether the actors need one canonical object or are each publishing independent facts. For independent facts, hand every actor a file, key, branch, or directory it alone owns, and combine them only where the results are read or reported. Two workers each writing their own field into one shared state file still share it; one state file per worker does not.
-- Only when a single shared target is a real invariant, serialize access by structure: a lockfile, phases that run in order, a single owner that performs every write, or an atomic compare-and-swap.
+- Find the shared changeable state. Examples are files that more than one actor reads and writes, and branches that more than one actor pushes to. An interface that one side defines while another side uses it is shared state too.
+- Ask whether the actors need one canonical object, or whether each actor publishes independent facts. For independent facts, give each actor a file, key, branch, or directory that only it owns. Combine the results only where something reads or reports them. Two workers that each write their own field into one shared state file still share it. One state file for each worker removes the sharing.
+- Serialize access by structure only when one shared target is a real invariant. Use a lockfile, phases that run in order, one owner that does every write, or an atomic compare-and-swap.
 - A written instruction or a team convention is never concurrency control.
-- Reaching for a lock is a design smell to examine, not the default answer.
+- A lock is a sign to examine the design. It is not the default answer.
 
-Where it stops: it governs the code a slice writes, not how sessions share a spec file. The implement rule on interleavings governs a record that stays shared; this file runs first and asks whether it has to be shared at all. Work split across subagents already follows the parallel skill, which never dispatches agents that would touch the same files.
+Where it stops: this file applies to code that a slice writes, not to how sessions share a spec file. The implement rule on two operations that change the same data applies to data that stays shared. This file runs first, and asks whether the data must be shared at all. Work split across subagents already follows the parallel skill. It never sends agents that would touch the same files.

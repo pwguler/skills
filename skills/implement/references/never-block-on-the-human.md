@@ -1,13 +1,17 @@
 # Never block on the human
 
-Work stops for the user only where the user's answer is what is missing. A fork a command can settle is settled by the command: asking about it stalls the work, and guessing it ships a choice nobody checked.
+Stop the work for the user only when the answer of the user is what is missing. When a command can settle a decision, let the command settle it. A question about it stops the work, and a guess ships a choice that nobody checked.
 
 When: a slice reaches a choice that the spec and the code leave open.
 
-- A fork is genuine when it changes an acceptance criterion, a non-goal, or a public interface (an export, parameter, return value, or method that code outside the change calls), needs the user's authority (spending, access, policy), or cannot be undone (a force-push, deleted data, a message sent outside the repo). A genuine fork stops the work: name it, lay out the options with a recommendation, and wait for the answer. Building one option and asking afterwards is a guess.
-- A spec that fixes an interface beside a criterion that interface cannot meet is a genuine fork, even when one more method would satisfy both: the added method is the interface change, and the criteria do not outrank the interface the spec wrote down.
-- Any other fork that running something can answer (which approach is faster, whether a call works, which library handles the case) is settled by running it: measure or try each option, pick, and report what ran, what it showed, and the pick.
-- A choice of taste with no criterion behind it follows the surrounding code and is named in the report.
-- A problem noticed outside the slice is flagged for a later round, not fixed in this one.
+- A decision is for the user when one of these is true:
+  - It changes an acceptance criterion, a non-goal, or a public interface. A public interface is an export, a parameter, a return value, or a method that code outside the change calls.
+  - It needs the authority of the user: spending, access, or policy.
+  - It cannot be undone: a force-push, deleted data, or a message sent outside the repo.
+- A decision for the user stops the work. Name it, show the options with a recommendation, and wait for the answer. To build one option and ask afterwards is a guess.
+- A spec can define an interface and also have a criterion that the interface cannot meet. That is a decision for the user, even when one more method would satisfy both. The added method is the interface change. The criteria do not rank above the interface that the spec wrote down.
+- Settle every other decision that a run can answer by running it. Examples are which approach is faster, whether a call works, and which library handles the case. Measure or try each option, and pick one. Report what ran, what it showed, and the pick.
+- A choice of taste with no criterion behind it follows the code around it. Name the choice in the report.
+- Flag a problem outside the slice for a later round. Do not fix it in this one.
 
-Where it stops: drill settles forks before implementation starts; this file covers the ones a slice finds.
+Where it stops: drill settles decisions before implementation starts. This file covers the decisions that a slice finds.
