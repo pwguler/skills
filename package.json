@@ -1,39 +1,7 @@
 {
-  "name": "@pwguler/skills",
+  "name": "pwguler-skills",
   "version": "1.34.0",
-  "type": "module",
+  "private": true,
   "description": "Skills for pi",
-  "license": "MIT",
-  "author": "pwguler",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pwguler/skills.git"
-  },
-  "files": [
-    "skills",
-    "extensions",
-    "README.md",
-    "LICENSE"
-  ],
-  "keywords": [
-    "pi",
-    "pi-package",
-    "pi-skills",
-    "skills",
-    "agent-skills"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "peerDependencies": {
-    "@earendil-works/pi-coding-agent": "*"
-  },
-  "pi": {
-    "extensions": [
-      "./extensions/read-skill-first.ts"
-    ],
-    "skills": [
-      "./skills"
-    ]
-  }
+  "license": "MIT"
 }

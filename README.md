@@ -10,34 +10,16 @@ This suite works against the three debts of the Triple Debt Model (Storey, [arXi
 
 ## Install
 
-The suite runs in [pi](https://pi.dev). There are two ways to install it. Use only one. With both, every skill name occurs twice. Then pi keeps the first copy that it finds, and warns about the other.
-
-**From npm**:
+The suite runs in [pi](https://pi.dev). Install it with `npx skills`:
 
 ```bash
-pi install npm:@pwguler/skills
-```
-
-The npm package also adds a pi extension. It tells the agent to read a matching skill before it starts a task.
-
-**`npx skills`**, which installs only the skills:
-
-```bash
-npx skills add pwguler/skills
+npx skills add pwguler/skills -g -a pi
 ```
 
 ## Update
 
-**From npm**:
-
 ```bash
-pi update npm:@pwguler/skills
-```
-
-**`npx skills`**:
-
-```bash
-npx skills update
+npx skills update -g
 ```
 
 If a skill is missing after the update, install the suite again.
