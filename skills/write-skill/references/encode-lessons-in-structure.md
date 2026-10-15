@@ -27,7 +27,7 @@ When: you are about to write the same instruction a second time, or the same cor
 - A test that still passes when the behavior breaks protects nothing. A test that fails when only the internals change is wrong too. Fix it or delete it.
 - Every error, human correction, and surprise is a signal. Record each one, and decide whether it happened once or is a pattern.
 - Route each signal where it belongs. A one-time event goes to the record of the project. In that record, a settled term goes to `CONTEXT.md`, and a decision that passes the ADR tests goes to `docs/adr/`. A repeated fix goes to a skill or a lint rule. A fix for the whole system goes to a principle file in the skill whose step it adds detail to.
-- Act on each signal. Apply the fix now, or create a concrete `todo` item for it.
+- Act on each signal. Apply the fix now, or create a concrete item for it in the task list.
 - There are three failures. The first: you accept a lesson but do not record it, because a promise to remember does not last. The second: you record it but do not route it, like a note about a lint rule that nobody builds. The third: you fix one instance and leave the pattern.
 
 Where it stops: when a mechanism enforces the rule, the write-skill loop covers only the text that is left. That text still needs a baseline failure that you observed. Implement's type-system-discipline principle owns the level of states that the types cannot represent. Its build-the-lever principle owns the script.

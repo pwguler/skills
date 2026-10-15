@@ -1,6 +1,6 @@
 # App-check
 
-A project with a runtime interface can keep a recipe that drives it. A runtime interface is a UI, a CLI, a TUI, or a service. The recipe is a project skill at `.pi/skills/verify-<app>/`. It starts the app, drives a feature the way a user does, records what happened, and stops what it started. `verify` drives the recipe when the base branch has one. Write a recipe or update a recipe only when the user asks. Then edit nothing outside `.pi/skills/verify-<app>/`.
+A project with a runtime interface can keep a recipe that drives it. A runtime interface is a UI, a CLI, a TUI, or a service. The recipe is a project skill named `verify-<app>`, in the folder where your agent reads the skills of the project. It starts the app, drives a feature the way a user does, records what happened, and stops what it started. `verify` drives the recipe when the base branch has one. Write a recipe or update a recipe only when the user asks. Then edit nothing outside the folder of the recipe.
 
 ## Drive
 

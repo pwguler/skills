@@ -4,7 +4,7 @@
 
 The draft has these sections: `Destination`, `Decisions so far` (empty), `Open decisions`, `Not yet specified`, and `Out of scope`. Each open decision has a mode:
 
-- **AFK**: the `research` skill can resolve it alone. Launch one subagent for each AFK decision, all in one `subagent` workflow call as one `runs.all` batch. Use a `researcher` for an outside fact, and a `scout` for the history of the code. Give each subagent its decision and the citation rule of the `research` skill. Each subagent writes its findings to `docs/research/<slug>-<decision-slug>.md`.
+- **AFK**: the `research` skill can resolve it alone. Launch one fresh subagent for each AFK decision, all at the same time. Give each subagent its decision and the citation rule of the `research` skill. Each subagent writes its findings to `docs/research/<slug>-<decision-slug>.md`.
 - **HITL**: only a live exchange with the user resolves it. Never answer your own HITL question.
 
 One session writes the draft. It names the destination, lists the open decisions and the unclear items, and writes the draft. Then it launches the AFK subagents and stops. It resolves no decision itself.

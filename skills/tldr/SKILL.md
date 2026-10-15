@@ -7,7 +7,7 @@ A task just finished, or the user asks what happened. Give the result, not the t
 
 Rules:
 
-- When the user asks what happened since their last message, report as [catch-up.md](references/catch-up.md) says. Its reply order and its picture rules replace the rules below on the first line, the last line, and visuals. The other rules still apply. `/skill:recall` rebuilds the work of earlier sessions, not this skill.
+- When the user asks what happened since their last message, report as [catch-up.md](references/catch-up.md) says. Its reply order and its picture rules replace the rules below on the first line, the last line, and visuals. The other rules still apply. The `recall` skill rebuilds the work of earlier sessions, not this skill.
 - Write in ASD-STE100 Simplified Technical English: one meaning per word, active voice, short sentences, no idioms.
 - Fit the length to the task. A small task gets two or three lines. A large task, or one with much output, gets more. The reply is never longer than the result needs.
 - Choose the form that the user reads fastest for this result. Use prose for a few outcomes. Use bullets or a table when the user must scan several separate items.

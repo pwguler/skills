@@ -10,21 +10,21 @@ This suite works against the three debts of the Triple Debt Model (Storey, [arXi
 
 ## Install
 
-The suite runs in [pi](https://pi.dev). Install it with `npx skills`:
+The suite runs in any coding agent that reads [Agent Skills](https://agentskills.io). Install it with `npx skills`. It asks which agents get the suite:
 
 ```bash
-npx skills add pwguler/skills -g -a pi
+npx skills add pwguler/skills
 ```
 
 ## Update
 
 ```bash
-npx skills update -g
+npx skills update
 ```
 
 If a skill is missing after the update, install the suite again.
 
-Run `/reload` in an open session to load the new version.
+Start a new session to load the new version.
 
 ## The loop
 
@@ -68,13 +68,13 @@ The suite keeps these documents. Each one appears when the work first needs it, 
 - `docs/adr/`: decisions that are hard to undo.
 - `docs/specs/<slug>.md`: the spec that guides the loop. A spec kept after its branch records why the code looks the way it does.
 - `docs/research/`: the findings that resolve the AFK decisions of a draft spec.
-- `.pi/skills/verify-<app>/`: the recipe that `verify` uses to drive the app. `verify` offers to write one when the app has none. It writes or updates the recipe only when you ask.
+- `verify-<app>`: a project skill, the recipe that `verify` uses to drive the app. `verify` offers to write one when the app has none. It writes or updates the recipe only when you ask.
 
 These files are part of the project. They live in the repository, people can read them, and PRs review them like code.
 
 ## When to use what
 
-You can also run any skill on demand: type `/skill:<name>`.
+You can also start any skill yourself, with the skill command of your agent.
 
 | Moment | Skill |
 |---|---|
@@ -90,6 +90,6 @@ You can also run any skill on demand: type `/skill:<name>`.
 | A finished branch that needs a merge or a PR | `land` |
 | Parallel work that you ask for: independent tasks, a race between attempts, or coverage of many parts of one job | `parallel` |
 | A document that an agent reads, to write or edit, or the same agent mistake corrected a second time | `write-skill` |
-| The start or continuation of work: where it stands, from past sessions. It runs only on `/skill:recall` | `recall` |
-| The end of a session with corrections, errors, or surprises: each lesson goes to a check, a skill, or a project file. It runs only on `/skill:reflect` | `reflect` |
+| The start or continuation of work: where it stands, from past sessions. Start it yourself | `recall` |
+| The end of a session with corrections, errors, or surprises: each lesson goes to a check, a skill, or a project file. Start it yourself | `reflect` |
 | A finished task, or a catch-up on this session since your last message | `tldr` |
