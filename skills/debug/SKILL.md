@@ -20,6 +20,6 @@ Rules:
 
 - Do not try several fixes at random to see if one helps.
 - Stop the loop after three refuted hypotheses in a row. Stop it also when the available evidence cannot give a reproduction. Then report what you tried and which observation is missing, and let the user decide.
-- If the fix does not make the reproduction pass, the hypothesis was wrong. Go back to step 4. Do not keep the failed fix and add a second fix. When two failed fixes shared one assumption, read [attack the premise](references/attack-the-premise.md).
+- If the fix does not make the reproduction pass, the hypothesis was wrong. Go back to step 4. Do not keep the failed fix and add a second fix. When two failed fixes shared one premise, read [attack the premise](references/attack-the-premise.md).
 - If the root cause shows a design problem, say so. Offer to run `drill` on the redesign. Do not hide the problem under a workaround.
 - When the cause took more than one hypothesis to find, propose a cheap signal that stays on. It is a log line, a metric, or an assertion that would have shown this cause at once. Add it when the user agrees.

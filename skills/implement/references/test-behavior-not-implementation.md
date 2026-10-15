@@ -1,24 +1,24 @@
 # Test behavior, not implementation
 
-A test runs the code the way its callers do. It compares what they would observe with a value written out literally in the test. A test that no defect can make fail costs run time and review attention, and it protects nothing.
+Each test states a promise that the code makes to its users. Users are callers, people, and other services. Behavior is what a user can observe: return values, errors, state that the user can read again, and outside effects. An outside effect is a sent request, a stored row, or a published message. Implementation is the rest: private helpers, the order of internal calls, data between steps, and which module did the work.
 
-When: the assertion of a test does not plainly compare the output of the subject with a literal value.
+When: you add, change, or keep a test.
 
 - The test uses the interface that step 3 names. This file tells what the assertion reads at that interface.
-- An assertion on which calls the code made observes no behavior. An assertion that repeats a constant of the code observes no behavior either. Neither one tests the behavior.
-- Before you keep a test, imagine that each function it imports returns nothing. A test that still passes after that change observes nothing. Rewrite its assertion or delete the test.
-- These assertions fail that check:
-  - An assertion that only checks that a value exists, is truthy, has a type, did not throw, or is positive. A test with no assertion also fails.
-  - An assertion only that a mock was called or was not called.
-  - An assertion only that a result is empty, missing, or not equal to one wrong value.
-  - An expected value that the code under test made itself. Examples are the subject compared with its own output, or a parsed field compared with the builder that made it.
-  - An assertion that repeats a constant kept by hand, a config default, a table row, or a prompt string.
-  - An assertion over data that the test or its setup built, when the test body never calls the subject.
-- The repair: run the subject in the body of the test on one concrete input. Compare its literal output or its visible effect. For example, give a title to a slug maker, and compare the result with the exact slug.
-- Test an absence together with its opposite. The same test asserts the presence that a second input gives.
-- Cover a constant by running the code that reads it on one input. Never cover it by stating its value again.
-- Judge a mock by the payload that it received or the state that it left. Never judge it by whether it ran.
-- Delete a test that has no such assertion available.
-- Keep a test that checks a relation among table rows. Examples are a key that two tables share, or a parent row that exists. Keep also a check that the type checker does at compile time.
+- Make two imagined edits to the code under each test:
+  - First edit: break the behavior. Give a wrong result, drop an effect, or repeat an effect. After this edit, a good test fails.
+  - Second edit: rebuild the internals, and keep every observable result. After this edit, a good test still passes. A test that fails here depends on the implementation, so every refactor breaks it.
+- A test that still passes after the first edit usually has one of these faults:
+  - its assertion promises less than the contract;
+  - the code under test produced the expected value;
+  - it restates a constant, a default, or a prompt, and no code that uses that value runs;
+  - it asserts on data that the test made, not on what the subject did.
+- Keep each test that fails after the first edit and passes after the second. Rewrite or delete the others.
+- Drive the subject through the interface that its users have, with one concrete input. Write the expected value from the requirement, never from output that the code printed. Assert exactly what the contract promises.
+- Let the contract choose the assertion. Example: the promise is "a closed account gets no email". Then "the mailer received no message" is behavior. Add a second case where the mailer gets a message. That case proves that the test can detect a send.
+- A mocked outside service observes its payload, so the payload is behavior. No user observes a call to an internal helper, so that call is implementation.
+- Assert an empty list only when no record matches. When records must come back, assert the exact records, not only that the list is not empty.
+- An exact error message ties the test to text that no caller reads. Callers branch on the error type, so the type is the contract.
+- Some tests hold an invariant, not a call: a key that two tables must share, or a compile-time type check. Such an invariant is behavior too.
 
-Where it stops: this file decides whether you keep a test. The implement rule that tests must fail first still decides whether a slice is done. A kept test must pass both. The implement rule on failure modes decides which failure modes get a test. It also decides how many tests a change needs.
+Where it stops: this file decides whether you keep a test. The implement rule that tests must fail first still decides whether a slice is done. A kept test must meet both edits above, and that rule too. The implement rule on failure modes decides which failure modes get a test. It also decides how many tests a change needs.
