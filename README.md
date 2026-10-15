@@ -18,7 +18,9 @@ The suite runs in [pi](https://pi.dev). There are two ways to install it. Use on
 pi install npm:@pwguler/skills
 ```
 
-**`npx skills`**:
+The npm package also adds a pi extension. It tells the agent to read a matching skill before it starts a task.
+
+**`npx skills`**, which installs only the skills:
 
 ```bash
 npx skills add pwguler/skills

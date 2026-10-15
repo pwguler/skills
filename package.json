@@ -1,6 +1,7 @@
 {
   "name": "@pwguler/skills",
   "version": "1.33.1",
+  "type": "module",
   "description": "Skills for pi",
   "license": "MIT",
   "author": "pwguler",
@@ -10,6 +11,7 @@
   },
   "files": [
     "skills",
+    "extensions",
     "README.md",
     "LICENSE"
   ],
@@ -23,7 +25,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
   "pi": {
+    "extensions": [
+      "./extensions/read-skill-first.ts"
+    ],
     "skills": [
       "./skills"
     ]

@@ -1,10 +1,10 @@
-// check-package.mjs: the npm package holds only package.json, README.md, LICENSE, and skills/,
-// with a SKILL.md for every skill folder, and pi loads every skill from this checkout with no diagnostics.
-// Needs @earendil-works/pi-coding-agent installed globally.
+// check-package.mjs: the npm package holds only package.json, README.md, LICENSE, skills/, and extensions/,
+// with a SKILL.md for every skill folder and every declared extension. pi loads every skill and every declared
+// extension from this checkout with no diagnostics, errors, or warnings. Needs @earendil-works/pi-coding-agent installed globally.
 import { execSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repo = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -19,8 +19,8 @@ const fail = (message) => {
 
 const [pack] = JSON.parse(execSync('npm pack --dry-run --json', { cwd: repo, encoding: 'utf8' }));
 const files = pack.files.map((file) => file.path);
-const stray = files.filter((path) => !/^(package\.json|README\.md|LICENSE|skills\/.+)$/.test(path));
-if (stray.length) fail(`files outside skills/ in the package: ${stray.join(', ')}`);
+const stray = files.filter((path) => !/^(package\.json|README\.md|LICENSE|skills\/.+|extensions\/[^/]+\.ts)$/.test(path));
+if (stray.length) fail(`files outside skills/ and extensions/ in the package: ${stray.join(', ')}`);
 const missing = skillDirs.filter((skill) => !files.includes(`skills/${skill}/SKILL.md`));
 if (missing.length) fail(`SKILL.md missing from the package: ${missing.join(', ')}`);
 console.log(`package ${pack.name}@${pack.version}: ${files.length} files, ${skillDirs.length - missing.length} of ${skillDirs.length} SKILL.md`);
@@ -45,4 +45,14 @@ const loaded = skills.map((skill) => skill.name);
 const notLoaded = skillDirs.filter((skill) => !loaded.includes(skill));
 if (notLoaded.length) fail(`pi did not load: ${notLoaded.join(', ')}`);
 console.log(`pi: ${loaded.length} skills, ${diagnostics.length} diagnostics`);
+
+const declared = JSON.parse(readFileSync(join(repo, 'package.json'), 'utf8')).pi?.extensions ?? [];
+const unpacked = declared.filter((path) => !files.includes(path.replace(/^\.\//, '')));
+if (unpacked.length) fail(`declared extensions missing from the package: ${unpacked.join(', ')}`);
+const { extensions, errors, warnings = [] } = loader.getExtensions();
+for (const error of errors) fail(`pi extension error: ${error.path}: ${error.error}`);
+for (const warning of warnings) fail(`pi extension warning: ${warning.path}: ${warning.warning}`);
+const ours = extensions.filter((extension) => extension.resolvedPath.startsWith(join(repo, 'extensions') + sep));
+if (ours.length !== declared.length) fail(`pi loaded ${ours.length} of the ${declared.length} extensions that package.json declares`);
+console.log(`pi: ${ours.length} of ${declared.length} extensions, ${errors.length} errors, ${warnings.length} warnings`);
 process.exit(failed ? 1 : 0);
