@@ -91,4 +91,5 @@ You can also run any skill on demand: type `/skill:<name>`.
 | Parallel work that you ask for: independent tasks, a race between attempts, or coverage of many parts of one job | `parallel` |
 | A document that an agent reads, to write or edit, or the same agent mistake corrected a second time | `write-skill` |
 | The start or continuation of work: where it stands, from past sessions. It runs only on `/skill:recall` | `recall` |
+| The end of a session with corrections, errors, or surprises: each lesson goes to a check, a skill, or a project file. It runs only on `/skill:reflect` | `reflect` |
 | A finished task, or a catch-up on this session since your last message | `tldr` |
