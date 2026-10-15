@@ -24,8 +24,6 @@ pi install npm:@pwguler/skills
 npx skills add pwguler/skills
 ```
 
-For the same reason, remove any older copy of these skills from `~/.agents/skills/` and `~/.pi/agent/skills/` before a pi package install.
-
 ## Update
 
 **From npm**:
