@@ -2,15 +2,15 @@
 
 [![skills.sh](https://skills.sh/b/pwguler/skills)](https://skills.sh/pwguler/skills)
 
-Built against the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.org/abs/2603.22106)). It names three debts that pile up when code arrives faster than people can follow it, and the suite works against each:
+This suite works against the three debts of the Triple Debt Model (Storey, [arXiv:2603.22106](https://arxiv.org/abs/2603.22106)). These debts grow when code arrives faster than people can follow it:
 
-- **Technical debt**, in the code: `implement` builds test-first in thin slices, `debug` fixes the root cause, and `verify` and `rubric` check the result against evidence and fresh reviewers.
-- **Cognitive debt**, in the people, as their shared understanding of the system fades: `tldr` reports results rather than transcripts, `recall` rebuilds where work stands from past sessions, `research` reads why code is shaped the way it is, and `CONTEXT.md` and `ARCHITECTURE.md` keep the shared picture current.
-- **Intent debt**, in what nobody wrote down (rationale, goals, constraints): `drill` writes the goal and constraints into a spec and hard-to-reverse decisions into ADRs, and `land` keeps the spec as the record of why.
+- **Technical debt** is in the code. `implement` builds test-first in thin slices, and `debug` fixes the root cause. `verify` checks the result against evidence, and `rubric` sends it to fresh reviewers.
+- **Cognitive debt** is in the people, when their shared understanding of the system fades. `tldr` reports results, not transcripts. `recall` rebuilds where work stands from past sessions. `research` finds out why code has its shape. `CONTEXT.md` and `ARCHITECTURE.md` keep the shared knowledge of the system current.
+- **Intent debt** is in what nobody wrote down: reasons, goals, and constraints. `drill` writes the goal and the constraints into a spec, and decisions that are hard to undo into ADRs. `land` keeps the spec as the record of why.
 
 ## Install
 
-The suite runs in [pi](https://pi.dev). Two ways in. Pick one: with both, every skill name collides, and pi keeps the first copy it finds and warns about the other.
+The suite runs in [pi](https://pi.dev). There are two ways to install it. Use only one. With both, every skill name occurs twice. Then pi keeps the first copy that it finds, and warns about the other.
 
 **pi package**:
 
@@ -24,7 +24,7 @@ pi install git:github.com/pwguler/skills
 npx skills add pwguler/skills
 ```
 
-For the same reason, a pi package install needs any older copy of these skills gone from `~/.agents/skills/` and `~/.pi/agent/skills/`.
+For the same reason, remove any older copy of these skills from `~/.agents/skills/` and `~/.pi/agent/skills/` before a pi package install.
 
 ## Update
 
@@ -40,28 +40,30 @@ pi update git:github.com/pwguler/skills
 npx skills update
 ```
 
-You may need to reinstall to get all skills.
+If a skill is missing after the update, install the suite again.
 
 Run `/reload` in an open session to load the new version.
 
 ## The loop
 
-The base suite (drill → implement → verify → land) implements the run-until-done loop: a bounded goal, a maker/checker cycle, an exit only on proven criteria. A quality claim no command can settle exits through `rubric`, judged by someone who did not make the work. Before work with a spec lands, `rubric`'s defect pass sends the diff to two fresh reviewers, one of them on another model family. Fast path: an obvious task skips the interview; one sentence is the plan, once it shows no decision to make. If `verify` fails twice on a fast-path task, the task was lying: route back through drill.
+The base suite (drill → implement → verify → land) is a loop that runs until the work is done. It has a bounded goal and a maker/checker cycle, and it exits only when every criterion is proven. A quality claim that no command can settle goes to `rubric`. A judge who did not make the work decides it. Before work with a spec lands, the `rubric` defect pass sends the diff to two fresh reviewers. One of them runs on another model family.
 
-Subtraction comes first: in each file a slice or a fix changes, the dead code goes before anything is added, and so does any comment that restates the code or excuses a workaround.
+Fast path: an obvious task skips the interview. One sentence is the plan, when that sentence shows no decision to make. If `verify` fails twice on a fast-path task, the task was not obvious. Then the task goes back through `drill`.
 
-The 24 engineering principles the work rests on (fix root causes, test behavior not implementation, make operations idempotent, explain the number, and the rest) live in the skill whose step or rule they deepen, and open at that step, so a session pays for one only when it reaches it.
+Subtraction comes first. In each file that a slice or a fix changes, the dead code goes before anything new comes in. So does each comment that repeats the code or excuses a workaround.
+
+The work rests on 24 engineering principles. Examples are "fix root causes", "make operations idempotent", and "explain the number". Each principle is in the skill whose step or rule it adds detail to. It opens at that step, so a session reads a principle only when it reaches that step.
 
 ```mermaid
 flowchart TD
-    idea([idea or codebase friction]) --> drill["1. drill: settle the plan"]
+    idea(["idea, or a problem in the codebase"]) --> drill["1. drill: settle the plan"]
     drill -- "goal, non-goals, acceptance criteria" --> spec[("docs/specs/*.md")]
-    drill -- "tree too big for one session" --> draft[("spec as draft: open decisions")]
-    draft -- "sessions resolve decisions one at a time" --> spec
+    drill -- "tree too large for one session" --> draft[("draft spec: open decisions")]
+    draft -- "sessions resolve one decision at a time" --> spec
     spec --> impl
 
     subgraph cycle["2. the maker / checker cycle"]
-        impl["implement (maker): failing test, minimum code, blast radius when a slice changes a contract"] --> verify["verify (checker): reject by default, quotes evidence, drives the runtime surface"]
+        impl["implement (maker): failing test, minimum code, blast radius when a slice changes a contract"] --> verify["verify (checker): rejects by default, quotes evidence, drives the runtime interface"]
         verify -- "criterion fails" --> impl
         impl -. "bug: root cause first" .-> debug
         debug -.-> impl
@@ -69,31 +71,41 @@ flowchart TD
     end
 
     verify -- "taste claim: no command can settle it" --> rub
-    impl -- "quality surface: UI, interface, name, doc" --> rub
+    impl -- "quality claim: UI, interface, name, doc" --> rub
     rub -- "criteria met" --> land
-    verify -- "every criterion proven" --> land["3. land: fresh-eyes gate, defect pass when a spec exists"]
-    impl -- "3 failed attempts on one slice" --> you(["escalate to you"])
-    land -- "residue to ADRs, CONTEXT.md, ARCHITECTURE.md; spec kept unless dropped" --> done([branch closed])
+    verify -- "every criterion proven" --> land["3. land: gate by fresh reviewers, defect pass when a spec exists"]
+    impl -- "3 failed attempts on one slice" --> you(["stop and ask you"])
+    land -- "lasting content to ADRs, CONTEXT.md, ARCHITECTURE.md; spec kept unless you drop it" --> done([branch closed])
 ```
 
-The documents the suite maintains, all created lazily with no setup step: `CONTEXT.md` (domain glossary, born from the first resolved term; a repo with several contexts keeps one per context, listed in `CONTEXT-MAP.md`), `ARCHITECTURE.md` (the system as it is), `DESIGN.md` (the look: tokens, type, color, spacing; `prototype` grounds in it, and `implement` builds UI from it), `docs/adr/` (hard-to-reverse decisions), `docs/specs/<slug>.md` (the loop's steering artifact; a spec kept after its branch is a record of why the code looks the way it does), `docs/research/` (the findings a draft spec's AFK decisions are resolved from), `.pi/skills/verify-<app>/` (the recipe `verify` drives the app with; `verify` offers one when the app has none, and writes or updates it only when you ask). These are shared project artifacts: committed, human-readable, reviewed in PRs.
+The suite keeps these documents. Each one appears when the work first needs it, with no setup step:
+
+- `CONTEXT.md`: the domain glossary. It starts with the first settled term. A repo with several contexts has one for each context, and lists them in `CONTEXT-MAP.md`.
+- `ARCHITECTURE.md`: the system as it is now.
+- `DESIGN.md`: the look, as tokens for typography, color, and spacing. `prototype` builds on it, and `implement` builds UI from it.
+- `docs/adr/`: decisions that are hard to undo.
+- `docs/specs/<slug>.md`: the spec that guides the loop. A spec kept after its branch records why the code looks the way it does.
+- `docs/research/`: the findings that resolve the AFK decisions of a draft spec.
+- `.pi/skills/verify-<app>/`: the recipe that `verify` uses to drive the app. `verify` offers to write one when the app has none. It writes or updates the recipe only when you ask.
+
+These files are part of the project. They live in the repository, people can read them, and PRs review them like code.
 
 ## When to use what
 
-Any skill also runs on demand: type `/skill:<name>`.
+You can also run any skill on demand: type `/skill:<name>`.
 
 | Moment | Skill |
 |---|---|
-| New plan, feature, or design, including the structure of a new codebase or area | `drill` |
-| Any topic you want settled by being questioned one decision at a time (`drill` runs it for plans) | `core-interview` |
-| A design decision needs a throwaway to react to | `prototype` |
-| Implementing a settled plan | `implement` |
-| Bug or unexpected behavior | `debug` |
-| About to claim done, fixed, or passing; write or update the app's verification recipe | `verify` |
-| A defect review of a change, or quality no command can settle | `rubric` |
-| Reading legwork, or why code is shaped the way it is | `research` |
-| Branch done, needs merging or a PR | `land` |
-| Parallel work you ask for: independent tasks, a race between attempts, or coverage across slices | `parallel` |
-| Authoring or editing anything an agent reads, or correcting the same agent mistake a second time | `write-skill` |
-| Starting or resuming work: where it stands, from past sessions; runs only on `/skill:recall` | `recall` |
-| A task finished, or you want to catch up on this session since your last message | `tldr` |
+| A new plan, feature, or design, or the structure of a new codebase or area | `drill` |
+| A topic that you want settled through questions, one decision at a time (`drill` runs it for plans) | `core-interview` |
+| A design decision that needs a throwaway to react to | `prototype` |
+| A settled plan to implement | `implement` |
+| A bug or unexpected behavior | `debug` |
+| Before you say done, fixed, or passing, or to write or update the verification recipe of the app | `verify` |
+| A defect review of a change, or a quality that no command can settle | `rubric` |
+| A fact from the owner of a library, service, or standard, why code has its shape, or reading to give to a subagent | `research` |
+| A finished branch that needs a merge or a PR | `land` |
+| Parallel work that you ask for: independent tasks, a race between attempts, or coverage of many parts of one job | `parallel` |
+| A document that an agent reads, to write or edit, or the same agent mistake corrected a second time | `write-skill` |
+| The start or continuation of work: where it stands, from past sessions. It runs only on `/skill:recall` | `recall` |
+| A finished task, or a catch-up on this session since your last message | `tldr` |
