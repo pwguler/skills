@@ -10,9 +10,15 @@ This suite works against the three debts of the Triple Debt Model (Storey, [arXi
 
 ## Install
 
-The suite runs in [pi](https://pi.dev). There are two ways to install it. Use only one. With both, every skill name occurs twice. Then pi keeps the first copy that it finds, and warns about the other.
+The suite runs in [pi](https://pi.dev). There are three ways to install it. Use only one. With two, every skill name occurs twice. Then pi keeps the first copy that it finds, and warns about the other.
 
-**pi package**:
+**From npm**:
+
+```bash
+pi install npm:@pwguler/skills
+```
+
+**From GitHub**, with no npm account:
 
 ```bash
 pi install git:github.com/pwguler/skills
@@ -28,7 +34,13 @@ For the same reason, remove any older copy of these skills from `~/.agents/skill
 
 ## Update
 
-**pi package**:
+**From npm**:
+
+```bash
+pi update npm:@pwguler/skills
+```
+
+**From GitHub**:
 
 ```bash
 pi update git:github.com/pwguler/skills
