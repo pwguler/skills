@@ -28,7 +28,7 @@ Start a new session to load the new version.
 
 ## The loop
 
-The base suite (drill → implement → verify → land) is a loop that runs until the work is done. It has a bounded goal and a maker/checker cycle, and it exits only when every criterion is proven. A quality claim that no command can settle goes to `rubric`. A judge who did not make the work decides it. Before work with a spec lands, the `rubric` defect pass sends the diff to two fresh reviewers. One of them runs on another model family.
+The base suite (drill → implement → verify → land) is a loop that runs until the work is done. It has a bounded goal and a maker/checker cycle, and it exits only when every criterion is proven. A quality claim that no command can settle goes to `rubric`. A judge who did not make the work decides it. Before work with a spec lands, the `rubric` defect pass sends the diff to two fresh reviewers.
 
 Fast path: an obvious task skips the interview. One sentence is the plan, when that sentence shows no decision to make. If `verify` fails twice on a fast-path task, the task was not obvious. Then the task goes back through `drill`.
 

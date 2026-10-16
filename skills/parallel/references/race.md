@@ -13,7 +13,7 @@ Each attempt returns its artifact and a short note on what it considered and rej
 
 ## Pick
 
-Grade every attempt against the criteria, one criterion at a time. For a second opinion, a fresh subagent grades them too. When your agent can choose the model of a subagent, use a family that made no attempt. When it agrees, the pick is confirmed. When it disagrees, read both notes again. Pick the base that the next maintainer can extend most easily. On a tie, pick the one with the smaller public interface.
+Grade every attempt against the criteria, one criterion at a time. For a second opinion, a fresh subagent grades them too. When it agrees, the pick is confirmed. When it disagrees, read both notes again. Pick the base that the next maintainer can extend most easily. On a tie, pick the one with the smaller public interface.
 
 ## Graft
 

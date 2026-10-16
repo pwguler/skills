@@ -6,7 +6,7 @@ Independent reviewers look for defects in a diff or in named files, before any t
 
 First, write the diff to a file. Include `git diff <base>...HEAD` and any uncommitted changes. Include in full each untracked file that the change adds (`git ls-files --others --exclude-standard`), because `git diff` leaves those out. A reviewer can have no shell, so it cannot run `git` itself.
 
-Launch two reviewers at the same time, each in a fresh subagent. Give each one the same brief: the diff file, the paragraph of intent, and the lenses below. When your agent can choose the model of a subagent, run one reviewer on the model of the session. Run the other on a model from another family. No reviewer sees the findings of another.
+Launch two reviewers at the same time, each in a fresh subagent. Give each one the same brief: the diff file, the paragraph of intent, and the lenses below. No reviewer sees the findings of another.
 
 A finding has a severity: `critical`, `warning`, or `nit`. It names a concrete path or call chain, and the failure that a user or caller would see. "I would have written it differently" is not a finding.
 
@@ -31,4 +31,4 @@ The lead session sorts every finding, with the context that the reviewers do not
 - **Noted:** true, but not actionable in this change.
 - **Dismissed:** exaggerated nits, hypothetical cases that the call chain blocks, speculative abstractions, and preference rewrites. Dismiss also findings that ignore a known constraint. Give the reason for each one.
 
-When two reviewers report the same defect, that is the strongest signal. It is stronger still when they come from different model families. A correctness or security finding from one reviewer alone still needs a stated reason before you dismiss it.
+When two reviewers report the same defect, that is the strongest signal. A correctness or security finding from one reviewer alone still needs a stated reason before you dismiss it.
